@@ -1,0 +1,47 @@
+# Defection × Sci-fi — Batch 1 (Tier A)
+
+**D-Sf1-1.**
+The navigation console chirps and Commander Yael Vasquez looks up from the fuel manifest. The chirp is the proximity alert she configured herself — keyed to the emission signature of any ship broadcasting a Sovereignty transponder code within four AU of the colony at Gliese 876d. The colony charter, which she co-signed with Pilot-Captain Ren Malheiros when they departed Ceres together eighteen months ago, is unambiguous on this point: no contact with Sovereignty vessels until the colony's communications blackout period expires. The blackout exists because the colony's location is classified — known only to the two of them and the Emigration Directorate. Malheiros is not on the bridge. Vasquez pulls the sensor log. A tight-beam transmission, originating from their own ship's secondary array, was sent forty-one minutes ago toward the approaching Sovereignty corvette. The beam carried their exact orbital coordinates and a docking request. The transmission is tagged with Malheiros's authentication cipher. She switches to the external feed and sees it: the corvette is already decelerating, adjusting its heading toward them. Malheiros's voice crackles over the internal comm from the cargo bay, asking if she wants coffee.
+
+> A = Commander Yael Vasquez / the colony; B = Pilot-Captain Ren Malheiros; P = colony charter (no contact with Sovereignty vessels during communications blackout; colony location classified); V = transmitting exact orbital coordinates and a docking request to a Sovereignty corvette using ship's secondary array; discovery = Vasquez detects the proximity alert, reviews the sensor log, finds Malheiros's authenticated transmission. ✓ all roles, ✓ all states.
+
+**D-Sf1-2.**
+"You're going to want to see this," Okonkwo says, and she does not sound like someone delivering routine news.
+
+Chief Engineer Lian Zhao pulls herself along the maintenance corridor toward the reactor bay of Waystation Eleven. Okonkwo, her junior technician, is floating beside an open access panel, a diagnostic pad in one hand, the other hand pointing at a tangle of rerouted plasma conduits.
+
+"These feeds," Okonkwo says. "The lithium-six line and the deuterium return. Someone moved them."
+
+Zhao looks. The conduits have been physically disconnected from the station's fusion loop and reconnected to a secondary manifold — one that feeds the docking arm on the station's blind side, the arm that services the prospector ships running helium-three claims in the outer belt. She recognizes the modification immediately. It is not a repair. It is a siphon: station fuel, drawn from the reactor's own supply, diverted to fill external tanks.
+
+"Who has access to this section?" Zhao asks.
+
+"Just us and Deng."
+
+Deng. Operations Director Deng, who reports to the Transit Authority, who signed the station-integrity compact when he took the post — the compact requiring that all reactor consumables remain allocated to station systems and that no fuel be dispensed to commercial vessels without a logged requisition approved by the chief engineer. No requisition exists. Zhao checks the dispensation log on her pad. Blank. She looks at the manifold connectors. The couplings are warm.
+
+> A = Chief Engineer Lian Zhao / Waystation Eleven; B = Operations Director Deng; P = station-integrity compact (all reactor consumables allocated to station systems; no fuel dispensed to commercial vessels without logged requisition approved by chief engineer); V = physically rerouting reactor fuel lines to the docking arm to siphon fuel to external vessels without requisition or approval; discovery = junior technician finds rerouted conduits, Zhao inspects and confirms the unauthorized modification with an empty dispensation log. ✓ all roles, ✓ all states.
+
+**D-Sf1-3.**
+I am the one who gave Sera the archive key. Forty-eight hours ago, in the sealed briefing chamber on Orbital Platform Minos, I placed the cryptographic token in her hand and told her what the Directorate told me: that the consciousness-transfer records of every colonist on Titan are stored in Vault Seven, that they are classified at the highest tier, and that her assignment as records custodian means she is the only person outside the Directorate with access. The oath she spoke — recorded, witnessed by the Directorate's judicial auditor — was specific: no duplication, no transmission, no access by any third party, no removal of records from the vault's air-gapped system. I watched her speak it. I am now standing in the comm-monitoring station on Deck Nine, where a routine signal-integrity sweep has flagged an anomalous narrowband burst from the platform's external antenna — a burst that, when I decode it, contains a compressed index of every consciousness-transfer record in Vault Seven, complete with biometric identifiers, addressed to a receiver on Enceladus whose registration belongs to the Free Titan Collective. The burst is stamped with Sera's archive key. The timestamp is oh-three-hundred, six hours ago. Sera is still on the platform. She is, according to the locator system, in the mess hall.
+
+> A = narrator (Directorate liaison / platform authority); B = Sera (records custodian); P = sworn oath (no duplication, no transmission, no third-party access, no removal of records from air-gapped system); V = transmitting a compressed index of all consciousness-transfer records to the Free Titan Collective via external antenna; discovery = routine signal-integrity sweep flags the anomalous burst, narrator decodes it and identifies Sera's archive key. ✓ all roles, ✓ all states.
+
+**D-Sf1-4.**
+The terraforming overseer would not have checked the atmospheric processors at all — they are not due for inspection until next cycle — except that the lichen farms in Sector Nine are dying. Something has shifted in the gas mix. Dr. Nazari, the chief climatologist assigned to the Aeolis Mons colony by the Martian Development Authority, is the sole person responsible for maintaining the atmospheric profile within the parameters set by the colony's environmental charter. The charter specifies the target: 21% oxygen, 78% nitrogen, 0.9% argon, trace CO2, maintained within a tolerance of half a percent in any direction. The overseer pulls the processor logs from the central monitoring station. The oxygen output was reduced eleven days ago — not by a malfunction but by a manual override entered with Dr. Nazari's credentials. The new setting holds oxygen at 18.2%, nearly three points below charter minimum. The logs show no filed variance request, no emergency notation, no communication to the oversight board. The override was entered at a terminal in Nazari's private lab. The overseer checks the colony health feed: twelve residents in Sector Nine have reported dizziness and fatigue in the last week. The lichen is the least of it.
+
+> A = terraforming overseer / colony oversight board; B = Dr. Nazari (chief climatologist); P = environmental charter requiring atmospheric profile maintained within specified parameters (21% O2 ±0.5%), any variance requiring filed request and board notification; V = manually overriding the oxygen output to 18.2% without filing a variance request or notifying the board; discovery = overseer investigates dying lichen, pulls processor logs, finds Nazari's manual override with no authorization on record. ✓ all roles, ✓ all states.
+
+**D-Sf1-5.**
+INCIDENT REPORT — DEEP-RANGE RELAY STATION CALLISTO-7
+FILED BY: Comm Officer Adaeze Nwosu
+DATE: Cycle 1142, Day 8
+CLASSIFICATION: PRIORITY / INTEGRITY VIOLATION
+
+At 04:17 station time, automated traffic analysis flagged a routing anomaly in the relay buffer. Callisto-7 operates under Union Relay Protocol, which requires all inter-system message traffic to pass through unmodified. Relay Operator Piotr Dahl signed the Union Relay Oath upon assuming his post: that no message transiting this station would be delayed, altered, rerouted, or inspected, and that the relay buffer would remain a sealed pass-through accessible only to the automated routing system.
+
+Upon investigating the flagged anomaly, I accessed the buffer audit trail. Twelve messages originating from the Jovian Workers' Coordinating Committee and addressed to the General Assembly at Ganymede Station were intercepted at the relay buffer, held for between six and nineteen minutes, and forwarded to an unauthorized secondary address — the administrative office of the Jovian Development Corporation — before being released to their intended recipients. Each interception corresponds to a manual access event logged under Operator Dahl's credentials. The secondary address is not listed in any authorized routing table.
+
+Operator Dahl is currently on shift. He has not filed any exception or override notice. I am submitting this report and sealing the buffer audit trail for review.
+
+> A = Union Relay Protocol authority / station command; B = Relay Operator Piotr Dahl; P = Union Relay Oath (no message delayed, altered, rerouted, or inspected; buffer remains sealed pass-through); V = intercepting twelve messages from the Workers' Coordinating Committee, holding them, and forwarding copies to the Jovian Development Corporation's administrative office; discovery = Comm Officer Nwosu investigates automated traffic anomaly, reviews buffer audit trail, finds Dahl's manual access events and unauthorized forwarding. ✓ all roles, ✓ all states.

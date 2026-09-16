@@ -1,0 +1,40 @@
+# Defection × Corporate — Batch 1 (Tier A)
+
+**D-Co1-1.**
+"Pull up the Kepler file," Rena says, and her assistant does, projecting the folder tree onto the wall screen. She is looking for the strategy memo her VP of Product, Davis, circulated to the leadership team three weeks ago — the one outlining the platform migration roadmap for Kepler, their flagship SaaS product, with pricing tiers, rollout dates, and the retention offers earmarked for at-risk enterprise clients. Davis had opened the meeting where he presented it by saying, word for word, "This stays in this room. I'm not even putting it on the shared drive." Rena had nodded. Everyone had nodded. Now she is looking at the activity log her IT director flagged an hour ago: Davis's credentials, used to access the Kepler strategy folder from an IP address geolocated to the downtown office of Parallel Systems — the company that poached their last two enterprise accounts. The log entry is timestamped to yesterday, four-fourteen p.m. The download includes every file in the folder. The access was made through a VPN endpoint registered to Parallel's corporate network. Rena closes the projection and asks her assistant to get Davis on the phone.
+
+> A = Rena (CEO / company leadership); B = Davis (VP of Product); P = verbal commitment to keep Kepler migration roadmap confidential to leadership team ("this stays in this room"); V = accessing and downloading the full strategy folder from a competitor's corporate network; discovery = IT director flags anomalous access log, Rena reviews it directly. ✓ all roles, ✓ all states.
+
+**D-Co1-2.**
+The quarterly board packet arrives in Leah Okafor's inbox at seven a.m. She is the independent director the board appointed specifically to oversee clinical-trial governance — her sole mandate, written into her appointment letter, is to ensure that the biotech's trial data reaches the board unaltered and on schedule. She opens the packet. The Phase III summary for Compound 9 looks clean: enrollment on target, adverse-event rate within range, interim efficacy signal positive. But an attachment has been included that was not meant for her. A forwarded thread between the chief medical officer and the head of regulatory, timestamped two days earlier. In it, the chief medical officer — Dr. Asher, the person whose role-based obligation is to present trial data accurately to the board — writes: "Pull the three sites with the elevated SAE clusters before the board cut. Leah won't know the difference. We re-add them in the FDA submission." The attachment includes the unpulled dataset. Leah opens it beside the board summary. Fourteen serious adverse events are missing from the version presented to her.
+
+> A = Leah Okafor (independent director / board); B = Dr. Asher (chief medical officer); P = role-based institutional duty to present clinical-trial data to the board unaltered; V = deliberately removing fourteen serious adverse events from the board summary; discovery = misdirected email thread containing instructions to alter the data, cross-referenced against the unpulled dataset. ✓ all roles, ✓ all states.
+
+**D-Co1-3.**
+I am the one who hired Tomoko. I brought her in as general counsel because our previous one retired and she came with fifteen years of pharma regulatory experience and, more to the point, because she looked me in the eye during her final interview and told me she had no ongoing obligations to any former client that would conflict with our interests. She said it plainly. I wrote it down in my interview notes. That was January. Now it is the first week of April and I am reading a letter that arrived by registered mail from Gessler BioSciences — our primary competitor in the CNS pipeline — informing us, with a tone of professional courtesy that does not disguise its purpose, that Tomoko has been providing them with privileged guidance on their FDA submission strategy under a consulting agreement dated November of the prior year. The letter includes a countersigned engagement agreement. Her signature. A scope of work covering regulatory strategy for a compound in the same therapeutic class as ours. The engagement predates her start with us by two months and, according to Gessler's records, remains active.
+
+> A = narrator (CEO / hiring executive); B = Tomoko (general counsel); P = verbal declaration during hiring interview that she held no conflicting obligations to any former client; V = maintaining an active consulting agreement with a direct competitor predating and continuing through her employment; discovery = registered letter from the competitor disclosing the engagement, including countersigned agreement. ✓ all roles, ✓ all states.
+
+**D-Co1-4.**
+Marcus Chen sits in the server room and watches the deployment dashboard. He is the site-reliability lead, and the only thing the CTO asked of him when she promoted him — the only condition, repeated in her office with the door closed, repeated again in his performance charter — was that no production push would go live without passing through the staged-rollout protocol: canary deployment to five percent of traffic, automated regression suite, forty-eight-hour soak, then full release. The protocol exists because the last uncontrolled push cratered the payments system for nine hours. Marcus looks at the dashboard now. Build 4.7.12, the new authentication module, is live. One hundred percent of traffic. No canary. No regression results logged. The deployment timestamp is three a.m. — six hours ago. He pulls the commit history: the push was initiated by Priya Subramanian, his most senior engineer, directly to production, bypassing every gate. He checks the soak-test queue. Empty. He checks the canary partition. Never instantiated. The system has been running unevaluated code against all users since before dawn.
+
+> A = Marcus Chen (site-reliability lead) / CTO / company; B = Priya Subramanian (senior engineer); P = staged-rollout protocol (canary to 5%, regression suite, 48-hour soak before full release — codified in performance charter and institutional mandate); V = pushing build 4.7.12 directly to 100% production traffic, bypassing all gates; discovery = Marcus reviews deployment dashboard and commit history, finds full bypass. ✓ all roles, ✓ all states.
+
+**D-Co1-5.**
+FROM: j.nakamura@terraverde.com
+TO: d.lynch@terraverde.com
+DATE: 14 March
+SUBJECT: Whistleblower intake — CONFIDENTIAL — Case #WB-2024-0091
+
+Diane,
+
+Per your directive when you established the internal-reporting channel: all submissions route to you as Ethics Officer, unfiltered, within 24 hours. No exceptions, no pre-screening, no editorial discretion. I am the intake coordinator. My role is to log, timestamp, and forward.
+
+I am writing to you now because I have discovered that I am not forwarding to you alone. Our submission platform logs show that Case #WB-2024-0077, received on 28 February, was accessed by Regional VP Howard Feld six hours before you received it. The platform permissions audit confirms that Feld's credentials were granted read access to the whistleblower queue on 15 January — an access level that only you, as Ethics Officer, are authorized to grant. The case in question named Feld's division. The complainant's identity was visible in the unredacted submission. The complainant was terminated on 3 March.
+
+I have attached the access logs, the permission-grant record, and the termination paperwork.
+
+Jun Nakamura
+Intake Coordinator, Internal Reporting
+
+> A = Diane Lynch (Ethics Officer) / company; B = Howard Feld (Regional VP); P = whistleblower channel protocol (submissions route to Ethics Officer only, unfiltered, no third-party access); V = Feld accessing the whistleblower queue and reading a case naming his own division before the Ethics Officer received it — using credentials that should never have been granted to him; discovery = intake coordinator discovers unauthorized access in platform logs and reports to Ethics Officer via email. ✓ all roles, ✓ all states.

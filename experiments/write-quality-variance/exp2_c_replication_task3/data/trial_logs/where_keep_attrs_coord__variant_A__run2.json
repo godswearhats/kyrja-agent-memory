@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_coord__variant_A__run2",
+  "task_label": "where_keep_attrs_coord",
+  "instance_id": "pydata__xarray-7229",
+  "variant": "A",
+  "run_number": 2,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 6917,
+  "agent": {
+    "result_text": "The existing `test_where_attrs` only tests data variable attrs, not coordinate attrs. The fix is complete.\n\n**Summary**: The bug was in `xr.where` at `computation.py:1863`. The `#6461` fix changed the `keep_attrs` handler from `lambda attrs, context: attrs[1]` to `lambda attrs, context: getattr(x, \"attrs\", {})`. This lambda was used by `apply_ufunc` for *both* data variable attrs and coordinate attrs. For coordinates, it incorrectly returned `x`'s data variable attrs (e.g., temperature metadata) instead of preserving the coordinate's own attrs (e.g., `{'standard_name': 'time', 'long_name': 'Time'}`).\n\nThe fix passes `\"override\"` as the `keep_attrs` strategy to `apply_ufunc` \u2014 which correctly preserves coordinate attrs from the first aligned input \u2014 then manually sets `result.attrs` from `x` to get the right data variable attrs. This handles both the original scalar-`x` case (#6461) and the coordinate attrs case (#7229).",
+    "num_turns": 25,
+    "duration_ms": 385078,
+    "total_cost_usd": 1.09713125,
+    "stop_reason": "end_turn",
+    "input_tokens": 26,
+    "output_tokens": 17847,
+    "cache_read_tokens": 800955,
+    "cache_creation_tokens": 39635
+  },
+  "evaluation": {
+    "success": false,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 1,
+    "stdout_tail": "; it can be silenced by converting the values to nanosecond precision ahead of time.\n    xr.DataArray(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED xarray/tests/test_computation.py::test_where_attrs - AssertionError: L...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n======================== 1 failed, 18 warnings in 0.37s ========================\n",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 390.68748569488525,
+  "timestamp": "2026-05-11T18:08:59"
+}

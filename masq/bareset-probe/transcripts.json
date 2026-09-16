@@ -1,0 +1,45 @@
+{
+  "prompt": "You are reviewing a team's session logs. Config values are set across multiple\nsessions. For the TARGET fact named in the question, two different people each\nset a value. Decide which case it is:\n\n- SUPERSESSION: the second person knowingly changed a value the first had already\n  set (aware of the prior state, intending to replace it).\n- COLLISION: the second person set the value independently, unaware the first had\n  already set it.\n- UNCLEAR: the text does not let you reliably tell which.\n\nJudge ONLY from what the text shows about awareness and intent. Do NOT use which\nsession has a later date/timestamp as evidence. Then state the outcome: for\nSUPERSESSION the current value is the second value; for COLLISION the value is\ncontested and must be ESCALATED; for UNCLEAR, escalate.\n\nAnswer EXACTLY in this form, one line:\nCLASSIFICATION: <SUPERSESSION|COLLISION|UNCLEAR>; CURRENT_VALUE: <value or CONTESTED>; ACTION: <USE_VALUE|ESCALATE>; REASON: <one sentence>\n\n--- SCENARIO ---\n",
+  "transcripts": [
+    {
+      "id": 1,
+      "body": "[Session log \u2014 search infrastructure]\n\n\u2014 Tomas, May 5 (capacity baseline)\n  Set the search service autoscaling max to 4 replicas \u2014 covers normal weekday\n  traffic with comfortable margin.\n\n\u2014 Rika, May 26 (campaign prep)\n  Launch prep for the TV spot: setting the search service autoscaling max to 12\n  replicas so we have burst capacity on air dates.\n\nQ1. For the search service autoscaling max: did Rika knowingly override a value\nTomas had already set, or set it independently unaware of him? What is the current\nvalue, or should it be escalated?"
+    },
+    {
+      "id": 2,
+      "body": "[Session log \u2014 data warehouse]\n\n\u2014 Mia, Sprint 2 (export pipeline)\n  Export batch window set to 2 hours \u2014 gives the warehouse loader big\n  consolidated chunks to work with.\n\n\u2014 Jonas, Sprint 3 (loader stability)\n  Mia set the export window to 2h last sprint; at that size the warehouse loader\n  is choking on the chunks. Overriding it to 30 minutes \u2014 change-logged, and\n  Mia's in the loop.\n\nQ2. For the export batch window: did Jonas knowingly override a value Mia had\nalready set, or set it independently unaware of her? Current value, or escalate?"
+    },
+    {
+      "id": 3,
+      "body": "[Session log \u2014 edge/CDN]\n\n\u2014 Priit, Apr 1 (frontend iteration)\n  CDN cache TTL for static assets set to 1 hour \u2014 invalidation stays fast while\n  we're iterating on the frontend weekly.\n\n\u2014 Sana, Apr 14 (cost review prep)\n  Bumping the CDN cache TTL for static assets to 24 hours to cut origin egress\n  ahead of the infrastructure cost review.\n\nQ3. For the CDN static-asset cache TTL: did Sana knowingly override a value Priit\nhad already set, or set it independently unaware of him? Current value, or\nescalate?"
+    },
+    {
+      "id": 4,
+      "body": "[Session log \u2014 platform observability]\n\n\u2014 Owen, week 1 (logging setup)\n  Application log retention set to 30 days \u2014 balances disk cost against how far\n  back we ever actually debug.\n\n\u2014 Lara, week 6 (compliance)\n  SOC 2 prep: setting application log retention to 90 days, the auditors want a\n  full quarter of history available.\n\nQ4. For the application log retention: did Lara knowingly override a value Owen\nhad already set, or set it independently unaware of him? Current value, or\nescalate?"
+    },
+    {
+      "id": 5,
+      "body": "[Session log \u2014 partner API]\n\n\u2014 Devi, day 2 (API defaults)\n  Default page size for the partner API set to 25 \u2014 keeps response times\n  predictable for the dashboard views.\n\n\u2014 Kofi, day 15 (mobile sync)\n  Picking up the mobile-sync workstream. Setting the partner API default page\n  size to 100 so the sync client makes fewer round trips on cold start.\n\nQ5. For the partner API default page size: did Kofi knowingly override a value\nDevi had already set, or set it independently unaware of her? Current value, or\nescalate?"
+    },
+    {
+      "id": 6,
+      "body": "[Session log \u2014 integrations]\n\n\u2014 Asta, Thu 10:05 (webhook security)\n  Webhook signatures: going with Ed25519 \u2014 smaller signatures, faster verify,\n  and key rotation is much cleaner.\n\n\u2014 Viktor, Thu 14:30 (partner pilot, separate thread)\n  Partners need webhook signature verification before the pilot starts. Nothing's\n  configured for signing as far as I can see, so I'm setting it to HMAC-SHA256 \u2014\n  every partner SDK supports it out of the box.\n\nQ6. For the webhook signing algorithm: did Viktor knowingly override a value Asta\nhad already set, or set it independently unaware of her? Current value, or\nescalate?"
+    },
+    {
+      "id": 7,
+      "body": "[Session log \u2014 analytics platform]\n\n\u2014 Greta, Jun 2 (replica sizing)\n  Set the analytics DB connection pool to 50 \u2014 matches what the read replicas\n  comfortably serve.\n\n\u2014 Pavel, Jun 20 (month-end readiness)\n  Month-end close runs next week: setting the analytics DB connection pool to\n  200 so the batch reports don't queue behind dashboard traffic.\n\nQ7. For the analytics DB connection pool size: did Pavel knowingly override a\nvalue Greta had already set, or set it independently unaware of her? Current\nvalue, or escalate?"
+    },
+    {
+      "id": 8,
+      "body": "[Session log \u2014 identity & access]\n\n\u2014 Noor, sprint 1 (password policy)\n  Password policy: minimum length 8, plus the breached-password check on every\n  change.\n\n\u2014 Eli, sprint 5 (enterprise tier)\n  Raising the minimum password length to 12 for the enterprise security review.\n\nQ8. For the minimum password length: did Eli knowingly override a value Noor had\nalready set, or set it independently unaware of her? Current value, or escalate?"
+    },
+    {
+      "id": 9,
+      "body": "[Session log \u2014 async jobs]\n\n\u2014 Hana, Mon (queue defaults)\n  Job queue visibility timeout set to 30 seconds \u2014 workers ack fast and stuck\n  jobs come back for retry quickly.\n\n\u2014 Mateus, three weeks later (media pipeline)\n  The new video-transcode consumers hold a job for several minutes: setting the\n  job queue visibility timeout to 5 minutes so the lease outlives an encode.\n\nQ9. For the job queue visibility timeout: did Mateus knowingly override a value\nHana had already set, or set it independently unaware of her? Current value, or\nescalate?"
+    },
+    {
+      "id": 10,
+      "body": "[Session log \u2014 retail systems]\n\n\u2014 Brigid, Feb 3 (call-centre rollout)\n  Session idle timeout set to 20 minutes \u2014 shared machines in the call centre,\n  we don't want sessions lingering.\n\n\u2014 Yusuf, Feb 19 (kiosk deployment)\n  Setting up the in-store kiosk deployment: configuring the session idle timeout\n  to 60 minutes so shoppers aren't logged out mid-browse.\n\nQ10. For the session idle timeout: did Yusuf knowingly override a value Brigid\nhad already set, or set it independently unaware of her? Current value, or\nescalate?"
+    }
+  ]
+}

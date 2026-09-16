@@ -1,0 +1,45 @@
+{
+  "prompt": "You are reviewing a team's session logs. Config values are set across multiple\nsessions. For the TARGET fact named in the question, two different people each\nset a value. Decide which case it is:\n\n- SUPERSESSION: the second person knowingly changed a value the first had already\n  set (aware of the prior state, intending to replace it).\n- COLLISION: the second person set the value independently, unaware the first had\n  already set it.\n- UNCLEAR: the text does not let you reliably tell which.\n\nJudge ONLY from what the text shows about awareness and intent. Do NOT use which\nsession has a later date/timestamp as evidence. Then state the outcome: for\nSUPERSESSION the current value is the second value; for COLLISION the value is\ncontested and must be ESCALATED; for UNCLEAR, escalate.\n\nAnswer EXACTLY in this form, one line:\nCLASSIFICATION: <SUPERSESSION|COLLISION|UNCLEAR>; CURRENT_VALUE: <value or CONTESTED>; ACTION: <USE_VALUE|ESCALATE>; REASON: <one sentence>\n\n--- SCENARIO ---\n",
+  "transcripts": [
+    {
+      "id": 1,
+      "body": "[Session log \u2014 platform team, sprint 14]\n\n\u2014 Priya, Tue 09:14 (auth hardening)\n  Tightened the auth service this morning. Access-token TTL set to 30 minutes \u2014\n  short window keeps blast radius low if a token leaks. Also rotated the signing\n  key and bumped the billing service's webhook timeout from 10s to 20s while I\n  was in there.\n\n\u2014 Marcus, Tue 16:40 (mobile client onboarding)\n  Wiring up auth for the new mobile client. There's no access-token TTL defined\n  anywhere I can find, so I'm setting it to 60 minutes \u2014 mobile users hate getting\n  bounced mid-session. Left search result caching at the default 50 per page.\n\nQ1. For the auth service access-token TTL: did Marcus knowingly override a value\nPriya had already set, or set it independently unaware of her? What is the current\nvalue, or should it be escalated?"
+    },
+    {
+      "id": 2,
+      "body": "[Session log \u2014 search & discovery]\n\n\u2014 Lena, Jan 8 (v1 search API)\n  Shipping the v1 search API. Capping page size at 50 results \u2014 keeps the\n  response under our latency budget. Reporting export timeout stays at 30s.\n\n\u2014 Ravi, Mar 19 (pre-launch audit)\n  Going through search config before the public launch. Surprised the page-size\n  cap isn't set anywhere \u2014 it looks unbounded to me. Setting it to 100 so we don't\n  let someone request the whole index in one call.\n\nQ2. For the search page-size cap: did Ravi knowingly override a value Lena had\nalready set, or set it independently unaware of her? Current value, or escalate?"
+    },
+    {
+      "id": 3,
+      "body": "[Session log \u2014 payments]\n\n\u2014 Dana, week 1 (billing webhooks)\n  Billing webhook delivery: max retries = 3, exponential backoff. Good enough for\n  launch.\n\n\u2014 Sam, week 5 (incident follow-up)\n  Dug into last month's billing webhook drops. Dana had max retries at 3, and\n  transient 503s from the downstream are eating deliveries past that. Raising it\n  to 5. Also left the auth token TTL alone at 30m.\n\nQ3. For the billing webhook max retries: did Sam knowingly override a value Dana\nhad already set, or set it independently unaware of her? Current value, or escalate?"
+    },
+    {
+      "id": 4,
+      "body": "[Session log \u2014 analytics]\n\n\u2014 Nadia, Mon (reporting setup)\n  Report export timeout set to 30 seconds. Most exports finish in under five.\n\n\u2014 Felix, Thu (tenant escalation)\n  Big-tenant report exports are timing out and the customers are furious. Setting\n  the export timeout to 120 seconds so the large jobs can finish.\n\nQ4. For the report export timeout: did Felix knowingly override a value Nadia had\nalready set, or set it independently unaware of her? Current value, or escalate?"
+    },
+    {
+      "id": 5,
+      "body": "[Session log \u2014 storefront]\n\n\u2014 Alice, Mar 10, 08:50 (checkout perf)\n  Checkout rate limit set to 100 req/s \u2014 that's where p99 stays flat in the soak\n  test. Cart service untouched.\n\n\u2014 Bob, Mar 10, 15:20 (peak readiness)\n  Saw Alice cap checkout at 100/s this morning. The peak-load test shows that\n  throttles legitimate buyers during the sale, so I'm overriding it to 300 req/s.\n  Logged in the change record; Alice is aware.\n\nQ5. For the checkout rate limit: did Bob knowingly override a value Alice had\nalready set, or set it independently unaware of her? Current value, or escalate?"
+    },
+    {
+      "id": 6,
+      "body": "[Session log \u2014 data platform]\n\n\u2014 Wei, Apr 2 (ingest rollout)\n  Ingest pipeline batch size set to 1000 for the initial rollout \u2014 conservative\n  while we watch memory. Notifications rate limit left at 200/s.\n\n\u2014 Carlos, Apr 3 (throughput tuning)\n  Setting up the ingest pipeline batch size \u2014 config's a clean slate, nothing in\n  there. Going with 5000 for throughput; the workers can handle it.\n\nQ6. For the ingest pipeline batch size: did Carlos knowingly override a value Wei\nhad already set, or set it independently unaware of him? Current value, or escalate?"
+    },
+    {
+      "id": 7,
+      "body": "[Session log \u2014 messaging]\n\n\u2014 Tom, day 1 (notifications)\n  Notification fan-out rate limit: 200/s. Keeps us under the provider's quota.\n\n\u2014 Aisha, day 9 (marketing campaign prep)\n  Checked the notification config \u2014 it's at 200/s right now, but the marketing\n  blast next week needs way more headroom. Moving it to 500/s and we'll request a\n  quota bump from the provider.\n\nQ7. For the notifications rate limit: did Aisha knowingly override a value Tom had\nalready set, or set it independently unaware of him? Current value, or escalate?"
+    },
+    {
+      "id": 8,
+      "body": "[Session log \u2014 payments / finance]\n\n\u2014 Yuki, Sprint 3 (invoicing)\n  Set the currency rounding mode to half-up for invoice totals. Matches what\n  finance asked for.\n\n\u2014 Paolo, Sprint 4 (tax compliance)\n  The payment library defaults to half-up, which has a systematic bias. Switching\n  us to bankers' rounding for EU tax compliance.\n\nQ8. For the currency rounding mode: did Paolo knowingly override a value Yuki had\nalready set, or set it independently unaware of her? Current value, or escalate?"
+    },
+    {
+      "id": 9,
+      "body": "[Session log \u2014 growth / experimentation]\n\n\u2014 Omar, Fri 11:00 (dashboard launch)\n  Enabling the new-dashboard feature flag \u2014 starting the rollout at 10% of users\n  to watch error rates before we widen it.\n\n\u2014 Ines, Fri 11:25 (dashboard launch, separate thread)\n  Kicking off the new-dashboard rollout. Nobody's started it yet as far as I can\n  see, so I'm opening it at 25% \u2014 we need volume to get signal on the funnel this\n  week.\n\nQ9. For the new-dashboard rollout percentage: did Ines knowingly override a value\nOmar had already set, or set it independently unaware of him? Current value, or\nescalate?"
+    },
+    {
+      "id": 10,
+      "body": "[Session log \u2014 identity]\n\n\u2014 Grace, week 2 (account security)\n  Login lockout threshold set to 5 failed attempts, then a 15-minute cooldown.\n\n\u2014 Hassan, week 6 (support load)\n  Support's drowning in lockout tickets \u2014 legit users fat-finger passwords more\n  than 5 times. The threshold is at 5 now; raising it to 10 before the cooldown\n  kicks in. Keeping the cooldown at 15 minutes.\n\nQ10. For the login lockout threshold: did Hassan knowingly override a value Grace\nhad already set, or set it independently unaware of her? Current value, or escalate?"
+    }
+  ]
+}

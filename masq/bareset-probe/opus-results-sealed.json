@@ -1,0 +1,64 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: 12; ACTION: USE_VALUE; REASON: Rika's \"burst capacity on air dates\" framing against the existing baseline shows she knew 4 was the prior weekday setting and deliberately raised it for the campaign."
+    },
+    {
+      "id": 2,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: 30 minutes; ACTION: USE_VALUE; REASON: Jonas explicitly cites Mia's prior 2h setting and intentionally overrides it to 30 minutes with a change-log and Mia in the loop."
+    },
+    {
+      "id": 3,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: 24 hours; ACTION: USE_VALUE; REASON: Sana's \"Bumping the CDN cache TTL ... to 24 hours\" explicitly references raising the existing TTL, showing awareness of the prior 1-hour value she intended to replace."
+    },
+    {
+      "id": 4,
+      "classification": "COLLISION",
+      "action": "ESCALATE",
+      "raw": "CLASSIFICATION: COLLISION; CURRENT_VALUE: CONTESTED; ACTION: ESCALATE; REASON: Lara's compliance-driven note shows no awareness of Owen's prior 30-day setting and frames it as a fresh decision, so the two values collide independently."
+    },
+    {
+      "id": 5,
+      "classification": "COLLISION",
+      "action": "ESCALATE",
+      "raw": "CLASSIFICATION: COLLISION; CURRENT_VALUE: CONTESTED; ACTION: ESCALATE; REASON: Kofi states he's picking up a new workstream and gives an independent rationale with no reference to Devi's prior setting, indicating he was unaware of it."
+    },
+    {
+      "id": 6,
+      "classification": "COLLISION",
+      "action": "ESCALATE",
+      "raw": "CLASSIFICATION: COLLISION; CURRENT_VALUE: CONTESTED; ACTION: ESCALATE; REASON: Viktor set HMAC-SHA256 believing \"nothing's configured for signing,\" showing he was unaware of Asta's prior Ed25519 choice in a separate thread."
+    },
+    {
+      "id": 7,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: 200; ACTION: USE_VALUE; REASON: Pavel names the same analytics DB connection pool and explicitly changes it to 200 for a specific reason, showing intent to replace the existing setting."
+    },
+    {
+      "id": 8,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: 12; ACTION: USE_VALUE; REASON: Eli \"raising the minimum password length to 12\" references the prior minimum, showing awareness of and intent to replace Noor's existing value."
+    },
+    {
+      "id": 9,
+      "classification": "COLLISION",
+      "action": "ESCALATE",
+      "raw": "CLASSIFICATION: COLLISION; CURRENT_VALUE: CONTESTED; ACTION: ESCALATE; REASON: Mateus sets the timeout purely from his transcode use-case with no reference to Hana's prior 30-second value, showing no awareness he was overriding an existing setting."
+    },
+    {
+      "id": 10,
+      "classification": "COLLISION",
+      "action": "ESCALATE",
+      "raw": "CLASSIFICATION: COLLISION; CURRENT_VALUE: CONTESTED; ACTION: ESCALATE; REASON: Yusuf configures the timeout fresh for a separate kiosk deployment with no reference to Brigid's prior call-centre setting, indicating independent unaware action rather than a knowing override."
+    }
+  ]
+}

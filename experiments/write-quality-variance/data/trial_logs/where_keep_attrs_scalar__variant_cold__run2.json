@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_cold__run2",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "cold",
+  "run_number": 2,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 1170,
+  "agent": {
+    "result_text": "This confirms the issue: `objs = _all_of_type(args, Variable)` filters to only `Variable` (and subclass) arguments. When `x` is a scalar like `1`, it's not a `Variable`, so `attrs` only contains attributes from the non-scalar arguments. With `cond` at index 0 and `x` being a scalar, `attrs` may have only 1 element (from `cond`), making `attrs[1]` fail.\n\nThe fix `attrs[1] if len(attrs) > 1 else {}` correctly handles this by returning an empty dict when the scalar `x` has no attributes to preserve.\n\n**Fix:** Changed the `keep_attrs` lambda in `xr.where` (`xarray/core/computation.py:1832`) to guard against the case where `x` is a scalar with no `.attrs`, returning `{}` instead of raising an `IndexError`.",
+    "num_turns": 11,
+    "duration_ms": 48507,
+    "total_cost_usd": 0.2310885,
+    "stop_reason": "end_turn",
+    "input_tokens": 12,
+    "output_tokens": 2279,
+    "cache_read_tokens": 222053,
+    "cache_creation_tokens": 9956
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 49.63656687736511,
+  "timestamp": "2026-05-11T15:50:42"
+}

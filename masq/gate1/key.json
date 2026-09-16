@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "label": "COLLISION",
+    "difficulty": "easy",
+    "herring": "self-supersession distractor (billing timeout)",
+    "marker": "\"no access-token TTL defined anywhere I can find\" -> unaware; same day"
+  },
+  {
+    "id": 2,
+    "label": "COLLISION",
+    "difficulty": "hard (time misdirection: 2-month gap)",
+    "herring": "large time gap tempts supersession",
+    "marker": "\"isn't set anywhere... looks unbounded to me\" -> unaware despite gap"
+  },
+  {
+    "id": 3,
+    "label": "SUPERSESSION",
+    "difficulty": "easy",
+    "herring": "distractor: auth TTL mentioned but untouched",
+    "marker": "\"Dana had max retries at 3 ... Raising it to 5\" -> aware + replace"
+  },
+  {
+    "id": 4,
+    "label": "UNCLEAR",
+    "difficulty": "BOUNDARY",
+    "herring": "symptom reaction without reference",
+    "marker": "Felix reacts to a symptom (timeouts) but never references Nadia or '30s'; could be reacting to default behaviour. Maps the forbidden middle."
+  },
+  {
+    "id": 5,
+    "label": "SUPERSESSION",
+    "difficulty": "easy-medium (time misdirection: same day)",
+    "herring": "same-day tempts collision",
+    "marker": "\"Saw Alice cap checkout at 100 ... overriding it to 300 ... Alice is aware\""
+  },
+  {
+    "id": 6,
+    "label": "COLLISION",
+    "difficulty": "medium (verb misdirection)",
+    "herring": "strong verb 'setting up ... 5000' but greenfield framing",
+    "marker": "\"config's a clean slate, nothing in there\" -> unaware"
+  },
+  {
+    "id": 7,
+    "label": "SUPERSESSION",
+    "difficulty": "medium (soft, value-aware no name)",
+    "herring": "no name reference, only current-value awareness",
+    "marker": "\"it's at 200/s right now ... Moving it to 500/s\" -> value-aware replacement"
+  },
+  {
+    "id": 8,
+    "label": "UNCLEAR",
+    "difficulty": "BOUNDARY",
+    "herring": "references the value as a LIBRARY default, not as the other party's decision",
+    "marker": "Paolo names half-up as the library default and 'switches' from it \u2014 may be unaware Yuki explicitly set it. Aware-of-value vs aware-of-write ambiguity."
+  },
+  {
+    "id": 9,
+    "label": "COLLISION",
+    "difficulty": "easy-medium",
+    "herring": "near-simultaneous parallel threads",
+    "marker": "\"Nobody's started it yet as far as I can see\" -> unaware, ~same time"
+  },
+  {
+    "id": 10,
+    "label": "SUPERSESSION",
+    "difficulty": "easy",
+    "herring": "explicit current-value reference",
+    "marker": "\"The threshold is at 5 now; raising it to 10\""
+  }
+]

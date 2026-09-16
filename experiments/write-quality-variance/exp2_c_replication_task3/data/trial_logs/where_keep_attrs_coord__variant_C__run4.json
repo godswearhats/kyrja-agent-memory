@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_coord__variant_C__run4",
+  "task_label": "where_keep_attrs_coord",
+  "instance_id": "pydata__xarray-7229",
+  "variant": "C",
+  "run_number": 4,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 6594,
+  "agent": {
+    "result_text": "The 6 failures are all `TypeError` from pandas/numpy compat \u2014 pre-existing and unrelated to my change. All 167 passing tests continue to pass (including the 57 keep_attrs tests).\n\n**Summary**: The fix replaces the closure-based lambda `lambda attrs, context: getattr(x, \"attrs\", {})` with a two-step approach:\n\n1. Pass `\"override\"` to `apply_ufunc` so coordinate attributes are merged normally (first occurrence wins)\n2. After `apply_ufunc` returns, set the result's `.attrs` to `x`'s attrs\n\nThis preserves coordinate attributes while still keeping `x`'s data variable attributes on the result, and the scalar-`x` case from #6461 continues to work (since `getattr(scalar, \"attrs\", {})` returns `{}`).",
+    "num_turns": 23,
+    "duration_ms": 243513,
+    "total_cost_usd": 0.74886275,
+    "stop_reason": "end_turn",
+    "input_tokens": 22,
+    "output_tokens": 10532,
+    "cache_read_tokens": 615142,
+    "cache_creation_tokens": 28039
+  },
+  "evaluation": {
+    "success": false,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 1,
+    "stdout_tail": "; it can be silenced by converting the values to nanosecond precision ahead of time.\n    xr.DataArray(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED xarray/tests/test_computation.py::test_where_attrs - AssertionError: L...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n======================== 1 failed, 18 warnings in 0.36s ========================\n",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 244.353600025177,
+  "timestamp": "2026-05-11T18:39:32"
+}

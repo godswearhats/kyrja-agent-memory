@@ -1,0 +1,56 @@
+{
+  "confidence_intervals": {
+    "T0_no_memory": {
+      "mean": 0.1482,
+      "ci_low": 0.1459,
+      "ci_high": 0.1505,
+      "std": 0.0621
+    },
+    "T1_bm25": {
+      "mean": 0.2287,
+      "ci_low": 0.2255,
+      "ci_high": 0.232,
+      "std": 0.0882
+    },
+    "T2_semantic": {
+      "mean": 0.2281,
+      "ci_low": 0.225,
+      "ci_high": 0.2313,
+      "std": 0.0859
+    },
+    "T3_hybrid": {
+      "mean": 0.2319,
+      "ci_low": 0.2287,
+      "ci_high": 0.2351,
+      "std": 0.0874
+    }
+  },
+  "pairwise_tests": {
+    "T1_bm25_vs_T0_no_memory": {
+      "mean_diff": 0.0805,
+      "p_a_better": 1.0
+    },
+    "T2_semantic_vs_T0_no_memory": {
+      "mean_diff": 0.0799,
+      "p_a_better": 1.0
+    },
+    "T3_hybrid_vs_T0_no_memory": {
+      "mean_diff": 0.0837,
+      "p_a_better": 1.0
+    },
+    "T2_semantic_vs_T1_bm25": {
+      "mean_diff": -0.0006,
+      "p_a_better": 0.375
+    },
+    "T3_hybrid_vs_T1_bm25": {
+      "mean_diff": 0.0032,
+      "p_a_better": 0.9591
+    },
+    "T3_hybrid_vs_T2_semantic": {
+      "mean_diff": 0.0038,
+      "p_a_better": 0.9864
+    }
+  },
+  "n_bootstrap": 10000,
+  "n_queries": 2920
+}

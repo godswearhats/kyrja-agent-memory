@@ -1,0 +1,41 @@
+# Reversal × Historical — Batch 2 (Tier B)
+
+**R-Hi2-1**
+
+The auction house is full. It is London, 1822, and the estate of Sir Reginald Partridge — debts totalling fourteen thousand pounds, creditors seated in the front row — is being sold off lot by lot. The auctioneer has moved through the silver, the furniture, and the library without once meeting the reserve. The paintings, which the family hoped would clear the majority of the debt, have drawn thin bidding: the Reynolds went for a third of its estimate, the Gainsborough for less. The auctioneer reaches the final lot. It is a small canvas, uncleaned, catalogued as "attributed to an unknown Flemish hand" and estimated at eight guineas. He opens the bidding. A dealer in the fourth row raises his paddle. Then a second dealer. Then a man in the gallery whom no one in the room recognises, who bids without hesitation, lot after lot, until the room falls silent at two thousand three hundred guineas. He identifies himself as an agent for the Marquess of Stafford, who has been searching for this panel — a lost Vermeer — for eleven years. The proceeds from the single canvas exceed the family's total debt. The creditors are paid in full before the room empties.
+
+> A = Partridge estate / family; G = pay off the fourteen-thousand-pound debt through the auction; X = debts unpaid (every lot below reserve, Reynolds and Gainsborough sold at fractions of estimate); ¬X = debts cleared in full from a single overlooked canvas selling for 2,300 guineas. ✓ polar binary on insolvent-vs-solvent axis, ✓ expectation set before resolution, ✓ inversion acknowledged within event.
+
+**R-Hi2-2**
+
+"He will hang," my father says, setting the newspaper on the kitchen table. It is Philadelphia, the autumn of 1735, and the printer Zenger has been in jail for ten months on the charge of seditious libel against the royal governor. My father serves on the city council and has read the depositions. The law is plain: publication of the libel is admitted, and under the standing statute, truth is no defence. The governor's own attorney has told the grand jury that the verdict is a formality. The judge is a Crown appointee. My father folds the paper and says it again, quieter: "The man will hang, and there is nothing to be done about it."
+
+I am in the courtroom gallery when the jury foreman stands. The deliberation lasted less than ten minutes. He speaks one word: "Not guilty." The judge strikes his bench. The gallery is on its feet. My father, two rows ahead of me, does not stand. He sits with the newspaper still folded under his arm, staring at the foreman as though the man has spoken in a language he does not recognise.
+
+> A = Zenger (printer); G = be acquitted of seditious libel; X = convicted and hanged (law is plain, truth no defence, publication admitted, governor's attorney called verdict a formality, judge is Crown appointee, father certain he will hang); ¬X = acquitted, jury returns "not guilty" in under ten minutes. ✓ polar binary on convicted-vs-acquitted axis, ✓ expectation set before resolution, ✓ inversion acknowledged within event.
+
+**R-Hi2-3**
+
+The captain brings the sloop about in the grey water off Havana, 1697. The Spanish treasure fleet is anchored in the harbour — nine galleons, riding low, their holds full of Peruvian silver. His crew numbers forty-three men. They have been at sea for eleven weeks, and the water casks are half-empty. This morning, the quartermaster held a vote: take one of the outlying galleons at dawn, when the watch changes. The vote carried unanimously. Every man aboard understands that the prize, if captured, ends the voyage — the silver from a single galleon would buy each of them a plantation and a decade of idleness.
+
+The sloop closes the gap in the pre-dawn dark. The target galleon rides at anchor, lanterns dim. The boarding party assembles at the rail. Then the lookout, perched on the crosstrees, calls down: the galleon's gun ports are open. All of them. And there are shapes moving on the water between the fleet — patrol boats, six of them, rowing in an arc that is closing around the sloop's position. The harbour knew they were coming. The captain gives the order to cut and run. They abandon the approach, hauling every yard of canvas onto the masts, and clear the harbour mouth with the patrol boats half a cable length behind. The silver stays in the harbour. The water casks are still half-empty.
+
+> A = pirate crew / captain; G = capture the outlying galleon and seize its silver; X = successful raid (unanimous vote, boarding party assembled, target at anchor with dim lanterns, pre-dawn timing); ¬X = raid aborted, forced to flee with nothing (harbour was forewarned, gun ports open, patrol boats closing). ✓ polar binary on capture-vs-flight axis, ✓ expectation set before resolution, ✓ inversion acknowledged within event.
+
+**R-Hi2-4**
+
+*From the journal of Brother Anselm, Priory of Saint-Gilles, Provence, entry dated the Feast of the Assumption, 1248:*
+
+*The prior summoned us to chapter this morning to read aloud the letter from the Bishop of Nimes, which arrived by mounted courier at first light. The letter confirmed what we had feared for three seasons. Our petition for the restoration of the priory's tithe rights — taken from us by the Count of Toulouse's bailiff in the year of Our Lord 1245 — has been denied by the episcopal court. The bishop's language was final. We are to yield the disputed lands and cease collection. The prior had already instructed the cellarer to draw up an account of what stores remained and how many months we might sustain the community without tithe income. The cellarer's answer was four months, perhaps five.*
+
+*The prior had scarcely finished reading when a second rider arrived, this one bearing the seal of the Papal Legate at Lyon. The legate's letter overrode the bishop's ruling entirely. Pope Innocent himself had intervened on referral from the Abbot of Cluny, our mother house. The tithe rights are restored in full, with arrears owed from the date of seizure. The count's bailiff is ordered to make restitution. The prior read this second letter aloud as well. The cellarer tore up his account of remaining stores.*
+
+> A = Priory of Saint-Gilles / prior; G = recover the tithe rights seized by the Count's bailiff; X = tithe rights lost permanently (bishop's denial arrived, language final, ordered to yield lands and cease collection, cellarer calculated four-to-five months of remaining stores); ¬X = tithe rights restored in full with arrears, by papal intervention. ✓ polar binary on denied-vs-restored axis, ✓ expectation set before resolution, ✓ inversion acknowledged within event.
+
+**R-Hi2-5**
+
+The executioner tests the blade on a melon. It is a clear morning in the courtyard of the Conciergerie, Paris, the sixth day of Thermidor, Year II of the Republic. Citizen Duval, former clerk to the Committee of Public Safety, stands in the tumbril with his hands bound behind him. The charges were read yesterday: corruption and royalist sympathy, on the testimony of two informants whose names he was not permitted to hear. The president of the Tribunal signed the death warrant before the defence advocate finished speaking. The crowd outside the gate is already arranging itself along the route.
+
+A mounted officer enters the courtyard at a canter and hands a sealed order to the captain of the guard. The captain reads it, reads it again, then walks to the tumbril. He cuts Duval's bindings. The order bears the signature of the Committee of Public Safety itself: Duval is to be released and returned to his post immediately. The two informants have been arrested overnight on charges of fabricating testimony for personal gain. The Tribunal's warrant is annulled. Duval steps down from the tumbril. The executioner covers the blade. The crowd at the gate receives no procession.
+
+> A = Citizen Duval (former clerk); G = survive / avoid execution; X = executed (charges read, death warrant signed, executioner preparing the blade, bound in the tumbril, crowd assembled for procession); ¬X = released, bindings cut, returned to his post, warrant annulled. ✓ polar binary on executed-vs-freed axis, ✓ expectation set before resolution, ✓ inversion acknowledged within event.

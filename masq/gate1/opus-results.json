@@ -1,0 +1,97 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "classification": "COLLISION",
+      "action": "ESCALATE",
+      "raw": "CLASSIFICATION: COLLISION; CURRENT_VALUE: CONTESTED; ACTION: ESCALATE; REASON: Marcus stated he could find no existing TTL (\"no access-token TTL defined anywhere I can find\") and set 60 min independently, unaware of Priya's prior 30-min setting.",
+      "truth": "COLLISION",
+      "correct": true,
+      "boundary": false
+    },
+    {
+      "id": 2,
+      "classification": "COLLISION",
+      "action": "ESCALATE",
+      "raw": "CLASSIFICATION: COLLISION; CURRENT_VALUE: CONTESTED; ACTION: ESCALATE; REASON: Ravi believed the cap \"isn't set anywhere\" and looked unbounded, so he set 100 independently, unaware of Lena's prior value of 50.",
+      "truth": "COLLISION",
+      "correct": true,
+      "boundary": false
+    },
+    {
+      "id": 3,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: 5; ACTION: USE_VALUE; REASON: Sam explicitly cites Dana's prior value of 3 and the diagnosed 503 failure as the reason for knowingly raising it to 5.",
+      "truth": "SUPERSESSION",
+      "correct": true,
+      "boundary": false
+    },
+    {
+      "id": 4,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: 120 seconds; ACTION: USE_VALUE; REASON: Felix references the existing export timeout and the timing-out large jobs, showing he knew a timeout was set and deliberately raised it to 120s.",
+      "truth": "UNCLEAR",
+      "correct": false,
+      "boundary": true
+    },
+    {
+      "id": 5,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: 300 req/s; ACTION: USE_VALUE; REASON: Bob explicitly references Alice's 100/s cap, states he is overriding it to 300 req/s, and logged the change with Alice aware, showing knowing replacement.",
+      "truth": "SUPERSESSION",
+      "correct": true,
+      "boundary": false
+    },
+    {
+      "id": 6,
+      "classification": "COLLISION",
+      "action": "ESCALATE",
+      "raw": "CLASSIFICATION: COLLISION; CURRENT_VALUE: CONTESTED; ACTION: ESCALATE; REASON: Carlos explicitly believed the config was \"a clean slate, nothing in there,\" showing he was unaware of Wei's prior 1000 setting and set 5000 independently.",
+      "truth": "COLLISION",
+      "correct": true,
+      "boundary": false
+    },
+    {
+      "id": 7,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: 500/s; ACTION: USE_VALUE; REASON: Aisha explicitly checked the existing config, noted it was \"at 200/s right now,\" and decided to move it to 500/s \u2014 showing awareness of the prior value and intent to replace it.",
+      "truth": "SUPERSESSION",
+      "correct": true,
+      "boundary": false
+    },
+    {
+      "id": 8,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: bankers' rounding; ACTION: USE_VALUE; REASON: Paolo explicitly references the existing half-up behavior and its bias, showing awareness of the prior setting and intent to replace it.",
+      "truth": "UNCLEAR",
+      "correct": false,
+      "boundary": true
+    },
+    {
+      "id": 9,
+      "classification": "COLLISION",
+      "action": "ESCALATE",
+      "raw": "CLASSIFICATION: COLLISION; CURRENT_VALUE: CONTESTED; ACTION: ESCALATE; REASON: Ines opened the rollout in a separate thread explicitly believing nobody had started it, so she set 25% independently and unaware of Omar's prior 10%.",
+      "truth": "COLLISION",
+      "correct": true,
+      "boundary": false
+    },
+    {
+      "id": 10,
+      "classification": "SUPERSESSION",
+      "action": "USE_VALUE",
+      "raw": "CLASSIFICATION: SUPERSESSION; CURRENT_VALUE: 10 failed attempts; ACTION: USE_VALUE; REASON: Hassan explicitly notes the threshold \"is at 5 now\" and is raising it to 10, showing awareness of the prior value and intent to replace it.",
+      "truth": "SUPERSESSION",
+      "correct": true,
+      "boundary": false
+    }
+  ],
+  "clear_correct": 8,
+  "clear_total": 8,
+  "clear_pct": 100.0
+}

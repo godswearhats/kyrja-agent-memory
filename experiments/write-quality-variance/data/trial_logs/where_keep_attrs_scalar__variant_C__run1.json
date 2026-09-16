@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_C__run1",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "C",
+  "run_number": 1,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 5052,
+  "agent": {
+    "result_text": "All cases work correctly:\n1. Scalar `x` with `keep_attrs=True` no longer crashes \u2014 returns empty attrs (since a scalar has none)\n2. DataArray `x` with `keep_attrs=True` still propagates attrs from `x`\n3. Default behavior (no `keep_attrs`) still returns empty attrs\n\nThe fix checks whether `x` has an `attrs` attribute before trying to index into the filtered attrs list. When `x` is a scalar (no `.attrs`), the lambda returns an empty dict instead of trying `attrs[1]` which would be out of range.",
+    "num_turns": 7,
+    "duration_ms": 39909,
+    "total_cost_usd": 0.18593025,
+    "stop_reason": "end_turn",
+    "input_tokens": 8,
+    "output_tokens": 1974,
+    "cache_read_tokens": 140911,
+    "cache_creation_tokens": 10259
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 40.871936559677124,
+  "timestamp": "2026-05-11T16:00:24"
+}

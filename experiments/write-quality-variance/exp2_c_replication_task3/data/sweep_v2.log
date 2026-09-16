@@ -1,0 +1,158 @@
+>>> cold run 1
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_cold__run1
+  Variant: cold
+  Run: 1
+  Model: claude-opus-4-6
+  Prompt: 4342 chars
+======================================================================
+  Agent: 470.5s, 23 turns
+  Eval: FAIL
+  Cost: $1.2969  Out tokens: 19150  Wall: 471.6s
+  Saved: where_keep_attrs_coord__variant_cold__run1.json
+>>> cold run 2
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_cold__run2
+  Variant: cold
+  Run: 2
+  Model: claude-opus-4-6
+  Prompt: 4342 chars
+======================================================================
+  Agent: 394.9s, 22 turns
+  Eval: FAIL
+  Cost: $1.1275  Out tokens: 16597  Wall: 395.8s
+  Saved: where_keep_attrs_coord__variant_cold__run2.json
+>>> cold run 3
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_cold__run3
+  Variant: cold
+  Run: 3
+  Model: claude-opus-4-6
+  Prompt: 4342 chars
+======================================================================
+  Agent: 442.7s, 34 turns
+  Eval: FAIL
+  Cost: $1.3162  Out tokens: 15238  Wall: 444.1s
+  Saved: where_keep_attrs_coord__variant_cold__run3.json
+>>> cold run 4
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_cold__run4
+  Variant: cold
+  Run: 4
+  Model: claude-opus-4-6
+  Prompt: 4342 chars
+======================================================================
+  Agent: 444.5s, 36 turns
+  Eval: FAIL
+  Cost: $1.5954  Out tokens: 20027  Wall: 445.3s
+  Saved: where_keep_attrs_coord__variant_cold__run4.json
+>>> A run 1
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_A__run1
+  Variant: A
+  Run: 1
+  Model: claude-opus-4-6
+  Prompt: 6917 chars
+======================================================================
+  Agent: 392.9s, 35 turns
+  Eval: FAIL
+  Cost: $1.2999  Out tokens: 16582  Wall: 394.0s
+  Saved: where_keep_attrs_coord__variant_A__run1.json
+>>> A run 2
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_A__run2
+  Variant: A
+  Run: 2
+  Model: claude-opus-4-6
+  Prompt: 6917 chars
+======================================================================
+  Agent: 385.1s, 25 turns
+  Eval: FAIL
+  Cost: $1.0971  Out tokens: 17847  Wall: 390.7s
+  Saved: where_keep_attrs_coord__variant_A__run2.json
+>>> A run 3
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_A__run3
+  Variant: A
+  Run: 3
+  Model: claude-opus-4-6
+  Prompt: 6917 chars
+======================================================================
+  Agent: 315.1s, 29 turns
+  Eval: FAIL
+  Cost: $1.1215  Out tokens: 16482  Wall: 316.4s
+  Saved: where_keep_attrs_coord__variant_A__run3.json
+>>> A run 4
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_A__run4
+  Variant: A
+  Run: 4
+  Model: claude-opus-4-6
+  Prompt: 6917 chars
+======================================================================
+  Agent: 352.2s, 17 turns
+  Eval: FAIL
+  Cost: $0.9023  Out tokens: 10472  Wall: 353.2s
+  Saved: where_keep_attrs_coord__variant_A__run4.json
+>>> C run 1
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_C__run1
+  Variant: C
+  Run: 1
+  Model: claude-opus-4-6
+  Prompt: 6594 chars
+======================================================================
+  Agent: 350.8s, 24 turns
+  Eval: FAIL
+  Cost: $0.9059  Out tokens: 14845  Wall: 351.8s
+  Saved: where_keep_attrs_coord__variant_C__run1.json
+>>> C run 2
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_C__run2
+  Variant: C
+  Run: 2
+  Model: claude-opus-4-6
+  Prompt: 6594 chars
+======================================================================
+  Agent: 228.2s, 19 turns
+  Eval: FAIL
+  Cost: $0.6469  Out tokens: 10092  Wall: 229.1s
+  Saved: where_keep_attrs_coord__variant_C__run2.json
+>>> C run 3
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_C__run3
+  Variant: C
+  Run: 3
+  Model: claude-opus-4-6
+  Prompt: 6594 chars
+======================================================================
+  Agent: 330.8s, 25 turns
+  Eval: FAIL
+  Cost: $0.9188  Out tokens: 14266  Wall: 331.7s
+  Saved: where_keep_attrs_coord__variant_C__run3.json
+>>> C run 4
+
+======================================================================
+Trial: where_keep_attrs_coord__variant_C__run4
+  Variant: C
+  Run: 4
+  Model: claude-opus-4-6
+  Prompt: 6594 chars
+======================================================================
+  Agent: 243.5s, 23 turns
+  Eval: FAIL
+  Cost: $0.7489  Out tokens: 10532  Wall: 244.4s
+  Saved: where_keep_attrs_coord__variant_C__run4.json
+
+Exp 2 sweep complete.

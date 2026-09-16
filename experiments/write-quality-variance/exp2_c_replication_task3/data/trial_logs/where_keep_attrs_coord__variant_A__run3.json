@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_coord__variant_A__run3",
+  "task_label": "where_keep_attrs_coord",
+  "instance_id": "pydata__xarray-7229",
+  "variant": "A",
+  "run_number": 3,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 6917,
+  "agent": {
+    "result_text": "All 57 `keep_attrs` tests pass. Here's a summary of the fix:\n\n**Problem**: The #6461 fix changed `keep_attrs = lambda attrs, context: attrs[1]` to `keep_attrs = lambda attrs, context: getattr(x, \"attrs\", {})` in `xr.where`. This lambda gets passed through `apply_ufunc` and is used for **both** coordinate merging (in `merge_collected`) and data variable attrs merging. Since the lambda always returns the top-level DataArray attrs (e.g., air temperature metadata), it overwrites coordinate attrs (e.g., time's `{'standard_name': 'time'}`) with the data variable attrs.\n\n**Fix**: In `apply_dataarray_vfunc` and `apply_dataset_vfunc`, when `keep_attrs` is a callable, use `\"override\"` for coordinate merging instead of the callable. The callable only applies to data variable attrs. `\"override\"` preserves coordinate attrs from the first matching input, which is the correct behavior since coordinates are already aligned.\n\nThe change is two lines in `xarray/core/computation.py` \u2014 one in `apply_dataarray_vfunc` (line ~311) and one in `apply_dataset_vfunc` (line ~476).",
+    "num_turns": 29,
+    "duration_ms": 315116,
+    "total_cost_usd": 1.121537,
+    "stop_reason": "end_turn",
+    "input_tokens": 30,
+    "output_tokens": 16482,
+    "cache_read_tokens": 956489,
+    "cache_creation_tokens": 36554
+  },
+  "evaluation": {
+    "success": false,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 1,
+    "stdout_tail": "; it can be silenced by converting the values to nanosecond precision ahead of time.\n    xr.DataArray(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED xarray/tests/test_computation.py::test_where_attrs - AssertionError: L...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n======================== 1 failed, 18 warnings in 0.37s ========================\n",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 316.4020457267761,
+  "timestamp": "2026-05-11T18:14:16"
+}

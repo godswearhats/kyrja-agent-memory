@@ -1,0 +1,19 @@
+1: COLLISION - 60
+
+2: COLLISION - 100
+
+3: SUPERSESSION - 5
+
+4: SUPERSESSION - 120 (arguably unclear)
+
+5: SUPERSESSION - 300
+
+6: COLLISION - 5000
+
+7: SUPERSESSION - 500
+
+8: SUPERSESSION - bankers' rounding (arguably unclear)
+
+9: COLLISION - 25
+
+10: SUPERSESSION - 10

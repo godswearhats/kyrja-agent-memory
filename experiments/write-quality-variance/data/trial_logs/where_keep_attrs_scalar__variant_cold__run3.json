@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_cold__run3",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "cold",
+  "run_number": 3,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 1170,
+  "agent": {
+    "result_text": "The fix is correct and minimal. When `x` is a scalar (like `1`), it doesn't have `.attrs` and isn't included in the `objs` list that `apply_ufunc` collects, so `attrs` has fewer entries than expected. The change returns an empty dict `{}` when `attrs[1]` doesn't exist, which is the appropriate behavior \u2014 scalars have no attributes to preserve.\n\n**Summary:** Fixed `xr.where` with `keep_attrs=True` crashing when `x` is a scalar by adding a bounds check on the `attrs` list in `computation.py:1832`. When `x` is a scalar (no `.attrs`), it returns `{}` instead of raising `IndexError`.",
+    "num_turns": 16,
+    "duration_ms": 71966,
+    "total_cost_usd": 0.31988075,
+    "stop_reason": "end_turn",
+    "input_tokens": 17,
+    "output_tokens": 2841,
+    "cache_read_tokens": 346375,
+    "cache_creation_tokens": 11965
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 72.91897368431091,
+  "timestamp": "2026-05-11T15:51:56"
+}

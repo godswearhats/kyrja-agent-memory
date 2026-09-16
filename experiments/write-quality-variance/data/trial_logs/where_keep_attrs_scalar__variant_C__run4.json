@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_C__run4",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "C",
+  "run_number": 4,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 5052,
+  "agent": {
+    "result_text": "All cases work correctly:\n\n- **Scalar `x` with `keep_attrs=True`**: no longer crashes, returns empty attrs (since a scalar has no attrs to preserve)\n- **DataArray `x` with `keep_attrs=True`**: still preserves attributes as expected\n- **Default `keep_attrs`**: unchanged behavior\n\nThe fix adds a bounds check on the `attrs` list \u2014 when `x` is a scalar, `apply_ufunc` doesn't include it in the attrs list, so `attrs[1]` would be out of range. The lambda now returns `{}` in that case.",
+    "num_turns": 4,
+    "duration_ms": 20901,
+    "total_cost_usd": 0.12002299999999999,
+    "stop_reason": "end_turn",
+    "input_tokens": 5,
+    "output_tokens": 1045,
+    "cache_read_tokens": 74894,
+    "cache_creation_tokens": 8712
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 156.92850065231323,
+  "timestamp": "2026-05-11T16:03:59"
+}

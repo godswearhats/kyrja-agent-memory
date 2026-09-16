@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_A__run1",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "A",
+  "run_number": 1,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 7151,
+  "agent": {
+    "result_text": "Confirmed. `objs = _all_of_type(args, DataArray)` filters to only DataArray objects. So when `x` is a scalar (like `1`), `objs` will only contain `cond` (and possibly `y` if it's a DataArray). The `attrs` list `[x.attrs for x in objs]` won't have an entry at index 1 for the scalar `x`.\n\nIn the case `xr.where(xr.DataArray([1, 2, 3]) > 0, 1, 0)`:\n- `cond` is a DataArray \u2192 included in `objs` at index 0\n- `x = 1` is a scalar \u2192 excluded from `objs`\n- `y = 0` is a scalar \u2192 excluded from `objs`\n\nSo `attrs` has length 1, and `attrs[1]` fails. My fix `attrs[1] if len(attrs) > 1 else {}` correctly handles this by returning empty attrs when the scalar `x` has no attrs to preserve.\n\nThe fix is complete. Changed line 1832 in `xarray/core/computation.py` to guard the `attrs[1]` access with a length check, returning empty attrs `{}` when `x` is a scalar and has no attributes to preserve.",
+    "num_turns": 13,
+    "duration_ms": 57446,
+    "total_cost_usd": 0.29061325,
+    "stop_reason": "end_turn",
+    "input_tokens": 14,
+    "output_tokens": 2607,
+    "cache_read_tokens": 290708,
+    "cache_creation_tokens": 12409
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 58.37383842468262,
+  "timestamp": "2026-05-11T15:53:56"
+}

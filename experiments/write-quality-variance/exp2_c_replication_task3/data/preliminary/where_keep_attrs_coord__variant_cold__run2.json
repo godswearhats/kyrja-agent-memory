@@ -1,0 +1,26 @@
+{
+  "trial_id": "where_keep_attrs_coord__variant_cold__run2",
+  "task_label": "where_keep_attrs_coord",
+  "instance_id": "pydata__xarray-7229",
+  "variant": "cold",
+  "run_number": 2,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 4342,
+  "agent": {
+    "result_text": "All passing. Here's a summary of the fix:\n\n**Problem:** `xr.where(..., keep_attrs=True)` used a lambda `lambda attrs, context: getattr(x, \"attrs\", {})` that was passed to `apply_ufunc`. This lambda always returned `x`'s top-level data attributes for *every* variable being processed, including coordinates. So coordinate attributes like `{'standard_name': 'time'}` got overwritten with data variable attributes like `{'units': 'K', ...}`.\n\n**Fix in `xarray/core/computation.py`:** When `keep_attrs=True`, instead of passing a lambda to `apply_ufunc`, we now:\n1. Call `apply_ufunc` with `keep_attrs=False` to avoid any attribute merging\n2. Manually restore attributes from `x` at each level:\n   - `result.attrs` from `x.attrs` (top-level/Dataset attrs)\n   - Each data variable's attrs from `x[v].attrs` (Dataset case)\n   - Each coordinate's attrs from `x.coords[c].attrs`\n\n**Test added:** A new assertion in `test_where_attrs` that verifies coordinate attributes are preserved when `keep_attrs=True`.",
+    "num_turns": 15,
+    "duration_ms": 173348,
+    "total_cost_usd": 0.6053689,
+    "stop_reason": "end_turn",
+    "input_tokens": 15,
+    "output_tokens": 4404,
+    "cache_read_tokens": 337705,
+    "cache_creation_tokens": 17317
+  },
+  "evaluation": {
+    "success": null,
+    "reason": "test patch failed to apply: error: patch failed: xarray/tests/test_computation.py:1925\nerror: xarray/tests/test_computation.py: patch does not apply\n"
+  },
+  "wall_time_seconds": 174.25295639038086,
+  "timestamp": "2026-05-11T16:51:36"
+}

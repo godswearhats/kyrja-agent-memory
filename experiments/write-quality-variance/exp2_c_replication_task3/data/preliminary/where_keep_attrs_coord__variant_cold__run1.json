@@ -1,0 +1,26 @@
+{
+  "trial_id": "where_keep_attrs_coord__variant_cold__run1",
+  "task_label": "where_keep_attrs_coord",
+  "instance_id": "pydata__xarray-7229",
+  "variant": "cold",
+  "run_number": 1,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 4342,
+  "agent": {
+    "result_text": "All tests pass. Here's a summary of the fix:\n\n**Problem:** `xr.where(..., keep_attrs=True)` was passing a lambda `lambda attrs, context: getattr(x, \"attrs\", {})` as the `keep_attrs` argument to `apply_ufunc`. This lambda always returns the **data variable** attributes of `x`, regardless of whether it's being called to merge coordinate attributes or data variable attributes. So coordinate attrs (like `time.attrs`) got overwritten with the data variable attrs.\n\n**Fix** in `xarray/core/computation.py:1860-1883`: Instead of passing a broken lambda into `apply_ufunc`, the fix:\n1. Calls `apply_ufunc` with `keep_attrs=\"override\"` (which takes attrs from the first argument \u2014 good enough as a base)\n2. After the call returns, explicitly sets attrs from `x` on the result, its data variables, and its coordinates separately\n\n**Test** added in `xarray/tests/test_computation.py`: Verifies that coordinate attributes are preserved from `x` when `keep_attrs=True`.",
+    "num_turns": 21,
+    "duration_ms": 262252,
+    "total_cost_usd": 0.8296302500000002,
+    "stop_reason": "end_turn",
+    "input_tokens": 20,
+    "output_tokens": 7268,
+    "cache_read_tokens": 565101,
+    "cache_creation_tokens": 26030
+  },
+  "evaluation": {
+    "success": null,
+    "reason": "test patch failed to apply: error: patch failed: xarray/tests/test_computation.py:1925\nerror: xarray/tests/test_computation.py: patch does not apply\n"
+  },
+  "wall_time_seconds": 263.14443373680115,
+  "timestamp": "2026-05-11T16:48:42"
+}

@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_C__run2",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "C",
+  "run_number": 2,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 5052,
+  "agent": {
+    "result_text": "The fix works. The change is minimal: in the `keep_attrs=True` lambda, instead of unconditionally accessing `attrs[1]`, it checks `len(attrs) > 1` first. When `x` is a scalar (no attrs to contribute), the attrs list is shorter, so we fall back to empty `{}`. When `x` is an xarray object, behavior is unchanged \u2014 attrs from `x` are preserved.",
+    "num_turns": 5,
+    "duration_ms": 26235,
+    "total_cost_usd": 0.1390185,
+    "stop_reason": "end_turn",
+    "input_tokens": 6,
+    "output_tokens": 1282,
+    "cache_read_tokens": 96200,
+    "cache_creation_tokens": 9098
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 27.101770639419556,
+  "timestamp": "2026-05-11T16:00:52"
+}

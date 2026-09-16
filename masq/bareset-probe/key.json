@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "label": "BARE",
+    "kind": "bare",
+    "pair": "launch-prep",
+    "note": "forward-looking burst-capacity reason; no awareness route, no greenfield claim"
+  },
+  {
+    "id": 2,
+    "label": "SUPERSESSION",
+    "kind": "control",
+    "pair": null,
+    "note": "explicit: names prior writer, prior value, override + awareness"
+  },
+  {
+    "id": 3,
+    "label": "SUPERSESSION",
+    "kind": "whisper",
+    "pair": null,
+    "note": "ONLY cue = presupposition verb 'bumping ... to' (implies a current TTL exists)"
+  },
+  {
+    "id": 4,
+    "label": "BARE",
+    "kind": "bare",
+    "pair": "external-requirement",
+    "note": "new external requirement (audit); forward-looking; no awareness route"
+  },
+  {
+    "id": 5,
+    "label": "BARE",
+    "kind": "bare",
+    "pair": "new-workstream",
+    "note": "picks up a workstream; forward-looking efficiency reason; no awareness route"
+  },
+  {
+    "id": 6,
+    "label": "COLLISION",
+    "kind": "control",
+    "pair": null,
+    "note": "explicit greenfield claim ('nothing's configured as far as I can see'), parallel day"
+  },
+  {
+    "id": 7,
+    "label": "BARE",
+    "kind": "bare",
+    "pair": "launch-prep",
+    "note": "matched to #1: upcoming-event burst reason; no awareness route"
+  },
+  {
+    "id": 8,
+    "label": "SUPERSESSION",
+    "kind": "whisper",
+    "pair": null,
+    "note": "ONLY cue = presupposition verb 'raising ... to' (implies a current minimum exists)"
+  },
+  {
+    "id": 9,
+    "label": "BARE",
+    "kind": "bare",
+    "pair": "external-requirement",
+    "note": "matched to #4: new consumer requirement; forward-looking; no awareness route"
+  },
+  {
+    "id": 10,
+    "label": "BARE",
+    "kind": "bare",
+    "pair": "new-workstream",
+    "note": "matched to #5: new deployment setup; security-vs-UX value tension; no awareness route"
+  }
+]

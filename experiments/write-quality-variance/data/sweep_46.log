@@ -1,0 +1,290 @@
+>>> A_orig run 1
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_A_orig__run1
+  Variant: A_orig
+  Run: 1
+  Prompt: 5188 chars
+======================================================================
+  Agent: 109.7s, 17 turns
+  Eval: PASS
+  Cost: $0.3759  Out tokens: 3797  Wall: 110.7s
+  Saved: where_keep_attrs_scalar__variant_A_orig__run1.json
+>>> A_orig run 2
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_A_orig__run2
+  Variant: A_orig
+  Run: 2
+  Prompt: 5188 chars
+======================================================================
+  Agent: 50.1s, 10 turns
+  Eval: PASS
+  Cost: $0.2407  Out tokens: 2494  Wall: 51.0s
+  Saved: where_keep_attrs_scalar__variant_A_orig__run2.json
+>>> A_orig run 3
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_A_orig__run3
+  Variant: A_orig
+  Run: 3
+  Prompt: 5188 chars
+======================================================================
+  Agent: 69.2s, 14 turns
+  Eval: PASS
+  Cost: $0.3115  Out tokens: 3094  Wall: 70.0s
+  Saved: where_keep_attrs_scalar__variant_A_orig__run3.json
+>>> A_orig run 4
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_A_orig__run4
+  Variant: A_orig
+  Run: 4
+  Prompt: 5188 chars
+======================================================================
+  Agent: 55.7s, 12 turns
+  Eval: PASS
+  Cost: $0.2709  Out tokens: 2649  Wall: 56.6s
+  Saved: where_keep_attrs_scalar__variant_A_orig__run4.json
+>>> cold run 1
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_cold__run1
+  Variant: cold
+  Run: 1
+  Prompt: 1170 chars
+======================================================================
+  Agent: 48.3s, 11 turns
+  Eval: PASS
+  Cost: $0.2387  Out tokens: 2276  Wall: 49.4s
+  Saved: where_keep_attrs_scalar__variant_cold__run1.json
+>>> cold run 2
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_cold__run2
+  Variant: cold
+  Run: 2
+  Prompt: 1170 chars
+======================================================================
+  Agent: 48.5s, 11 turns
+  Eval: PASS
+  Cost: $0.2311  Out tokens: 2279  Wall: 49.6s
+  Saved: where_keep_attrs_scalar__variant_cold__run2.json
+>>> cold run 3
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_cold__run3
+  Variant: cold
+  Run: 3
+  Prompt: 1170 chars
+======================================================================
+  Agent: 72.0s, 16 turns
+  Eval: PASS
+  Cost: $0.3199  Out tokens: 2841  Wall: 72.9s
+  Saved: where_keep_attrs_scalar__variant_cold__run3.json
+>>> cold run 4
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_cold__run4
+  Variant: cold
+  Run: 4
+  Prompt: 1170 chars
+======================================================================
+  Agent: 57.8s, 12 turns
+  Eval: PASS
+  Cost: $0.3914  Out tokens: 2545  Wall: 59.1s
+  Saved: where_keep_attrs_scalar__variant_cold__run4.json
+>>> A run 1
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_A__run1
+  Variant: A
+  Run: 1
+  Prompt: 7151 chars
+======================================================================
+  Agent: 57.4s, 13 turns
+  Eval: PASS
+  Cost: $0.2906  Out tokens: 2607  Wall: 58.4s
+  Saved: where_keep_attrs_scalar__variant_A__run1.json
+>>> A run 2
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_A__run2
+  Variant: A
+  Run: 2
+  Prompt: 7151 chars
+======================================================================
+  Agent: 43.0s, 10 turns
+  Eval: PASS
+  Cost: $0.2306  Out tokens: 2200  Wall: 48.7s
+  Saved: where_keep_attrs_scalar__variant_A__run2.json
+>>> A run 3
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_A__run3
+  Variant: A
+  Run: 3
+  Prompt: 7151 chars
+======================================================================
+  Agent: 85.1s, 12 turns
+  Eval: FAIL
+  Cost: $0.2666  Out tokens: 2499  Wall: 85.9s
+  Saved: where_keep_attrs_scalar__variant_A__run3.json
+>>> A run 4
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_A__run4
+  Variant: A
+  Run: 4
+  Prompt: 7151 chars
+======================================================================
+  Agent: 35.6s, 8 turns
+  Eval: PASS
+  Cost: $0.1999  Out tokens: 1817  Wall: 36.5s
+  Saved: where_keep_attrs_scalar__variant_A__run4.json
+>>> B run 1
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_B__run1
+  Variant: B
+  Run: 1
+  Prompt: 6394 chars
+======================================================================
+  Agent: 71.9s, 16 turns
+  Eval: PASS
+  Cost: $0.3285  Out tokens: 2750  Wall: 72.9s
+  Saved: where_keep_attrs_scalar__variant_B__run1.json
+>>> B run 2
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_B__run2
+  Variant: B
+  Run: 2
+  Prompt: 6394 chars
+======================================================================
+  Agent: 33.2s, 5 turns
+  Eval: PASS
+  Cost: $0.1394  Out tokens: 1245  Wall: 34.2s
+  Saved: where_keep_attrs_scalar__variant_B__run2.json
+>>> B run 3
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_B__run3
+  Variant: B
+  Run: 3
+  Prompt: 6394 chars
+======================================================================
+  Agent: 24.5s, 5 turns
+  Eval: PASS
+  Cost: $0.1387  Out tokens: 1235  Wall: 25.6s
+  Saved: where_keep_attrs_scalar__variant_B__run3.json
+>>> B run 4
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_B__run4
+  Variant: B
+  Run: 4
+  Prompt: 6394 chars
+======================================================================
+  Agent: 35.1s, 8 turns
+  Eval: FAIL
+  Cost: $0.1954  Out tokens: 1919  Wall: 36.0s
+  Saved: where_keep_attrs_scalar__variant_B__run4.json
+>>> C run 1
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_C__run1
+  Variant: C
+  Run: 1
+  Prompt: 5052 chars
+======================================================================
+  Agent: 39.9s, 7 turns
+  Eval: PASS
+  Cost: $0.1859  Out tokens: 1974  Wall: 40.9s
+  Saved: where_keep_attrs_scalar__variant_C__run1.json
+>>> C run 2
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_C__run2
+  Variant: C
+  Run: 2
+  Prompt: 5052 chars
+======================================================================
+  Agent: 26.2s, 5 turns
+  Eval: PASS
+  Cost: $0.1390  Out tokens: 1282  Wall: 27.1s
+  Saved: where_keep_attrs_scalar__variant_C__run2.json
+>>> C run 3
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_C__run3
+  Variant: C
+  Run: 3
+  Prompt: 5052 chars
+======================================================================
+  Agent: 26.5s, 4 turns
+  Eval: PASS
+  Cost: $0.1220  Out tokens: 1111  Wall: 27.5s
+  Saved: where_keep_attrs_scalar__variant_C__run3.json
+>>> C run 4
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_C__run4
+  Variant: C
+  Run: 4
+  Prompt: 5052 chars
+======================================================================
+  Agent: 20.9s, 4 turns
+  Eval: PASS
+  Cost: $0.1200  Out tokens: 1045  Wall: 156.9s
+  Saved: where_keep_attrs_scalar__variant_C__run4.json
+>>> D run 1
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_D__run1
+  Variant: D
+  Run: 1
+  Prompt: 6821 chars
+======================================================================
+  Agent: 57.1s, 10 turns
+  Eval: PASS
+  Cost: $0.2591  Out tokens: 2826  Wall: 58.0s
+  Saved: where_keep_attrs_scalar__variant_D__run1.json
+>>> D run 2
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_D__run2
+  Variant: D
+  Run: 2
+  Prompt: 6821 chars
+======================================================================
+  Agent: 30.2s, 6 turns
+  Eval: PASS
+  Cost: $0.1626  Out tokens: 1468  Wall: 31.1s
+  Saved: where_keep_attrs_scalar__variant_D__run2.json
+>>> D run 3
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_D__run3
+  Variant: D
+  Run: 3
+  Prompt: 6821 chars
+======================================================================
+  Agent: 24.2s, 4 turns
+  Eval: PASS
+  Cost: $0.1226  Out tokens: 1000  Wall: 25.1s
+  Saved: where_keep_attrs_scalar__variant_D__run3.json
+>>> D run 4
+
+======================================================================
+Trial: where_keep_attrs_scalar__variant_D__run4
+  Variant: D
+  Run: 4
+  Prompt: 6821 chars
+======================================================================
+  Agent: 68.3s, 10 turns
+  Eval: PASS
+  Cost: $0.2433  Out tokens: 2406  Wall: 69.4s
+  Saved: where_keep_attrs_scalar__variant_D__run4.json
+
+Sweep complete.

@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_D__run1",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "D",
+  "run_number": 1,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 6821,
+  "agent": {
+    "result_text": "All cases work correctly:\n\n1. **Scalar `x`, `keep_attrs=True`** \u2014 no longer crashes, returns empty attrs (correct since scalars have no attrs)\n2. **DataArray `x` with attrs, `keep_attrs=True`** \u2014 preserves `x`'s attrs as intended\n3. **Both scalars, `keep_attrs=True`** \u2014 returns empty attrs, no crash\n4. **`keep_attrs=False`** \u2014 still drops attrs as before\n\nThe fix: instead of `lambda attrs, context: attrs[1]` (which indexes into a filtered list of only xarray objects' attrs), the lambda now uses `getattr(x, \"attrs\", {})` to directly grab attrs from the `x` argument. This handles scalars (which lack `.attrs`) by returning `{}`, and correctly returns `x.attrs` when `x` is a DataArray/Dataset.",
+    "num_turns": 10,
+    "duration_ms": 57118,
+    "total_cost_usd": 0.25910874999999994,
+    "stop_reason": "end_turn",
+    "input_tokens": 11,
+    "output_tokens": 2826,
+    "cache_read_tokens": 215940,
+    "cache_creation_tokens": 12491
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 58.022870779037476,
+  "timestamp": "2026-05-11T16:04:58"
+}

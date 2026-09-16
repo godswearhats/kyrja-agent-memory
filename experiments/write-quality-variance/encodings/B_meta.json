@@ -1,0 +1,42 @@
+{
+  "variant": "B",
+  "prompt_file": "B_summary_1200.md",
+  "source_file": "task1_full.md",
+  "elapsed_sec": 21.973024368286133,
+  "model": "opus",
+  "usage": {
+    "input_tokens": 5,
+    "cache_creation_input_tokens": 13383,
+    "cache_read_input_tokens": 16953,
+    "output_tokens": 1848,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 13383,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [
+      {
+        "input_tokens": 5,
+        "output_tokens": 1848,
+        "cache_read_input_tokens": 16953,
+        "cache_creation_input_tokens": 13383,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 13383
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard"
+  },
+  "total_cost_usd": 0.14322625,
+  "duration_ms": 21069,
+  "num_turns": 1,
+  "output_chars": 5142,
+  "output_words": 690
+}

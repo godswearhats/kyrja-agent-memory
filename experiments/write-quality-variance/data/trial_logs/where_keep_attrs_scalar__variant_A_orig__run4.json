@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_A_orig__run4",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "A_orig",
+  "run_number": 4,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 5188,
+  "agent": {
+    "result_text": "This confirms the issue. `_all_of_type` filters to only `DataArray` (or `Dataset`) objects. When `x` is a scalar like `1`, it's not a `DataArray`, so `objs` only contains `cond` (index 0). The `attrs` list passed to the lambda has only 1 element (from `cond`), so `attrs[1]` raises `IndexError`.\n\nThe fix is correct: `attrs[1] if len(attrs) > 1 else {}` returns an empty dict when `x` is scalar (no attrs to preserve), and preserves `x`'s attrs when `x` is a DataArray.\n\n**Fix**: Changed line 1832 in `xarray/core/computation.py` to guard against `IndexError` when `x` is a scalar (has no `.attrs`). The lambda now returns `{}` if the attrs list is too short, instead of blindly indexing `attrs[1]`.",
+    "num_turns": 12,
+    "duration_ms": 55705,
+    "total_cost_usd": 0.27093875,
+    "stop_reason": "end_turn",
+    "input_tokens": 13,
+    "output_tokens": 2649,
+    "cache_read_tokens": 260812,
+    "cache_creation_tokens": 11547
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 56.6140992641449,
+  "timestamp": "2026-05-11T15:49:01"
+}

@@ -1,0 +1,42 @@
+{
+  "variant": "C",
+  "prompt_file": "C_structured_1200.md",
+  "source_file": "task2_full.md",
+  "elapsed_sec": 20.95442247390747,
+  "model": "claude-opus-4-6",
+  "usage": {
+    "input_tokens": 2,
+    "cache_creation_input_tokens": 8626,
+    "cache_read_input_tokens": 12913,
+    "output_tokens": 672,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 8626,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 672,
+        "cache_read_input_tokens": 12913,
+        "cache_creation_input_tokens": 8626,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 8626
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard"
+  },
+  "total_cost_usd": 0.080856,
+  "duration_ms": 19937,
+  "num_turns": 1,
+  "output_chars": 2163,
+  "output_words": 282
+}

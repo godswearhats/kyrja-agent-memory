@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_A__run2",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "A",
+  "run_number": 2,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 7151,
+  "agent": {
+    "result_text": "All passing. The fix is a one-line change on line 1832 of `xarray/core/computation.py`: when `keep_attrs=True`, the lambda now checks `len(attrs) > 1` before accessing `attrs[1]`, falling back to `{}` when `x` is a scalar (scalars have no `.attrs`, so `apply_ufunc` excludes them from the attrs list, making the index out of range).",
+    "num_turns": 10,
+    "duration_ms": 43046,
+    "total_cost_usd": 0.230591,
+    "stop_reason": "end_turn",
+    "input_tokens": 11,
+    "output_tokens": 2200,
+    "cache_read_tokens": 212581,
+    "cache_creation_tokens": 10686
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 48.69400906562805,
+  "timestamp": "2026-05-11T15:54:45"
+}

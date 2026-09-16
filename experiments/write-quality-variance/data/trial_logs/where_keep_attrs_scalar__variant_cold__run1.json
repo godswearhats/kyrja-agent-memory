@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_cold__run1",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "cold",
+  "run_number": 1,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 1170,
+  "agent": {
+    "result_text": "Now I can see the pattern. At line 311, for DataArrays: `attrs = merge_attrs([x.attrs for x in objs], ...)`. The `objs` list is built from `_all_of_type(args, DataArray)` \u2014 only actual DataArray objects have `.attrs`, so scalars are excluded from `objs`. \n\nSimilarly at line 764 for Variables: `[obj.attrs for obj in objs]` where `objs = _all_of_type(args, Variable)`.\n\nSo when `x` is a scalar (like `1`), it's not a DataArray/Variable, so `objs` only contains the non-scalar arguments. The `attrs` list passed to the `keep_attrs` callable will have fewer entries than the 3 arguments to `where`, and `attrs[1]` can be out of range.\n\nThe fix correctly handles this by returning an empty dict `{}` when there aren't enough entries in the attrs list \u2014 which is the right behavior since a scalar has no attributes to preserve.\n\nThe fix is a one-line change in `xarray/core/computation.py:1832`: the `keep_attrs` lambda now checks `len(attrs) > 1` before accessing `attrs[1]`, falling back to an empty dict `{}` when scalars cause the attrs list to be shorter than expected.",
+    "num_turns": 11,
+    "duration_ms": 48252,
+    "total_cost_usd": 0.2387295,
+    "stop_reason": "end_turn",
+    "input_tokens": 12,
+    "output_tokens": 2276,
+    "cache_read_tokens": 227980,
+    "cache_creation_tokens": 10718
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 49.367663860321045,
+  "timestamp": "2026-05-11T15:49:52"
+}

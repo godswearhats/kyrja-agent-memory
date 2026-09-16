@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_A_orig__run2",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "A_orig",
+  "run_number": 2,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 5188,
+  "agent": {
+    "result_text": "All tests pass. Here's the fix:\n\n**Line 1832 in `xarray/core/computation.py`**: When `keep_attrs=True`, the lambda `lambda attrs, context: attrs[1]` crashes with `IndexError` because scalar arguments (like `1` or `0`) don't have attributes, so `apply_ufunc` builds a shorter `attrs` list that may not have an index 1.\n\nThe one-line fix changes the lambda to safely return `{}` when `x` is a scalar (and thus absent from the attrs list):\n\n```python\n# Before:\nkeep_attrs = lambda attrs, context: attrs[1]\n# After:\nkeep_attrs = lambda attrs, context: attrs[1] if len(attrs) > 1 else {}\n```",
+    "num_turns": 10,
+    "duration_ms": 50061,
+    "total_cost_usd": 0.24065525,
+    "stop_reason": "end_turn",
+    "input_tokens": 11,
+    "output_tokens": 2494,
+    "cache_read_tokens": 211750,
+    "cache_creation_tokens": 11249
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 50.95849895477295,
+  "timestamp": "2026-05-11T15:46:52"
+}

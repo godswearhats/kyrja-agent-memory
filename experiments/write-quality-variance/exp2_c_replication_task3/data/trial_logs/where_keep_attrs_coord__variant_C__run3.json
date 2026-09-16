@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_coord__variant_C__run3",
+  "task_label": "where_keep_attrs_coord",
+  "instance_id": "pydata__xarray-7229",
+  "variant": "C",
+  "run_number": 3,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 6594,
+  "agent": {
+    "result_text": "All 57 `keep_attrs` tests and both `where` tests pass.\n\nThe fix: instead of passing a lambda that always returns `x.attrs` (which overwrites coordinate attrs with data variable attrs), we use `\"override\"` for the `apply_ufunc` call (which correctly preserves coordinate attrs from the input objects), then explicitly set `result.attrs = getattr(x, \"attrs\", {})` to ensure data variable attrs come from `x`. This handles both the original #6461 scalar case (scalar `x` has no `.attrs`, so we get `{}`) and this #7229 regression (coordinate attrs are no longer overwritten).",
+    "num_turns": 25,
+    "duration_ms": 330759,
+    "total_cost_usd": 0.91876675,
+    "stop_reason": "end_turn",
+    "input_tokens": 25,
+    "output_tokens": 14266,
+    "cache_read_tokens": 720320,
+    "cache_creation_tokens": 31871
+  },
+  "evaluation": {
+    "success": false,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 1,
+    "stdout_tail": "; it can be silenced by converting the values to nanosecond precision ahead of time.\n    xr.DataArray(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED xarray/tests/test_computation.py::test_where_attrs - AssertionError: L...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n======================== 1 failed, 18 warnings in 0.36s ========================\n",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 331.7395107746124,
+  "timestamp": "2026-05-11T18:35:27"
+}

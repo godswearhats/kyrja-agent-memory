@@ -1,0 +1,32 @@
+{
+  "trial_id": "where_keep_attrs_scalar__variant_A__run4",
+  "task_label": "where_keep_attrs_scalar",
+  "instance_id": "pydata__xarray-6461",
+  "variant": "A",
+  "run_number": 4,
+  "model": "claude-opus-4-6",
+  "prompt_length_chars": 7151,
+  "agent": {
+    "result_text": "The fix is correct and minimal. Here's what's happening:\n\n**Root cause:** When `keep_attrs=True`, the `where` function replaces it with `lambda attrs, context: attrs[1]` to grab `x`'s attributes. But `apply_ufunc` only collects `.attrs` from xarray objects \u2014 when `x` is a scalar (like `1`), it's not in the `attrs` list. With three args `(cond, x=scalar, y=scalar)`, `attrs` may only contain `[cond.attrs]`, so `attrs[1]` raises `IndexError`.\n\n**Fix:** Changed the lambda to `attrs[1] if len(attrs) > 1 else {}` \u2014 if `x` is a scalar and has no attrs entry, return an empty dict instead of crashing.",
+    "num_turns": 8,
+    "duration_ms": 35623,
+    "total_cost_usd": 0.1998915,
+    "stop_reason": "end_turn",
+    "input_tokens": 9,
+    "output_tokens": 1817,
+    "cache_read_tokens": 167302,
+    "cache_creation_tokens": 10930
+  },
+  "evaluation": {
+    "success": true,
+    "total": 1,
+    "test_ids": [
+      "xarray/tests/test_computation.py::test_where_attrs"
+    ],
+    "returncode": 0,
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "wall_time_seconds": 36.49872636795044,
+  "timestamp": "2026-05-11T15:56:50"
+}
