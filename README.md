@@ -150,8 +150,7 @@ as unresolved.
 **write-quality-variance is n=4.** Four runs per condition, one task, one repository,
 ~$10 of total compute. It also carries an acknowledged distiller-model confound: the
 winning variant was distilled by a newer model than the control it beat. This is a
-suggestive pilot, not a result. Its own limitations section says so and is worth reading
-as an example of the discipline.
+suggestive pilot, not a result. Its own limitations section says as much.
 
 **The literature moved, and some of this is a rediscovery.** Finding 3 is a rediscovery
 of *decontextualization* — a known problem in NLP with existing treatment (Choi et al.,
