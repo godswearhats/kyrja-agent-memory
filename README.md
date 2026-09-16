@@ -16,15 +16,11 @@ unanswered. Take whatever is useful.
 
 | If you want | Read |
 |---|---|
-| Reading notes on 86 papers | [`wiki/source/`](wiki/source/) |
 | Where the work had got to when it stopped | [`wiki/NOW.md`](wiki/NOW.md) |
 | The full page catalogue | [`wiki/index.md`](wiki/index.md) |
 | A narrative of how the thinking changed | [`wiki/log.md`](wiki/log.md) |
 | How the wiki is structured, and why | [`wiki/SCHEMA.md`](wiki/SCHEMA.md) |
-
-The `wiki/source/` directory is probably the most reusable thing in the repo: 86 papers
-read and summarised with the claims separated from the evidence, cross-linked to where
-each one was actually used or contradicted.
+| Reading notes on 86 papers | [`wiki/source/`](wiki/source/) |
 
 ---
 
@@ -86,8 +82,8 @@ degenerate, it fails there rather than silently producing an easy benchmark.
 A pre-generated sample corpus is in `masq/generator/sample-corpus/`.
 
 `masq/gate1/` and `masq/bareset-probe/` are the two pre-registered pilots that had to
-pass before the benchmark design was frozen. They are small, self-contained, and the
-most directly reusable methodology in the repo.
+pass before the benchmark design was frozen — each states its thresholds in advance,
+then scores itself against them.
 
 ---
 
