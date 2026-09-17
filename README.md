@@ -23,6 +23,7 @@ unanswered. Take whatever is useful.
 | A narrative of how the thinking changed | [`wiki/log.md`](wiki/log.md) |
 | How the wiki is structured, and why | [`wiki/SCHEMA.md`](wiki/SCHEMA.md) |
 | Reading notes on 86 papers and vendor docs | [`wiki/source/`](wiki/source/) |
+| The benchmark: what it is and how to run it | [`masq/README.md`](masq/README.md) |
 
 `wiki/NOW.md` is a status file written for the person who wrote it, in dense shorthand.
 If it bounces you, the glossary and `wiki/index.md` are the gentler doors.
