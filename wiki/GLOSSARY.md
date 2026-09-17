@@ -32,8 +32,8 @@ is the single biggest hazard for an outside reader.
 |---|---|
 | **Kyrja** | The umbrella name for this whole body of work. Not an acronym and not expanded anywhere — it was an arbitrary project name. |
 | **Kerros** | The substrate-memory research programme. Finnish for *layer / stratum* — memory at the substrate layer. Parked. Defined in [concept/kerros.md](./concept/kerros.md). |
-| **MASQ** | The synthetic scope-disambiguation benchmark. **Never expanded anywhere in the archive**; treat it as a bare name. |
-| **MTP** | Appears ~49 times as the name of the intended first shippable product. **Never expanded anywhere in the archive.** From context it is the minimum/first testable product. |
+| **MASQ** | **Multi-Agent Session Queries.** The scope-disambiguation benchmark. The name and the core insight — that shared vocabulary across parallel project contexts defeats similarity ranking — carry over from an earlier benchmark of the same name built on simulated multi-agent sessions; that earlier version is not in this archive. What ships here is the v2 redesign: synthetic, invariant-checked, closed-form graded. See [`masq/README.md`](../masq/README.md). |
+| **MTP** | **Minimum Testable Product** — the first thing intended to be built, for self-testing on the authors' own work. The expansion is not stated anywhere in this archive; it comes from the wider project notes. |
 | **caddy** | Design vocabulary, not a product: a co-trained memory module with its own state and learned policies. Named for the golf caddy — a separately-employed expert who carries the player's model of the course. [concept/caddy.md](./concept/caddy.md) |
 | **the wedge** | The deliberately narrow initial product scope intended to prove the architecture before the full stack is built. |
 | **Thread 1 … Thread 5** | Numbered parallel research threads from the April 2026 period. Thread 5 is the retrieval-tier ablation in [`experiments/thread5/`](../experiments/thread5/). |
@@ -56,7 +56,7 @@ is the single biggest hazard for an outside reader.
 | **consolidation channel** | The hypothesised mechanism moving information from retrieval-style memory into model weights. Kerros's central object. |
 | **substrate** | Memory the model thinks *with* (in its computation), as opposed to a database it thinks *about*. |
 | **integration gate** | The test of whether a memory component can be bolted onto a frozen model or must be co-trained. |
-| **MBP** | MERLIN's memory-based predictor — the auxiliary world-model loss that shapes its memory writes. Dropped by later work; whether that mattered is an open question here. |
+| **MBP** | **Memory-Based Predictor** — an auxiliary world-model loss applied to memory representations, from MERLIN. Later work inherited MERLIN's read head but dropped the MBP; whether that omission mattered is an open question here. |
 | **admission control** | Deciding what to store at all, rather than storing everything and filtering at read time. |
 
 ## Epistemic tags
@@ -91,10 +91,13 @@ Honest notes about things this glossary can't fix:
 
 - **`F1`–`F12` and `Scenario A`–`F`** (scale-model factors and bracketing scenarios) are
   defined in a document that is not in this archive. They are unresolvable here.
-- **`R5`** is discussed as a declined option but never appears in the R-table, which
-  lists only R1–R4.
+- **`R5`** — *read-as-write reconsolidation at zero latency.* Discussed as a declined
+  option and absent from the R-table, which lists only R1–R4. It was demoted from a
+  load-bearing commitment to a biological constraint that the architecture need not copy.
 - **`T2` and `T3`** of the maturity ladder are never defined, only T1 and T4.
 - **`event-mode` / `arc-mode`** (used in [`experiments/probes/`](../experiments/probes/))
-  are named only in an archived log entry.
+  are the two probe corpus formats: single-event candidates, and multi-event sequences.
+  Arc-mode was the primary falsifier of that probe. The rename that created both terms is
+  recorded only in an archived log entry.
 - The only page defining the MASQ `C1`–`C4` cells is marked SUPERSEDED, and those cells
   do not exist in the shipped benchmark.

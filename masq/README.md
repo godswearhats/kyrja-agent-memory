@@ -4,8 +4,18 @@ MASQ builds corpora in which the hard part is not *finding* the right memory but
 *excluding* the wrong ones. It then measures whether a memory system lets an agent make
 the correct decision.
 
-The name is not an acronym and is never expanded anywhere in this archive. Treat it as a
-bare label.
+**MASQ** stands for **Multi-Agent Session Queries**. The name is inherited from an earlier,
+differently-constructed benchmark of the same name — a simulated 12-week engineering
+organisation of 3 teams and 5 projects, where the same vocabulary ("authentication",
+"caching", "retry logic") recurs across project contexts and semantic similarity alone
+can't disambiguate. That benchmark is not part of this archive.
+
+The lineage matters for reading the older files here: `phase1-breakdown.md` plans a
+benchmark much closer to that original — real multi-agent sessions, a vector store,
+LLM-judged answers. What shipped is the v2 redesign below, which keeps the name and the
+core insight (similar vocabulary across parallel contexts defeats similarity ranking) but
+replaces the corpus with a synthetic, invariant-checked construction and the judge with
+closed-form grading.
 
 ---
 
