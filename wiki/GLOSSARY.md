@@ -59,6 +59,27 @@ is the single biggest hazard for an outside reader.
 | **MBP** | **Memory-Based Predictor** — an auxiliary world-model loss applied to memory representations, from MERLIN. Later work inherited MERLIN's read head but dropped the MBP; whether that omission mattered is an open question here. |
 | **admission control** | Deciding what to store at all, rather than storing everything and filtering at read time. |
 
+## Codes that index another page
+
+| Code | Resolves to |
+|---|---|
+| `M01`–`M17` | Rows of [concept/mechanism-gap-matrix.md](./concept/mechanism-gap-matrix.md) — biological memory mechanisms scored against what current architectures cover. That page is the index. |
+| `H23`–`H46` | Hypothesis pages in [hypothesis/](./hypothesis/), one file each. |
+| `E1`, `E2`, … | Event labels *local to a single probe file* — "E1 (discovery, present)". A per-file convention, redefined in each scenario, not a global scheme. |
+
+## Borrowed from cognitive science and the ML literature
+
+Each has a source page under [source/](./source/) with the full citation.
+
+| Term | Meaning |
+|---|---|
+| **CLS** | **Complementary Learning Systems** — the hippocampus/neocortex dual-store account of memory. The framework behind most of the consolidation reasoning here. |
+| **TCM** | **Temporal Context Model** (Howard & Kahana 2002) — retrieval cued by a slowly drifting context vector. |
+| **SPW-R** | **Sharp wave-ripple** (Buzsáki 2015) — hippocampal replay events, the biological anchor for replay-driven consolidation. |
+| **EM** | **Episodic memory.** Also `EM-LLM` (Fountas et al. 2024), which segments a stream into events by surprise. |
+| **RC** | **Reservoir computing** — a fixed random recurrent network with only the readout trained. Investigated as a caddy substrate and closed as empirically dead. |
+| **ICAE** | **In-context Autoencoder** (Ge et al. 2024) — context compression into memory slots via a frozen decoder. |
+
 ## Epistemic tags
 
 The wiki marks every substantive claim with its evidential status. This is load-bearing,
