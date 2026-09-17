@@ -21,7 +21,8 @@ is the single biggest hazard for an outside reader.
 | `S3`, `S4` | caddy **store** operations | — | Amazon **S3**; the **S4** state-space model |
 | `Gate 1`, `Gate 2` | **integration gates** (Kerros research programme) | **pre-build gates** (discriminability, bare-set) | — |
 | `K2` | caddy **consolidator** operation | `K ∈ {10,20,40,80}` = retrieval **top-k**, or sibling-**bed size** | — |
-| `T1`–`T4` | **maturity tiers** (T1 proven at LLM scale → T4 speculative) | — | Thread 5 **retrieval tiers**; storage tiers (hot/warm/cold) |
+| `T1`–`T4` | **implementation-feasibility tiers** for caddy operations: T1 proven at LLM scale → T4 speculative | — | Thread 5 **retrieval tiers** (T0 none / T1 BM25 / T2 semantic / T3 hybrid); storage tiers (hot/warm/cold) |
+| `tier 1`–`tier 4` | **retrieval-capability ladder** — a *different* scheme from `T1`–`T4` above. tier 2 = semantic; tier 3 = analogical/structural. Whether tier 3 is distinct from good tier 2 is open, after a bag-of-words baseline decoded the structure at 82%. | — | — |
 | `ACL` | access-control list | — | the **ACL** conference |
 | `SR` | successor representation | — | a MemoryArena metric |
 | `A` / `B` | — | the two **grading layers** (chain reconstruction / decision) | `A`–`D` = encoding **variants** in write-quality-variance |
@@ -30,7 +31,7 @@ is the single biggest hazard for an outside reader.
 
 | Term | Meaning |
 |---|---|
-| **Kyrja** | The umbrella name for this whole body of work. Not an acronym and not expanded anywhere — it was an arbitrary project name. |
+| **Kyrja** | The umbrella name for this body of work, covering both the benchmark and the parked substrate research. No expansion or etymology is recorded anywhere in the source material; treat it as a bare project name. |
 | **Kerros** | The substrate-memory research programme. Finnish for *layer / stratum* — memory at the substrate layer. Parked. Defined in [concept/kerros.md](./concept/kerros.md). |
 | **MASQ** | **Multi-Agent Session Queries.** The scope-disambiguation benchmark. The name and the core insight — that shared vocabulary across parallel project contexts defeats similarity ranking — carry over from an earlier benchmark of the same name built on simulated multi-agent sessions; that earlier version is not in this archive. What ships here is the v2 redesign: synthetic, invariant-checked, closed-form graded. See [`masq/README.md`](../masq/README.md). |
 | **MTP** | **Minimum Testable Product** — the first thing intended to be built, for self-testing on the authors' own work. The expansion is not stated anywhere in this archive; it comes from the wider project notes. |
@@ -66,6 +67,9 @@ is the single biggest hazard for an outside reader.
 | `M01`–`M17` | Rows of [concept/mechanism-gap-matrix.md](./concept/mechanism-gap-matrix.md) — biological memory mechanisms scored against what current architectures cover. That page is the index. |
 | `H23`–`H46` | Hypothesis pages in [hypothesis/](./hypothesis/), one file each. |
 | `E1`, `E2`, … | Event labels *local to a single probe file* — "E1 (discovery, present)". A per-file convention, redefined in each scenario, not a global scheme. |
+| `H01`–`H22` | Hypotheses numbered before the wiki existed. Most were shelved or folded into later pages rather than carried over, so they have no page here. Subjects: H01 institutional-memory gap · H02 market window · H03 governance table-stakes · H04 proxy-beats-tools · H05 tools-without-training · H06 dogfood · H07 proxy standalone value · H08 filter-first · H09 scaling crossover · H10 distributed-systems mapping · H11 eventual consistency · H12 z-curve (deferred) · H13 intent-outcome encoding · H14 encoding-too-lossy · H15 RL encoding · H16 retrieval bottleneck · H17 ceiling effect · H18 routing matters · H19 forgetting scores · H20 consolidation ordering · H21 conflict rate · H22 consolidation as RL target. Some were renumbered into the H23+ range — H10 and H11 became [H31](./hypothesis/H31-distributed-systems-mapping.md) and [H32](./hypothesis/H32-eventual-consistency.md). |
+| `F1`–`F13` | Parameters of the memory-volume scale model — table below. |
+| `Scenario A`–`F` | The six deployment scenarios bracketing that model — table below. |
 
 ## Borrowed from cognitive science and the ML literature
 
@@ -79,6 +83,42 @@ Each has a source page under [source/](./source/) with the full citation.
 | **EM** | **Episodic memory.** Also `EM-LLM` (Fountas et al. 2024), which segments a stream into events by surprise. |
 | **RC** | **Reservoir computing** — a fixed random recurrent network with only the readout trained. Investigated as a caddy substrate and closed as empirically dead. |
 | **ICAE** | **In-context Autoencoder** (Ge et al. 2024) — context compression into memory slots via a frozen decoder. |
+
+## The scale model — factors and scenarios
+
+A stock-and-flow model of memory accumulation over five years, behind the volume
+argument. Inflow is `users × adoption × sessions/day × orchestration_depth ×
+memories/session × tool-chain amplifier`; outflow is first-order consolidation. The model
+code is not in this archive; these are its parameters and published results.
+
+| Factor | Parameter | Meaning | Sensitivity |
+|---|---|---|---|
+| `F1` | tool-chain persistence rate | probability a session persists tool traces as memory | high |
+| `F2` | orchestration depth | agent sessions spawned per user-initiated task | high |
+| `F3` | autonomous agents per employee | background agents running continuously | high |
+| `F4` | sessions per user-day | active sessions per active user per working day | medium |
+| `F5` | memories per session | persistable chunks created per session, after extraction | medium |
+| `F6` | initial adoption rate | fraction of employees using agents in year 0 | medium |
+| `F7` | adoption growth rate | annual logistic growth toward saturation | medium |
+| `F8` | consolidation rate | fraction of stock removed or merged per year | low |
+| `F9` | company size | total employees modelled | low |
+| `F10` | software-work fraction | fraction of employees doing agent-using work | low |
+| `F11` | deployment-model isolation factor | multiplier for per-deployment effects | structural |
+| `F12` | retention floor | minimum years memories must be retained for compliance | structural |
+| `F13` | embedding dimension | vector dimension of the embedding model | structural |
+
+| Scenario | Y5 vectors | Peak QPS | Walls crossed |
+|---|---|---|---|
+| **A** SWE-200 conservative | 55M | 33 | 3 |
+| **B** SWE-200 moderate | 166M | 108 | 4 |
+| **C** SWE-200 aggressive | 997M | 551 | 5 |
+| **D** Enterprise-5000 conservative | 65M | 49 | 3 |
+| **E** Enterprise-5000 aggressive | 2.7B | 1,719 | 6 |
+| **F** Frontier-1000 (2030) | 8.5B | 4,032 | 6 |
+
+Four factors were audited against outside evidence. `F1` was **demoted** from foundation
+to amplifier when none of six audited memory systems turned out to persist tool traces as
+first-class memory.
 
 ## Epistemic tags
 
@@ -110,12 +150,11 @@ nearest-neighbour index · **BM25**: the standard lexical ranking function ·
 
 Honest notes about things this glossary can't fix:
 
-- **`F1`–`F12` and `Scenario A`–`F`** (scale-model factors and bracketing scenarios) are
-  defined in a document that is not in this archive. They are unresolvable here.
 - **`R5`** — *read-as-write reconsolidation at zero latency.* Discussed as a declined
   option and absent from the R-table, which lists only R1–R4. It was demoted from a
   load-bearing commitment to a biological constraint that the architecture need not copy.
-- **`T2` and `T3`** of the maturity ladder are never defined, only T1 and T4.
+- **`T2` and `T3`** of the feasibility ladder are never spelled out — only the endpoints
+  are stated anywhere. Read them as intermediate confidence between proven and speculative.
 - **`event-mode` / `arc-mode`** (used in [`experiments/probes/`](../experiments/probes/))
   are the two probe corpus formats: single-event candidates, and multi-event sequences.
   Arc-mode was the primary falsifier of that probe. The rename that created both terms is
