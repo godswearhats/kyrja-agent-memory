@@ -1,0 +1,447 @@
+{
+  "meta": {
+    "domain": "rate-limit",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/rate-limit/s4005/60k",
+    "target_scope": "checkout-api",
+    "n_scopes": 5,
+    "family": "family-rate-limit.json",
+    "n_results": 6,
+    "elapsed_s": 28.5
+  },
+  "ground_truth": {
+    "current_value": 800,
+    "current_setter": "Dana",
+    "chain_length": 4,
+    "steps": [
+      {
+        "value": 200,
+        "setter": "Sam",
+        "type": "initial"
+      },
+      {
+        "value": 1000,
+        "setter": "Grace",
+        "type": "supersession"
+      },
+      {
+        "value": 500,
+        "setter": "Ines",
+        "type": "collision"
+      },
+      {
+        "value": 800,
+        "setter": "Dana",
+        "type": "resolution"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_800",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 800 req/s\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: 200 req/s\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 1000 req/s\nSTEP_2_SETTER: Grace\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: 500 req/s\nSTEP_3_SETTER: Ines\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: 800 req/s\nSTEP_4_SETTER: Dana\nSTEP_4_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "800 req/s",
+        "current_setter": "Dana",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200 req/s",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "1000 req/s",
+            "setter": "Grace",
+            "type": "supersession"
+          },
+          {
+            "value": "500 req/s",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "800 req/s",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Trace: Sam set 200 (day 5); Grace explicitly cited Sam's 200 and superseded it with 1000 (acknowledged supersession, day 39); Ines, unaware, set 500 creating a collision with Grace's 1000 (day 114); Dana acknowledged both Grace's 1000 and Ines's 500, noted the flagged conflict, and resolved it to 800 (day 136). Since the current value was set by Dana's explicit resolution, I act on it and report no open conflict.\n\nACTION: set_800\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_800",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 300 req/s\nCURRENT_SETTER: team\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 50 req/s\nSTEP_1_SETTER: Omar\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 200 req/s\nSTEP_2_SETTER: Marcus\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 300 req/s\nSTEP_3_SETTER: team\nSTEP_3_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "300 req/s",
+        "current_setter": "team",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "50 req/s",
+            "setter": "Omar",
+            "type": "initial"
+          },
+          {
+            "value": "200 req/s",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "300 req/s",
+            "setter": "team",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 12,
+        "score": 0.0625
+      },
+      "a_score": 0.0625,
+      "b_raw": "Change history: Omar set /checkout to 50 req/s and Marcus independently set it to 200 req/s \u2014 an initial disagreement \u2014 but the note then records that the team acknowledged both values, agreed to unify, and resolved to 300 req/s. Because that final write explicitly references both prior values and resolves them, it is an acknowledged resolution, not an open conflict.\n\nACTION: set_300\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_300",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_300, expected set_800"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 300\nCURRENT_SETTER: Tom\nCHAIN_LENGTH: 18\nSTEP_1_VALUE: 200\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 50\nSTEP_2_SETTER: Omar\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 800\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: 1000\nSTEP_4_SETTER: Grace\nSTEP_4_TYPE: supersession\nSTEP_5_VALUE: 100\nSTEP_5_SETTER: Aisha\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: 50\nSTEP_6_SETTER: Lena\nSTEP_6_TYPE: collision\nSTEP_7_VALUE: 200\nSTEP_7_SETTER: Omar\nSTEP_7_TYPE: collision\nSTEP_8_VALUE: 150\nSTEP_8_SETTER: Ines\nSTEP_8_TYPE: resolution\nSTEP_9_VALUE: 800\nSTEP_9_SETTER: Aisha\nSTEP_9_TYPE: collision\nSTEP_10_VALUE: 800\nSTEP_10_SETTER: Priya\nSTEP_10_TYPE: collision\nSTEP_11_VALUE: 100\nSTEP_11_SETTER: Priya\nSTEP_11_TYPE: resolution\nSTEP_12_VALUE: 1000\nSTEP_12_SETTER: Omar\nSTEP_12_TYPE: collision\nSTEP_13_VALUE: 500\nSTEP_13_SETTER: Ines\nSTEP_13_TYPE: collision\nSTEP_14_VALUE: 800\nSTEP_14_SETTER: Dana\nSTEP_14_TYPE: resolution\nSTEP_15_VALUE: 150\nSTEP_15_SETTER: Ines\nSTEP_15_TYPE: resolution\nSTEP_16_VALUE: 500\nSTEP_16_SETTER: Aisha\nSTEP_16_TYPE: supersession\nSTEP_17_VALUE: 500\nSTEP_17_SETTER: Marcus\nSTEP_17_TYPE: supersession\nSTEP_18_VALUE: 300\nSTEP_18_SETTER: Tom\nSTEP_18_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "300",
+        "current_setter": "Tom",
+        "chain_length": "18",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "50",
+            "setter": "Omar",
+            "type": "collision"
+          },
+          {
+            "value": "800",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "1000",
+            "setter": "Grace",
+            "type": "supersession"
+          },
+          {
+            "value": "100",
+            "setter": "Aisha",
+            "type": "collision"
+          },
+          {
+            "value": "50",
+            "setter": "Lena",
+            "type": "collision"
+          },
+          {
+            "value": "200",
+            "setter": "Omar",
+            "type": "collision"
+          },
+          {
+            "value": "150",
+            "setter": "Ines",
+            "type": "resolution"
+          },
+          {
+            "value": "800",
+            "setter": "Aisha",
+            "type": "collision"
+          },
+          {
+            "value": "800",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "100",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "1000",
+            "setter": "Omar",
+            "type": "collision"
+          },
+          {
+            "value": "500",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "800",
+            "setter": "Dana",
+            "type": "resolution"
+          },
+          {
+            "value": "150",
+            "setter": "Ines",
+            "type": "resolution"
+          },
+          {
+            "value": "500",
+            "setter": "Aisha",
+            "type": "supersession"
+          },
+          {
+            "value": "500",
+            "setter": "Marcus",
+            "type": "supersession"
+          },
+          {
+            "value": "300",
+            "setter": "Tom",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 0.8125
+      },
+      "a_score": 0.8125,
+      "b_raw": "I traced the /checkout (exact path) change history through the log.\n\nThe setting was written and re-resolved many times. The relevant tail: by day 159 Aisha set it to 500 (acknowledging Ines's prior 150), day 170 Marcus moved it to 500 (acknowledging Priya's value), and the final entry on day 179 (Tom) explicitly states \"Omar set /checkout rate limit to 50 req/s and Marcus independently set it to 200 req/s \u2014 the team agreed to unify on one setting. Resolving to 300 req/s\" \u2014 an explicit resolution that acknowledges both conflicting writers. Since the current value was set by an acknowledged resolution, there is no open, unacknowledged conflict.\n\nACTION: set_300\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_300",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_300, expected set_800"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 500\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 9\nSTEP_1_VALUE: 200\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 50\nSTEP_2_SETTER: Omar\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 1000\nSTEP_3_SETTER: Grace\nSTEP_3_TYPE: supersession\nSTEP_4_VALUE: 100\nSTEP_4_SETTER: Aisha\nSTEP_4_TYPE: collision\nSTEP_5_VALUE: 200\nSTEP_5_SETTER: Omar\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: 800\nSTEP_6_SETTER: Aisha\nSTEP_6_TYPE: collision\nSTEP_7_VALUE: 500\nSTEP_7_SETTER: Ines\nSTEP_7_TYPE: collision\nSTEP_8_VALUE: 800\nSTEP_8_SETTER: Dana\nSTEP_8_TYPE: resolution\nSTEP_9_VALUE: 500\nSTEP_9_SETTER: Aisha\nSTEP_9_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "500",
+        "current_setter": "Aisha",
+        "chain_length": "9",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "50",
+            "setter": "Omar",
+            "type": "collision"
+          },
+          {
+            "value": "1000",
+            "setter": "Grace",
+            "type": "supersession"
+          },
+          {
+            "value": "100",
+            "setter": "Aisha",
+            "type": "collision"
+          },
+          {
+            "value": "200",
+            "setter": "Omar",
+            "type": "collision"
+          },
+          {
+            "value": "800",
+            "setter": "Aisha",
+            "type": "collision"
+          },
+          {
+            "value": "500",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "800",
+            "setter": "Dana",
+            "type": "resolution"
+          },
+          {
+            "value": "500",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 0.8125
+      },
+      "a_score": 0.8125,
+      "b_raw": "## Change history trace\n\nThe `/checkout` value churned through many writers, but the key resolution points are: Grace (day 39) explicitly superseded Sam's 200 \u2192 1000; this produced a Grace(1000)/Ines(500) disagreement that **Dana (day 136) explicitly resolved** by acknowledging both sides in the weekly review and recording 800. The latest writer, **Aisha (day 159), then performed an acknowledged supersession** \u2014 referencing an earlier writer (Ines) and the incident review to override the value to 500.\n\nBecause the current value was set via an acknowledged supersession (not an open, unaddressed disagreement), this is a resolved state, not a live conflict. (Carlos's day-42 1000\u219250 change was on `/sessions`, not `/checkout` \u2014 a distractor.)\n\nACTION: set_500\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_500",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_500, expected set_800"
+      }
+    },
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 800\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 200\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 500\nSTEP_2_SETTER: Ines\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 800\nSTEP_3_SETTER: Dana\nSTEP_3_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "800",
+        "current_setter": "Dana",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "500",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "800",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 9,
+        "step_total": 12,
+        "score": 0.75
+      },
+      "a_score": 0.75,
+      "b_raw": "The /checkout setting drifted through many unacknowledged re-settings (200 \u2192 1000 \u2192 500), but day 136 (Dana) explicitly resolved a Grace/Ines conflict to 800 acknowledging both, day 157 (Ines) resolved an Aisha/Priya conflict to 150 acknowledging both, and the latest entry, day 179 (Tom), explicitly acknowledges both Omar's 50 and Marcus's 200 and resolves to 300. (Entries for /checkout-v2 and /checkout-canary are separate settings and don't apply.)\n\nACTION: set_300\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_300",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_300, expected set_800"
+      }
+    },
+    {
+      "arm": "where-scope-target",
+      "arm_key": "scopefilter",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 800 req/s\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: 200 req/s\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 1000 req/s\nSTEP_2_SETTER: Grace\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: 500 req/s\nSTEP_3_SETTER: Ines\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: 800 req/s\nSTEP_4_SETTER: Dana\nSTEP_4_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "800 req/s",
+        "current_setter": "Dana",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200 req/s",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "1000 req/s",
+            "setter": "Grace",
+            "type": "supersession"
+          },
+          {
+            "value": "500 req/s",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "800 req/s",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Tracing the history: Sam set 200 (day 5), Grace explicitly referenced Sam's value and superseded it to 1000 (day 39), Ines set 500 without acknowledging Grace's 1000 (day 114, creating an unresolved conflict), and Dana (day 136) explicitly acknowledged both Grace's 1000 and Ines's 500 and resolved them to 800 in the change record. Since the current value was set by Dana's resolution that acknowledged both sides, the conflict is resolved.\n\nACTION: set_800\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_800",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    }
+  ]
+}

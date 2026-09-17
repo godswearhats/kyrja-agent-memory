@@ -15,7 +15,7 @@ context string it returns, isolating retrieval quality as the single variable.
 import hashlib, json, os, pickle, urllib.request
 import numpy as np
 
-OLLAMA = os.environ.get("OLLAMA_HOST", "http://192.168.109.1:11434")
+OLLAMA = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
 EMB_MODEL = "nomic-embed-text"
 _CACHE = os.path.join(os.path.dirname(__file__), ".emb_cache")
 

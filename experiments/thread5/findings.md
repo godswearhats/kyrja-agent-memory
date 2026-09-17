@@ -35,7 +35,7 @@ Reviewed four papers on RL-trained memory construction:
 - **BudgetMem** (2602.06025): RL-trained query-aware budget-tier router. Uses Contriever top-5. Fixed retrieval across all conditions.
 - **GAM** (2511.18423): JIT memory with dual memorizer/researcher agents. Key finding: researcher (retrieval) capacity is far more sensitive to model size than memorizer (encoding) capacity — even a 0.5B memorizer is competitive, but a weak researcher collapses the system.
 
-**Central gap identified:** Every paper treats retrieval as a fixed, unexamined constant. Nobody has studied what happens when you improve retrieval quality while holding encoding constant, or vice versa.
+**Gap identified in these four papers:** each treats retrieval as a fixed, unexamined constant. (The original text claimed nobody had studied this. That overclaims from a four-paper survey — retrieval ablations are routine in the RAG literature.) Within this set, none examines what happens when you improve retrieval quality while holding encoding constant, or vice versa.
 
 ### Ceiling Effect Experiment
 
@@ -68,9 +68,9 @@ Reviewed four papers on RL-trained memory construction:
 | T3 (hybrid) | 0.2319 | [0.229, 0.235] | +0.084 (p=1.000) |
 
 Adjacent tier improvements:
-- T0 → T1: +0.0805 (p=1.000) — massive, definitive
+- T0 → T1: +0.0805 (p=1.000) — large; note `p_a_better`, not a p-value. CIs do not overlap.
 - T1 → T2: -0.0006 (p=0.375) — no difference
-- T2 → T3: +0.0038 (p=0.986) — tiny but significant
+- T2 → T3: +0.0038 (p=0.986) — *not* significant; this is `p_a_better`, and the T2/T3 confidence intervals overlap
 
 ### LLM-as-Judge
 
@@ -104,11 +104,19 @@ Going from no memory to any retrieval gives a +54% F1 improvement (p=1.000). But
 
 ### 2. The binding constraint is encoding quality, not retrieval quality
 
+> **STRUCK.** This section rests entirely on the LLM-as-judge
+> numbers retracted in the correction at the top of this file. It is left in place for
+> provenance, not as a finding. Do not cite it.
+
 The LLM-as-judge reveals that 98% of answers are factually wrong across ALL tiers — even when the correct memory is retrieved. Intent+outcome encodings compress tool-call chains (~3,000 tokens average) down to ~60 tokens. The details needed to answer specific questions (file paths, function names, error messages, exact commands) are discarded during encoding.
 
 This means improving retrieval cannot overcome encoding information loss. Even perfect retrieval (100% hit rate) would still yield ~98% wrong answers because the memories themselves don't contain enough detail.
 
 ### 3. The ceiling effect hypothesis was correct — but the ceiling is encoding, not retrieval
+
+> **STRUCK.** This section rests entirely on the LLM-as-judge
+> numbers retracted in the correction at the top of this file. It is left in place for
+> provenance, not as a finding. Do not cite it.
 
 The original hypothesis asked: does retrieval quality bound performance? The answer is: not at this scale and encoding quality. The actual bound is encoding information loss. Retrieval improvements add marginal value because the memories are too compressed to be useful regardless of how well you find them.
 
@@ -119,6 +127,10 @@ Intent+outcome encoding compresses inherently high-dimensional data. A 10-step t
 Conversational memory — preferences, facts, decisions — is naturally more compact. Prompted extraction (Mem0-style) handles it well because the source information is already close to its compressed form. The encoding quality problem is specific to agentic work.
 
 ### 5. RL-trained encoding is likely essential for agentic memory
+
+> **STRUCK.** This section rests entirely on the LLM-as-judge
+> numbers retracted in the correction at the top of this file. It is left in place for
+> provenance, not as a finding. Do not cite it.
 
 No hand-crafted encoding strategy can anticipate what details a future query will need. Sometimes the file path matters. Sometimes the error message. Sometimes the decision rationale. Prompted encoders guess. RL-trained encoders learn what to keep based on actual downstream QA accuracy.
 

@@ -7,6 +7,13 @@ sources: [source/supermemory-docs.md, ../experiment/2026-07-22-masq-supermemory-
 tags: [incumbent, integration-gap, extraction-first, masq-tested]
 ---
 
+> **Superseded 2026-07-25.** The A=8% figure on this page was **excluded for cause** —
+> a cap outage plus a supermemory-server v0.0.3 bug that marked documents `done` with
+> zero extracted memories left 340/626 documents empty. The repaired, verified re-run
+> gives A=31% (n=1 core). See
+> [2026-07-25 repair experiment](../experiment/2026-07-25-masq-supermemory-repair.md).
+> Do not cite the 8%.
+
 ## What it does
 
 Memory and context engine for AI systems. Five-component application surface: Memory Engine (fact extraction + contradiction resolution), User Profiles (static facts + dynamic context), Hybrid Search (RAG + memory in one query), Connectors (Google Drive, Gmail, Notion, GitHub real-time sync), File Processing (PDFs, images, video, code). MIT-licensed core, with pluggable vector backends (bring-your-own Pinecone / Weaviate / Qdrant).
@@ -38,7 +45,7 @@ See [Supermemory vendor source](../source/supermemory-docs.md) for the underlyin
 ## Where it fails
 
 - **Extraction-first lossiness.** Conversations compressed into discrete facts at ingest discards nuanced technical context. For engineering-team use cases where the *interaction context* matters (not just the surface fact), this is a structural ceiling.
-- **First-party MASQ measurement (2026-07-22, PRELIMINARY).** Tested as MASQ system #2 (self-hosted v0.0.3, claude-opus-4-8 extraction): `[MEASURED]` A=8% / B-FAIL on the smoke core — below the scope-blind floor — with 0 scope-bound kernel-entity memories in retrieved sets despite all source sessions naming their scope. Consistent with the lossiness ceiling above in a sharpened, mechanism-specific form (scope qualifiers stripped at write time; candidate mechanism [H46](../hypothesis/H46-consolidation-scope-smear.md)). **Held methodology-suspect pending the audit items in the [experiment page](../experiment/2026-07-22-masq-supermemory-smoke.md)** — do not cite as a settled benchmark number.
+- **First-party MASQ measurement (2026-07-22, PRELIMINARY).** Tested as MASQ system #2 (self-hosted v0.0.3, claude-opus-4-8 extraction): `[MEASURED — SUPERSEDED, see below]` A=8% / B-FAIL on the smoke core — below the scope-blind floor — with 0 scope-bound kernel-entity memories in retrieved sets despite all source sessions naming their scope. Consistent with the lossiness ceiling above in a sharpened, mechanism-specific form (scope qualifiers stripped at write time; candidate mechanism [H46](../hypothesis/H46-consolidation-scope-smear.md)). **Held methodology-suspect pending the audit items in the [experiment page](../experiment/2026-07-22-masq-supermemory-smoke.md)** — do not cite as a settled benchmark number.
 - **Benchmark numbers vendor-only.** 81.6% LongMemEval vendor self-report; no independent replication. The [benchmark-replication-gap](../concept/benchmark-replication-gap.md) concern applies.
 - **Storage-primitive depth.** Like Cognee, scaling is inherited from the chosen backend (Pinecone / Weaviate / Qdrant), all of which are HNSW-based. Same [cascading-failures](../concept/cascading-failures.md) regime exposure at billion-scale.
 

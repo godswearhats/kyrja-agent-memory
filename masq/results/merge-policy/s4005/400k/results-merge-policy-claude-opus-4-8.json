@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "domain": "merge-policy",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/merge-policy/s4005/400k",
+    "target_scope": "team-mobile",
+    "n_scopes": 5,
+    "family": "family-merge-policy.json",
+    "n_results": 4,
+    "elapsed_s": 147.2
+  },
+  "ground_truth": {
+    "current_value": "squash-merge",
+    "current_setter": "Dana",
+    "chain_length": 4,
+    "steps": [
+      {
+        "value": "rebase-merge",
+        "setter": "Grace",
+        "type": "initial"
+      },
+      {
+        "value": "fast-forward-only",
+        "setter": "Sam",
+        "type": "supersession"
+      },
+      {
+        "value": "merge-commit",
+        "setter": "Bob",
+        "type": "collision"
+      },
+      {
+        "value": "squash-merge",
+        "setter": "Dana",
+        "type": "resolution"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_squash-merge",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: squash-merge\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: rebase-merge\nSTEP_1_SETTER: Grace\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: fast-forward-only\nSTEP_2_SETTER: Sam\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: merge-commit\nSTEP_3_SETTER: Bob\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: squash-merge\nSTEP_4_SETTER: Dana\nSTEP_4_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "squash-merge",
+        "current_setter": "Dana",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "rebase-merge",
+            "setter": "Grace",
+            "type": "initial"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Sam",
+            "type": "supersession"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Trace: Grace set rebase-merge (day 18); Sam explicitly overrode that citing the release audit \u2192 fast-forward-only (acknowledged supersession, day 153); Bob, unaware, set merge-commit (day 453, an unacknowledged collision with Sam); Dana then explicitly acknowledged both Sam's and Bob's values, noted the flagged conflict, and resolved it to squash-merge (day 543). Since the current value comes from Dana's resolution that acknowledged both sides, the conflict is resolved.\n\nACTION: set_squash-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_squash-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: rebase-merge\nCURRENT_SETTER: Tom\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: squash-merge\nSTEP_1_SETTER: Omar\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: merge-commit\nSTEP_2_SETTER: Marcus\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: rebase-merge\nSTEP_3_SETTER: Tom\nSTEP_3_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "rebase-merge",
+        "current_setter": "Tom",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "squash-merge",
+            "setter": "Omar",
+            "type": "initial"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Tom",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 12,
+        "score": 0.0625
+      },
+      "a_score": 0.0625,
+      "b_raw": "Change history: Omar set squash-merge and Marcus independently set merge-commit (a genuine conflict), but Tom's note then acknowledges both settings and records that the team agreed to unify, resolving to rebase-merge. Since both sides were acknowledged and resolved to a single value, this is a resolved conflict, and I act on the resolution.\n\nACTION: set_rebase-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_rebase-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_rebase-merge, expected set_squash-merge"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at the storefront-web merge-policy events that are embedded in **team-mobile-context** messages (each change rides alongside a team-mobile cross-team mention), the chain is:\n\n- **Day 18 \u2014 Grace** (\"product wants a roadmap check-in with team-mobile\" \u2192 \"Configured rebase-merge on storefront-web today\"): first setting \u2192 initial.\n- **Day 153 \u2014 Sam** (\"team-mobile cut a release candidate\" \u2192 \"Grace had storefront-web on rebase-merge \u2026 changing it to fast-forward-only\"): names prior value + setter \u2192 supersession.\n- **Day 453 \u2014 Bob** (\"standup with team-mobile flagged some build flakiness\" \u2192 \"Couldn't find any merge policy on storefront-web, so I'm putting it on merge-commit\"): unaware of prior \u2192 collision.\n- **Day 543 \u2014 Dana** (\"team-mobile cut a release candidate\" \u2192 \"conflict \u2026 Sam had it on fast-forward-only, Bob had it on merge-commit \u2026 setting it to squash-merge\"): acknowledges the Sam/Bob conflict and resolves \u2192 resolution.\n\nCURRENT_VALUE: squash-merge\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: rebase-merge\nSTEP_1_SETTER: Grace\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: fast-forward-only\nSTEP_2_SETTER: Sam\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: merge-commit\nSTEP_3_SETTER: Bob\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: squash-merge\nSTEP_4_SETTER: Dana\nSTEP_4_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "squash-merge",
+        "current_setter": "Dana",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "rebase-merge",
+            "setter": "Grace",
+            "type": "initial"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Sam",
+            "type": "supersession"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "## History trace for `storefront-web` (suffix variants like `-v2`, `-legacy`, `-canary`, `-storybook` excluded)\n\nThis setting was written and rewritten many times (Grace\u2192rebase d18, Omar\u2192squash d51, Priya\u2192ff-only d81, Sam\u2192ff-only d153, Aisha\u2192squash d201, Omar\u2192rebase d252, Lena\u2192squash d237, Aisha\u2192ff-only d275, Omar\u2192rebase d252, Bob\u2192merge-commit d453, plus several \"resolution\" entries: Ines d260\u2192rebase, Priya d286\u2192squash, Dana d543\u2192squash, Ines d625\u2192rebase, Tom d716\u2192rebase). The decisive point is the **latest** event: on day 716 Tom writes \"Omar set storefront-web to squash-merge and Marcus independently set it to merge-commit \u2026 the team agreed to unify on one policy. Resolving to rebase-merge.\" That entry explicitly names both conflicting writers/values and resolves them, i.e. an acknowledged resolution, not an open disagreement.\n\nBecause the current value comes from a resolution that acknowledged both sides, I act on it and report no live conflict.\n\nACTION: set_rebase-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_rebase-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_rebase-merge, expected set_squash-merge"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at this, I need to filter to changes about **storefront-web** (not storefront-web-canary or capacity-plans) that occur in entries scoped to **team-mobile**.\n\nTeam-mobile entries touching storefront-web:\n- **Grace, day 18** (team-mobile roadmap check-in): sets rebase-merge \u2014 first in this context \u2192 initial\n- **Sam, day 153** (team-mobile release candidate): \"Grace had it on rebase-merge... changing it to fast-forward-only\" \u2192 acknowledges prior value+setter \u2192 supersession\n- **Bob, day 453** (team-mobile build flakiness): \"Couldn't find any merge policy... putting it on merge-commit\" \u2192 unaware of prior \u2192 collision\n- **Dana, day 543** (team-mobile release candidate): \"Sam had it on fast-forward-only, Bob had it on merge-commit... setting it to squash-merge\" \u2192 resolves the Sam/Bob conflict (both team-mobile entries) \u2192 resolution\n\n(Excluded: Omar d51/Marcus d325 = team-design; Ines d260/Omar d333 = team-payments; Omar d228 = storefront-web-*canary*; Omar d239 = capacity-plans.)\n\nThe resolution at day 543 references exactly the two prior team-mobile setters (Sam, Bob), confirming the scope is internally consistent.\n\nCURRENT_VALUE: squash-merge\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: rebase-merge\nSTEP_1_SETTER: Grace\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: fast-forward-only\nSTEP_2_SETTER: Sam\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: merge-commit\nSTEP_3_SETTER: Bob\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: squash-merge\nSTEP_4_SETTER: Dana\nSTEP_4_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "squash-merge",
+        "current_setter": "Dana",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "rebase-merge",
+            "setter": "Grace",
+            "type": "initial"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Sam",
+            "type": "supersession"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "**History trace:** The storefront-web merge policy churned through many values (Grace\u2192rebase day 18, Omar\u2192squash day 51, Sam\u2192ff-only day 153 superseding Grace, Marcus/Omar\u2192various, Bob\u2192merge-commit day 453), but the most recent writer, Dana (day 543), explicitly acknowledged *both* outstanding sides \u2014 Sam's fast-forward-only and Bob's merge-commit \u2014 flagged the conflict in the weekly review, and resolved it to squash-merge in the change record. Since the current value was set by an acknowledged resolution of both prior writers, this is a resolved supersession, not an open conflict.\n\nACTION: set_squash-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_squash-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    }
+  ]
+}

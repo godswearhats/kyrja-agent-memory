@@ -1,0 +1,296 @@
+{
+  "meta": {
+    "domain": "merge-policy",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/merge-policy/s4004/25k",
+    "target_scope": "team-payments",
+    "n_scopes": 5,
+    "family": "family-merge-policy.json",
+    "n_results": 4,
+    "elapsed_s": 63.1
+  },
+  "ground_truth": {
+    "current_value": "rebase-merge",
+    "current_setter": "Aisha",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": "merge-commit",
+        "setter": "Lena",
+        "type": "initial"
+      },
+      {
+        "value": "squash-merge",
+        "setter": "Lena",
+        "type": "self_revision"
+      },
+      {
+        "value": "rebase-merge",
+        "setter": "Aisha",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_rebase-merge",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: rebase-merge\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: merge-commit\nSTEP_1_SETTER: Lena\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: squash-merge\nSTEP_2_SETTER: Lena\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: rebase-merge\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "rebase-merge",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "merge-commit",
+            "setter": "Lena",
+            "type": "initial"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Lena",
+            "type": "self_revision"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "History: Lena set merge-commit (day 28), then explicitly superseded her own value to squash-merge (day 52, citing new audit tooling), then Aisha explicitly referenced squash-merge and Lena's change and overrode it to rebase-merge (day 90, citing the release audit). Each change acknowledged the prior value, so this is a chain of resolved supersessions, not an unresolved conflict.\n\nACTION: set_rebase-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_rebase-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: rebase-merge\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: squash-merge\nSTEP_1_SETTER: Lena\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: rebase-merge\nSTEP_2_SETTER: Aisha\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "rebase-merge",
+        "current_setter": "Aisha",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "squash-merge",
+            "setter": "Lena",
+            "type": "initial"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 5,
+        "step_total": 9,
+        "score": 0.6153846153846154
+      },
+      "a_score": 0.6153846153846154,
+      "b_raw": "History: Lena set storefront-web to squash-merge; a later writer explicitly referenced Lena's squash-merge value, cited last week's release audit as contradicting it, and overrode it to rebase-merge while flagging Lena. Because the later writer named and acknowledged the earlier value/writer before overriding, this is a resolved supersession, not an unacknowledged conflict.\n\nACTION: set_rebase-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_rebase-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "# Reasoning\n\nI tracked every change to the **exact** repo `storefront-web` in this channel, excluding the sibling repos (`-storybook`, `-v2`, `-legacy`, `-canary`). The \"team-payments\" framing is flavor \u2014 all merge-policy writes occur in the single repo-settings channel, and the other teams are only mentioned in passing. I classified each write by what the writer claimed: no acknowledgment of a prior setting = collision; acknowledged a prior value/setter = supersession; explicitly \"no policy / couldn't find one\" = collision; acknowledging two conflicting parties and merging them = resolution.\n\nCURRENT_VALUE: rebase-merge\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 17\nSTEP_1_VALUE: squash-merge\nSTEP_1_SETTER: Priya\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: rebase-merge\nSTEP_2_SETTER: Sam\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: squash-merge\nSTEP_3_SETTER: Marcus\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: fast-forward-only\nSTEP_4_SETTER: Wei\nSTEP_4_TYPE: supersession\nSTEP_5_VALUE: merge-commit\nSTEP_5_SETTER: Lena\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: rebase-merge\nSTEP_6_SETTER: Ravi\nSTEP_6_TYPE: supersession\nSTEP_7_VALUE: squash-merge\nSTEP_7_SETTER: Grace\nSTEP_7_TYPE: collision\nSTEP_8_VALUE: squash-merge\nSTEP_8_SETTER: Priya\nSTEP_8_TYPE: collision\nSTEP_9_VALUE: squash-merge\nSTEP_9_SETTER: Lena\nSTEP_9_TYPE: supersession\nSTEP_10_VALUE: merge-commit\nSTEP_10_SETTER: Bob\nSTEP_10_TYPE: resolution\nSTEP_11_VALUE: rebase-merge\nSTEP_11_SETTER: Alice\nSTEP_11_TYPE: supersession\nSTEP_12_VALUE: squash-merge\nSTEP_12_SETTER: Bob\nSTEP_12_TYPE: collision\nSTEP_13_VALUE: squash-merge\nSTEP_13_SETTER: Tom\nSTEP_13_TYPE: supersession\nSTEP_14_VALUE: merge-commit\nSTEP_14_SETTER: Marcus\nSTEP_14_TYPE: supersession\nSTEP_15_VALUE: squash-merge\nSTEP_15_SETTER: Omar\nSTEP_15_TYPE: supersession\nSTEP_16_VALUE: fast-forward-only\nSTEP_16_SETTER: Alice\nSTEP_16_TYPE: collision\nSTEP_17_VALUE: rebase-merge\nSTEP_17_SETTER: Aisha\nSTEP_17_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "rebase-merge",
+        "current_setter": "Aisha",
+        "chain_length": "17",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "squash-merge",
+            "setter": "Priya",
+            "type": "initial"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Sam",
+            "type": "collision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Wei",
+            "type": "supersession"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Lena",
+            "type": "collision"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Ravi",
+            "type": "supersession"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Grace",
+            "type": "collision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Lena",
+            "type": "supersession"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Bob",
+            "type": "resolution"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Alice",
+            "type": "supersession"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Tom",
+            "type": "supersession"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Marcus",
+            "type": "supersession"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Omar",
+            "type": "supersession"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Alice",
+            "type": "collision"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 7,
+        "step_total": 9,
+        "score": 0.7692307692307693
+      },
+      "a_score": 0.7692307692307693,
+      "b_raw": "**Change history for `storefront-web`** (excluding the distinct repos `storefront-web-storybook`, `-legacy`, `-v2`, `-canary`): the setting churned through many writers (Priya\u2192Sam\u2192Marcus\u2192Wei\u2192Lena\u2192\u2026\u2192Marcus day 60 explicitly consolidated the dual Wei/Priya settings to merge-commit acknowledging both sides, then more overrides), and the most recent write is Aisha on day 90, who states it was on squash-merge \"from Lena's change\" and overrides it to rebase-merge \u2014 an acknowledged supersession that names the prior writer. Since the current value was set by an acknowledged supersession of the immediately prior value (not a silent disagreement), there is no unresolved conflict at the head.\n\nACTION: set_rebase-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_rebase-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: rebase-merge\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: merge-commit\nSTEP_1_SETTER: Lena\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: squash-merge\nSTEP_2_SETTER: Lena\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: rebase-merge\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "rebase-merge",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "merge-commit",
+            "setter": "Lena",
+            "type": "initial"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Lena",
+            "type": "self_revision"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Tracing storefront-web (excluding the -v2/-storybook/other-repo variants): Priya set squash-merge (d6), Wei superseded Sam's rebase-merge \u2192 fast-forward-only (d26), Lena set merge-commit (d28) then explicitly switched it to squash-merge (d52), Bob acknowledged BOTH Wei's and Priya's values and consolidated on merge-commit (d60), and finally Aisha (d90) explicitly referenced \"squash-merge from Lena\" and overrode it to rebase-merge. Every step in this chain either explicitly references the prior value/writer or resolves both sides, so the current value rests on an acknowledged supersession, not an open conflict.\n\nACTION: set_rebase-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_rebase-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    }
+  ]
+}

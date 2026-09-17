@@ -1,0 +1,306 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4002/60k",
+    "target_scope": "eu-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 6,
+    "elapsed_s": 37.6
+  },
+  "ground_truth": {
+    "current_value": "growth",
+    "current_setter": "Omar",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": "growth",
+        "setter": "Marcus",
+        "type": "initial"
+      },
+      {
+        "value": "sre",
+        "setter": "Dana",
+        "type": "supersession"
+      },
+      {
+        "value": "growth",
+        "setter": "Omar",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_growth",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: growth team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: sre team\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: growth team\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "growth team",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "growth team",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Tracing the history: Marcus (day 29) set the owner to **growth**; Dana (day 83) explicitly referenced Marcus's change and superseded it to **sre**, flagging him; Omar (day 173) explicitly referenced Dana's note and superseded it back to **growth**. Each change acknowledged and overrode the prior one, so the chain is a series of resolved supersessions, not an unacknowledged conflict.\n\nACTION: set_growth\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_growth",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: none (billing-reconciliation owner is not scoped to eu-cluster)\nCURRENT_SETTER: none\nCHAIN_LENGTH: 0\nUNRESOLVED_CONFLICT: false\n\nNote: In this memory, eu-cluster appears only in \"eu-cluster came back healthy after the patch\" \u2014 a deploy/health fact with no connection to billing-reconciliation. The billing-reconciliation owner assignment (Dana \u2192 sre, then Omar supersedes \u2192 growth) is a separate, unscoped statement. So *within the eu-cluster context specifically*, there is no billing-reconciliation owner and no change history. (For the record, the global chain is: STEP_1 Dana=sre/initial, STEP_2 Omar=growth/supersession \u2014 but that belongs to no cluster context, not eu-cluster.)",
+      "a_parsed": {
+        "current_value": "none (billing-reconciliation owner is not scoped to eu-cluster)",
+        "current_setter": "none",
+        "chain_length": "0",
+        "unresolved_conflict": "false",
+        "steps": []
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 9,
+        "score": 0.07692307692307693
+      },
+      "a_score": 0.07692307692307693,
+      "b_raw": "Change history: Dana's note assigned billing-reconciliation to the sre team; Omar later explicitly referenced that assignment and overrode it to the growth team, citing the new charter mapping. This is an acknowledged supersession (Omar named the prior value and replaced it), not an unresolved conflict.\n\nACTION: set_growth\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_growth",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "I'll reconstruct the change history for **billing-reconciliation** ownership scoped specifically to the **eu-cluster** context. The key is isolating only the ownership statements that appear alongside an eu-cluster mention (excluding na-cluster, apac-cluster, staging-cluster, legacy-cluster contexts, and the distinct `billing-reconciliation-*` variant services).\n\nThe eu-cluster\u2013scoped changes:\n\n- **Marcus, day 29** \u2014 \"QA ran the data-residency checks against **eu-cluster**. billing-reconciliation now has an owner of record: the **growth** team\" \u2192 first eu-cluster assignment (initial).\n- **Dana, day 83** \u2014 \"we're tightening the compliance posture on **eu-cluster**. billing-reconciliation is under the growth team from **Marcus's** change... moving it to the **sre** team and flagging Marcus\" \u2192 acknowledges prior value+setter (supersession).\n- **Omar, day 173** \u2014 \"**eu-cluster** came back healthy after the patch. Per **Dana's** note, billing-reconciliation was assigned to the sre team... I'm updating it to the **growth** team\" \u2192 acknowledges prior value+setter (supersession).\n\nCURRENT_VALUE: growth team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: sre team\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: growth team\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "growth team",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "growth team",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "I traced the `billing-reconciliation` (exact name, excluding suffixed variants like `-v2`, `-daily`, `-adhoc`, `-audit`) ownership history through the log.\n\nThe chain is long but every later write that changed the value explicitly referenced and overrode a prior writer: Bob\u2192data-eng was superseded by Marcus\u2192sre (\"Saw Bob assign... reassigning\"); Lena's payments and Bob's identity were unified by Carlos\u2192data-eng (\"both were live... going with data-eng\"); Omar's platform was superseded by Tom\u2192data-eng (\"flagging Omar\"); and the final write, Omar on day 173, states \"Per Dana's note, billing-reconciliation was assigned to the sre team; the new charter mapping says otherwise, so I'm updating it to the growth team\" \u2014 an explicit, acknowledged supersession of the prior value.\n\nBecause the current value was set by an acknowledged supersession (Omar referencing and overriding Dana's earlier assignment), this is a resolved supersession, not an unacknowledged conflict.\n\nACTION: set_growth\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_growth",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking only at changes scoped to the **eu-cluster** context (filtering out the global/other-cluster entries and the distinct `billing-reconciliation-v2`/`-adhoc` entities), I find a clean three-step chain.\n\nThe eu-cluster entries:\n- **Marcus, day 29** (data-residency checks against eu-cluster): sets owner to **growth** per service charter \u2014 initial.\n- **Dana, day 83** (compliance posture on eu-cluster): \"under the growth team from Marcus's change... moving it to sre and flagging Marcus\" \u2014 acknowledges prior value+setter \u2192 supersession.\n- **Omar, day 173** (eu-cluster healthy after patch): \"Per Dana's note... assigned to sre... updating it to growth\" \u2014 acknowledges prior value+setter \u2192 supersession.\n\nEach step's stated prior value matches the previous step exactly (growth \u2192 sre \u2192 growth), confirming these belong to the same context. The other ledger entries reference values (data-eng, platform, payments) that never appear here, confirming they belong to other contexts.\n\nCURRENT_VALUE: growth\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: growth\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: sre\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: growth\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "growth",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "sre",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "growth",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "I'll trace the change history for billing-reconciliation (ignoring the distinct settings billing-reconciliation-v2, -adhoc).\n\nbilling-reconciliation passed through a chain in which each later writer explicitly named a prior writer/value and overrode it: Omar (growth, d4) \u2192 Bob (data-eng, d39) \u2192 Marcus acknowledges Bob, sets sre (d75) \u2192 Dana acknowledges Marcus, sets sre (d83) \u2192 Tom acknowledges Omar, sets data-eng (d124) \u2192 Tom acknowledges Marcus, sets payments (d138) \u2192 Omar (d173) explicitly references Dana's sre and overrides to growth. The most recent write is an acknowledged supersession, not an open disagreement.\n\nACTION: set_growth\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_growth",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: sre team\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: sre team\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "sre team",
+        "current_setter": "Dana",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 6,
+        "step_total": 9,
+        "score": 0.5384615384615384
+      },
+      "a_score": 0.5384615384615384,
+      "b_raw": "**Trace:** billing-reconciliation went growth (Omar d4, reaffirmed Marcus d29) \u2192 payments (Lena d53, unack'd) \u2192 sre (Dana d83, ack'ing only Marcus/growth) \u2192 fulfillment (Priya d110, \"no owner\") \u2192 data-eng (Grace d111, who explicitly acknowledged *both* the sre and fulfillment sides and resolved them). Then Omar d119 set platform but referenced \"the growth team\" \u2014 a value that was already stale \u2014 and never acknowledged Grace's data-eng resolution, so his supersession overrides the wrong prior value and leaves data-eng vs. platform unresolved.\n\nBecause the current value (platform) was not an acknowledged supersession of the actual prior value (Grace's data-eng resolution), the data-eng/platform disagreement stands unacknowledged.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got none, expected set_growth; false_alarm"
+      }
+    },
+    {
+      "arm": "where-scope-target",
+      "arm_key": "scopefilter",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: growth team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: sre team\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: growth team\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "growth team",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "growth team",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Tracing the history: Marcus (day 29) set billing-reconciliation to **growth** per the charter; Dana (day 83) explicitly referenced Marcus's growth value and overrode it to **sre**; Omar (day 173) explicitly referenced Dana's sre value and overrode it back to **growth**. Each writer acknowledged the prior value before changing it, so every step is a resolved supersession, not an unacknowledged conflict. The current value is growth.\n\nACTION: set_growth\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_growth",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    }
+  ]
+}

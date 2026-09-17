@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4003/150k",
+    "target_scope": "staging-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 4,
+    "elapsed_s": 119.2
+  },
+  "ground_truth": {
+    "current_value": "contested",
+    "current_setter": "contested:{Priya,Omar}",
+    "chain_length": 4,
+    "steps": [
+      {
+        "value": "payments",
+        "setter": "Sam",
+        "type": "initial"
+      },
+      {
+        "value": "platform",
+        "setter": "Tom",
+        "type": "collision"
+      },
+      {
+        "value": "data-eng",
+        "setter": "Priya",
+        "type": "resolution"
+      },
+      {
+        "value": "fulfillment",
+        "setter": "Omar",
+        "type": "collision"
+      }
+    ],
+    "unresolved_conflict": true,
+    "action": "any_recorded",
+    "conflict_flag": true
+  },
+  "results": [
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: none\nCURRENT_SETTER: none\nCHAIN_LENGTH: 0\nUNRESOLVED_CONFLICT: false\n\nNote: The only write to \"billing-reconciliation owner\" here is Omar's assignment to the *fulfillment team*, but that is a **context-free / global** ownership setting (\"Couldn't find an owner of record... so I'm putting it under the fulfillment team\"). His mention of staging-cluster (\"staging-cluster config is lagging prod\") is an unrelated passing observation, not a scoping of the ownership change. In the **staging-cluster context specifically**, there are zero changes to the billing-reconciliation owner \u2014 hence chain length 0 and no in-context value.",
+      "a_parsed": {
+        "current_value": "none",
+        "current_setter": "none",
+        "chain_length": "0",
+        "unresolved_conflict": "false",
+        "steps": []
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": false,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 12,
+        "score": 0.0
+      },
+      "a_score": 0.0,
+      "b_raw": "First, the change history: the only writer to touch billing-reconciliation ownership is Omar, who found no prior owner of record and assigned it to the fulfillment team \u2014 a single assignment with no competing value from anyone else. The staging-cluster remark is about a different setting and carries no billing-reconciliation owner value, so there are not two conflicting values to reconcile here.\n\nACTION: set_fulfillment\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_fulfillment",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "flag_missed"
+      }
+    },
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "I traced the four writes to billing-reconciliation ownership, all in the staging-cluster context (the staging-cluster drift/mirror/config remarks in each entry are incidental status notes, not ownership writes).\n\nCURRENT_VALUE: fulfillment team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: payments team\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: platform team\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: data-eng team\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nSTEP_4_VALUE: fulfillment team\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nUNRESOLVED_CONFLICT: true\n\nNote: The current value of record is unambiguously the last write (fulfillment team, Omar), so it is not itself \"contested.\" But I flag UNRESOLVED_CONFLICT as true because Omar's final write was a collision \u2014 he blindly overwrote Priya's deliberate resolution without any awareness of it, leaving the prior reconciliation (data-eng) unaccounted for.",
+      "a_parsed": {
+        "current_value": "fulfillment team",
+        "current_setter": "Omar",
+        "chain_length": "4",
+        "unresolved_conflict": "true",
+        "steps": [
+          {
+            "value": "payments team",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "platform team",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "data-eng team",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 0.875
+      },
+      "a_score": 0.875,
+      "b_raw": "**Change history:** Sam set *payments* (day 103) and Tom set *platform* (day 105) without acknowledging Sam \u2014 an unresolved collision that Priya then explicitly resolved on day 352 by naming both prior writers and assigning *data-eng*. However, Omar (day 358) claimed \"no owner of record\" and set *fulfillment*, ignoring and never acknowledging Priya's resolution \u2014 re-opening the conflict.\n\nThe latest value (*fulfillment*) was not set by a resolution or an acknowledged supersession; Omar silently overrode a documented resolution, so the current state is an unresolved disagreement between Priya's *data-eng* and Omar's *fulfillment*.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "Reconstructing the chain for **billing-reconciliation** ownership scoped to **staging-cluster** (filtering out all assignments tagged to other clusters \u2014 legacy/eu/na/apac \u2014 which form separate chains):\n\nThe staging-cluster\u2013tagged writes are: Sam day 103 (\"demoing off staging-cluster\" \u2192 payments), Tom day 105 (\"staging-cluster drifted again\" \u2192 platform), Priya day 352 (\"staging-cluster is mirroring the release candidate\" \u2192 data-eng), Omar day 358 (\"staging-cluster config is lagging prod\" \u2192 fulfillment). Notably, Priya's day-352 resolution names exactly the two prior in-scope writers (Sam/payments, Tom/platform), confirming the scope boundary.\n\nCURRENT_VALUE: fulfillment team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: payments team\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: platform team\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: data-eng team\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nSTEP_4_VALUE: fulfillment team\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "fulfillment team",
+        "current_setter": "Omar",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "payments team",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "platform team",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "data-eng team",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": false,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 0.8125
+      },
+      "a_score": 0.8125,
+      "b_raw": "I traced the `billing-reconciliation` ownership history (the base setting, ignoring the `-audit`/`-daily`/`-v2`/`-adhoc` variants).\n\nThe setting was reassigned many times. Several conflicts were genuinely resolved along the way \u2014 e.g. day 212 Ravi consolidated Ines's growth vs Bob's trust-safety under identity; day 282 Dana resolved Grace's platform vs Alice's identity to growth; day 318 Ines resolved Aisha's data-eng vs Alice's identity to sre; day 352 Priya resolved Sam's payments vs Tom's platform to data-eng; and day 355 Priya resolved Ravi's trust-safety vs Aisha's identity to data-eng. The most recent resolution left the value at **data-eng** (day 355).\n\nThen on day 358, Omar wrote: \"Couldn't find an owner of record for billing-reconciliation, so I'm putting it under the **fulfillment** team.\" This is a fresh assignment that neither references nor acknowledges the day-355 data-eng resolution \u2014 it claims no owner exists at all. So the head of the history is two different live values (data-eng from Priya's resolution vs fulfillment from Omar) with no acknowledgement bridging them.\n\nThat is an unresolved conflict at the current head, so I will not silently pick one.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: contested\nCURRENT_SETTER: contested:{Priya,Omar}\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: platform team\nSTEP_1_SETTER: Tom\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: data-eng team\nSTEP_2_SETTER: Priya\nSTEP_2_TYPE: resolution\nSTEP_3_VALUE: fulfillment team\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: collision\nUNRESOLVED_CONFLICT: true",
+      "a_parsed": {
+        "current_value": "contested",
+        "current_setter": "contested:{Priya,Omar}",
+        "chain_length": "3",
+        "unresolved_conflict": "true",
+        "steps": [
+          {
+            "value": "platform team",
+            "setter": "Tom",
+            "type": "initial"
+          },
+          {
+            "value": "data-eng team",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 8,
+        "step_total": 12,
+        "score": 0.6875
+      },
+      "a_score": 0.6875,
+      "b_raw": "## Change history for billing-reconciliation ownership\n\nTracing chronologically: Omar (d37) set **trust-safety**; Grace (d41) explicitly referenced Omar's note and superseded it to **platform** (resolved); Bob (d62) blindly set trust-safety, then a string of blind writes (Tom\u2192platform, Ravi\u2192trust-safety, Aisha\u2192identity) each claiming \"no owner found.\" Ravi (d212) acknowledged the growth/trust-safety split and resolved to **identity**; Aisha (d238) referenced Bob and superseded to **data-eng** (Bob in loop); Priya (d352) acknowledged the Sam/Tom split and resolved to **data-eng**. Then Omar (d358) claimed \"couldn't find an owner of record\" and set **fulfillment**, never acknowledging the established data-eng resolution.\n\nThe most recent write (Omar, fulfillment) is a blind overwrite that directly disagrees with the immediately preceding data-eng resolution and acknowledges neither it nor any prior writer \u2014 so the current state is an unresolved conflict, not a clean supersession.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    }
+  ]
+}

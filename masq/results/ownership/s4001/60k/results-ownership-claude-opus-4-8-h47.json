@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4001/60k",
+    "target_scope": "na-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 2,
+    "elapsed_s": 122.1
+  },
+  "ground_truth": {
+    "current_value": "sre",
+    "current_setter": "Aisha",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": "trust-safety",
+        "setter": "Wei",
+        "type": "initial"
+      },
+      {
+        "value": "data-eng",
+        "setter": "Wei",
+        "type": "self_revision"
+      },
+      {
+        "value": "sre",
+        "setter": "Aisha",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_sre",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: sre team\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: trust-safety team\nSTEP_1_SETTER: Wei\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: data-eng team\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: sre team\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "sre team",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "trust-safety team",
+            "setter": "Wei",
+            "type": "initial"
+          },
+          {
+            "value": "data-eng team",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "sre team",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "I'll trace the change history for billing-reconciliation ownership.\n\nTracing the chain: it churned through many owners, but the last genuine *resolution* was Omar (day 150), who explicitly reconciled the competing values (Carlos\u2192identity, Wei\u2192platform) and assigned **data-eng**, noting both sides in the change record. Then Ravi (day 164) claimed he \"couldn't find an owner of record\" and set **trust-safety**, without acknowledging Omar's resolution or any prior owner \u2014 so data-eng and trust-safety now stand as two different values that were never reconciled.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got none, expected set_sre; false_alarm"
+      }
+    },
+    {
+      "arm": "bm25-scoped-k10",
+      "arm_key": "bm25_scoped_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at this carefully, I need to distinguish the *context* a change was made in from topics that merely co-occur in the same journal entry.\n\nEvery billing-reconciliation ownership change in the record is explicitly *severed* from na-cluster by a disclaimer, and each states its own, different context/reason:\n\n- **Lena, d1** \u2192 fulfillment team \u2014 reason: \"quarter-close review\" (no na-cluster mention at all)\n- **Wei, d24** \u2192 trust-safety \u2014 reason: \"quarter-close review\"; the na-cluster item sits in the *prior* clause tagged \"Not related, but \u2014\"\n- **Wei, d42** \u2192 data-eng \u2014 reason: \"the reorg moved this area\"; na-cluster appears only in a \"Meanwhile\" clause\n- **Aisha, d57** \u2192 sre \u2014 reason: \"the incident review recommended it\"; na-cluster appears only in a \"Separately\" clause\n\nIn every case na-cluster is a co-occurring distractor, deliberately marked as unrelated to the billing item. No billing-reconciliation ownership change was ever made *in the na-cluster context*. That thread lives in a quarter-close/reorg/incident-review context, not na-cluster.\n\nCURRENT_VALUE: none\nCURRENT_SETTER: none\nCHAIN_LENGTH: 0\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "none",
+        "current_setter": "none",
+        "chain_length": "0",
+        "unresolved_conflict": "false",
+        "steps": []
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 9,
+        "score": 0.07692307692307693
+      },
+      "a_score": 0.07692307692307693,
+      "b_raw": "I'll trace the ownership history for billing-reconciliation.\n\nLena (day 1) set the owner to **fulfillment**; Wei (day 24) set it to **trust-safety** without any reference to Lena's fulfillment assignment \u2014 that fork is an unacknowledged disagreement between two people. Everything after (Wei day 42: trust-safety\u2192data-eng, \"revisiting my call\"; Aisha day 57: data-eng\u2192sre, \"per Wei\") is an acknowledged chain built entirely on Wei's branch, and no one ever went back and reconciled or even referenced Lena's original fulfillment value \u2014 so the root conflict between fulfillment and trust-safety was never resolved.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got none, expected set_sre; false_alarm"
+      }
+    }
+  ]
+}

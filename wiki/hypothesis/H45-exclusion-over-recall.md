@@ -20,6 +20,26 @@ constraint is **exclusion (precision), not recall**: ranking retrieves the targe
 but cannot leave the siblings out, because the query offers no content signal that
 separates them.
 
+> **FALSIFIED 2026-09-16/17 — the parenthetical "any method, any k" and the stated
+> mechanism are both wrong.** The claim above was asserted from two retrievers at one
+> k with one query formulation and no ablation. The target scope is in fact **verbatim
+> in `a_query` on 15/15 cores**; the published arms destroyed that signal through
+> (a) `[a-z0-9]+` tokenization, which splits `checkout-web` so every sibling collides
+> on the shared prefix, and (b) retrieving with the full ~63-word task prompt, which
+> dilutes the discriminator to ~20% of the BM25 document score. Fixing both — no
+> ground-truth field read — gives top-10 composition of 3.4/3.4 target and **0.2**
+> siblings, and on a pre-registered re-run scores **14/15 B-pass**, effectively tying
+> the oracle filter (15/15) and clearing the plateau (paste 9/15, control bm25 9/15).
+> Paired 5 FAIL→PASS, 0 PASS→FAIL. See
+> [PREREG](../../masq/harness/PREREG-scoped-bm25.md) and
+> [RESULTS](../../masq/harness/RESULTS-scoped-bm25.md).
+>
+> **Corrected claim:** a discriminator present in the query must not be diluted by
+> tokenization or prompt boilerplate. Ranking is sufficient here once it isn't. What
+> remains genuinely untested is scope that must be **inferred** from unanchored
+> natural language — not "the filter is an oracle", which a 10-line regex-plus-
+> substring filter reproduces exactly on 15/15 cores.
+
 **Status SUPPORTED is scoped to the MASQ construct** (synthetic, confusability authored
 by design, n=15, one size, one reader). It is *not* a validated general claim about
 real-corpus retrieval — see Scope/construct limits.

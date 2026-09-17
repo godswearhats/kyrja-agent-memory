@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "domain": "rate-limit",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/rate-limit/s4005/60k",
+    "target_scope": "checkout-api",
+    "n_scopes": 5,
+    "family": "family-rate-limit.json",
+    "n_results": 2,
+    "elapsed_s": 74.1
+  },
+  "ground_truth": {
+    "current_value": 800,
+    "current_setter": "Dana",
+    "chain_length": 4,
+    "steps": [
+      {
+        "value": 200,
+        "setter": "Sam",
+        "type": "initial"
+      },
+      {
+        "value": 1000,
+        "setter": "Grace",
+        "type": "supersession"
+      },
+      {
+        "value": 500,
+        "setter": "Ines",
+        "type": "collision"
+      },
+      {
+        "value": 800,
+        "setter": "Dana",
+        "type": "resolution"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_800",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "bm25-scoped-k10",
+      "arm_key": "bm25_scoped_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 800 req/s\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: 200 req/s\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 1000 req/s\nSTEP_2_SETTER: Grace\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: 500 req/s\nSTEP_3_SETTER: Ines\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: 800 req/s\nSTEP_4_SETTER: Dana\nSTEP_4_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "800 req/s",
+        "current_setter": "Dana",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200 req/s",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "1000 req/s",
+            "setter": "Grace",
+            "type": "supersession"
+          },
+          {
+            "value": "500 req/s",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "800 req/s",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "The change history: Sam set /checkout to 200 req/s (day 5); Grace explicitly cited Sam's 200 and superseded it with 1000 (day 39); Ines, unaware, set 500 (day 114), creating an unacknowledged Grace-vs-Ines conflict; Dana (day 136) then explicitly named both values and resolved the conflict to 800 req/s in the change record. Since the current value came from Dana's acknowledged resolution, this is resolved, not open.\n\nACTION: set_800\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_800",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at this, I need to isolate changes to **/checkout** (the checkout-api endpoint) and exclude the decoy endpoints `/checkout-v2` (Carlos, day 93) and `/checkout-canary` (Hassan, day 173), plus the flavor-text mentions of checkout-web/mobile/internal/sandbox, which are explicitly flagged as unrelated.\n\nThe eight in-context changes, chronologically:\n\n- **Sam (day 5):** sets 200, no prior \u2014 *initial*\n- **Omar (day 63):** sets 200, no acknowledgment of Sam \u2014 *collision*\n- **Marcus (day 82):** \"no rate limit set from what I can tell\" \u2192 200 \u2014 *collision*\n- **Omar (day 84):** \"no rate limit yet\" \u2192 1000 (doesn't cite his own day-63 setting) \u2014 *collision*\n- **Ines (day 114):** \"couldn't find any rate limit\" \u2192 500 \u2014 *collision*\n- **Dana (day 136):** acknowledges a Grace-vs-Ines conflict \u2192 800 \u2014 *resolution*\n- **Ines (day 157):** acknowledges an Aisha-vs-Priya conflict \u2192 150 \u2014 *resolution*\n- **Tom (day 179):** acknowledges an Omar-vs-Marcus conflict \u2192 300 \u2014 *resolution*\n\n(Note: the resolution entries cite party names/values that don't cleanly match the true prior chain \u2014 that's noise in the records \u2014 but each is still a resolution of a flagged conflict, and the latest one settles the value.)\n\nCURRENT_VALUE: 300\nCURRENT_SETTER: Tom\nCHAIN_LENGTH: 8\nSTEP_1_VALUE: 200\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 200\nSTEP_2_SETTER: Omar\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 200\nSTEP_3_SETTER: Marcus\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: 1000\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nSTEP_5_VALUE: 500\nSTEP_5_SETTER: Ines\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: 800\nSTEP_6_SETTER: Dana\nSTEP_6_TYPE: resolution\nSTEP_7_VALUE: 150\nSTEP_7_SETTER: Ines\nSTEP_7_TYPE: resolution\nSTEP_8_VALUE: 300\nSTEP_8_SETTER: Tom\nSTEP_8_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "300",
+        "current_setter": "Tom",
+        "chain_length": "8",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "200",
+            "setter": "Omar",
+            "type": "collision"
+          },
+          {
+            "value": "200",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "1000",
+            "setter": "Omar",
+            "type": "collision"
+          },
+          {
+            "value": "500",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "800",
+            "setter": "Dana",
+            "type": "resolution"
+          },
+          {
+            "value": "150",
+            "setter": "Ines",
+            "type": "resolution"
+          },
+          {
+            "value": "300",
+            "setter": "Tom",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 9,
+        "step_total": 12,
+        "score": 0.625
+      },
+      "a_score": 0.625,
+      "b_raw": "Tracing the history of `/checkout` (excluding the distinct `/checkout-v2` and `/checkout-canary` endpoints): the value was set repeatedly (Omar 200 \u2192 Marcus 200 \u2192 Omar 1000 \u2192 Ines 500), then went through explicit conflict resolutions \u2014 Dana resolved Grace/Ines to 800 (day 136), Ines resolved Aisha/Priya to 150 (day 157), and most recently Tom resolved Omar's 50 vs Marcus's 200 by team agreement to 300 (day 179). The current value comes from that last resolution, which acknowledged both sides.\n\nACTION: set_300\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_300",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_300, expected set_800"
+      }
+    }
+  ]
+}

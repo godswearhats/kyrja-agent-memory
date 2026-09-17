@@ -1,0 +1,221 @@
+{
+  "meta": {
+    "domain": "merge-policy",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/merge-policy/s4002/25k",
+    "target_scope": "team-design",
+    "n_scopes": 5,
+    "family": "family-merge-policy.json",
+    "n_results": 4,
+    "elapsed_s": 92.8
+  },
+  "ground_truth": {
+    "current_value": "rebase-merge",
+    "current_setter": "Omar",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": "rebase-merge",
+        "setter": "Marcus",
+        "type": "initial"
+      },
+      {
+        "value": "fast-forward-only",
+        "setter": "Dana",
+        "type": "supersession"
+      },
+      {
+        "value": "rebase-merge",
+        "setter": "Omar",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_rebase-merge",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: rebase-merge\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: rebase-merge\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: fast-forward-only\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: rebase-merge\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "rebase-merge",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "rebase-merge",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Change history: Marcus set rebase-merge (day 15); Dana explicitly referenced Marcus's value and superseded it to fast-forward-only (day 42); Omar explicitly referenced Dana's fast-forward-only and superseded it back to rebase-merge (day 87). Each change acknowledged the prior writer, so this is a chain of resolved supersessions with current value rebase-merge.\n\nACTION: set_rebase-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_rebase-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: rebase-merge\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: fast-forward-only\nSTEP_1_SETTER: Dana\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: rebase-merge\nSTEP_2_SETTER: Omar\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "rebase-merge",
+        "current_setter": "Omar",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "fast-forward-only",
+            "setter": "Dana",
+            "type": "initial"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 5,
+        "step_total": 9,
+        "score": 0.6153846153846154
+      },
+      "a_score": 0.6153846153846154,
+      "b_raw": "Tracing the history: Dana set storefront-web to fast-forward-only; Omar (day 87) explicitly cites Dana's value, notes the new repo-standards doc contradicts it, and updates the setting to rebase-merge. Because Omar acknowledged Dana's earlier value and overrode it on a stated basis, this is a resolved supersession rather than an unacknowledged disagreement.\n\nACTION: set_rebase-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_rebase-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "I'll work through this carefully. The log mixes storefront-web merge-policy changes across several team \"contexts\" (signaled by which team is mentioned alongside each change). I need only the changes tagged to **team-design**.\n\nScanning all storefront-web changes and their context signals, the **team-design** ones are:\n\n- **Marcus, day 15**: \"product loved the latest team-design explorations.\" \u2192 \"storefront-web merge policy set to **rebase-merge**.\" \u2192 first team-design setting (**initial**).\n- **Dana, day 42**: \"team-design demoed the refreshed brand direction.\" \u2192 \"storefront-web is on rebase-merge **from Marcus's change**... switching it to **fast-forward-only** and flagging Marcus.\" \u2192 acknowledges prior value+setter (**supersession**).\n- **Omar, day 87**: \"we're syncing with team-design on the component library.\" \u2192 \"**Per Dana's note**, storefront-web was on fast-forward-only... updating it to **rebase-merge**.\" \u2192 acknowledges prior value+setter (**supersession**).\n\nOther storefront-web changes (Omar d2/d60 = team-mobile, Marcus d4 = team-platform, Bob d20/Marcus d38/Tom d69 = team-payments, Lena d27/Bob d61/Carlos d80 = team-growth, Sam d50/Priya d55/Grace d56 = team-platform, Tom d62 = team-mobile) belong to other contexts and are excluded.\n\nCURRENT_VALUE: rebase-merge\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: rebase-merge\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: fast-forward-only\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: rebase-merge\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "rebase-merge",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "rebase-merge",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "The storefront-web policy churned through many writers, but the relevant late history is anchored by explicit resolutions: Grace (day 56) reconciled Sam's fast-forward-only vs Priya's merge-commit, and Carlos (day 80) reconciled Lena's squash-merge vs Bob's rebase-merge by team agreement on merge-commit \u2014 and the final write, Omar (day 87), explicitly references Dana's earlier fast-forward-only value and overrides it to rebase-merge, an acknowledged supersession.\n\nACTION: set_rebase-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_rebase-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at this carefully, I need to filter the storefront-web merge policy changes to the **team-design context** specifically (excluding storefront-web-v2 and storefront-web-canary, which are different repos).\n\nScanning each entry for the team-design context tag and for the exact repo \"storefront-web\":\n\n- **Day 15 \u2014 Marcus** (context: team-design \u2014 \"product loved the latest team-design explorations\"): sets storefront-web to **rebase-merge**. No prior in this context \u2192 initial.\n- **Day 42 \u2014 Dana** (context: team-design \u2014 \"team-design demoed the refreshed brand direction\"): \"storefront-web is on **rebase-merge from Marcus's change**, but the new repo-standards doc says otherwise \u2014 switching it to **fast-forward-only** and flagging Marcus.\" She explicitly acknowledges the prior value (rebase-merge) and setter (Marcus) \u2192 supersession.\n\nThe other merge-policy edits (Lena/team-growth, Marcus day38/team-payments, Sam/Priya/Grace/team-platform, Tom/team-payments) belong to other contexts, and Hassan/Bob's edits target different repos (v2, canary). Dana's acknowledgment (\"rebase-merge from Marcus\") matches the team-design chain exactly, which confirms the scoping.\n\nCURRENT_VALUE: fast-forward-only\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: rebase-merge\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: fast-forward-only\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "fast-forward-only",
+        "current_setter": "Dana",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "rebase-merge",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Dana",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 6,
+        "step_total": 9,
+        "score": 0.5384615384615384
+      },
+      "a_score": 0.5384615384615384,
+      "b_raw": "History: storefront-web cycled through rebase-merge (Marcus d15) \u2192 squash-merge (Lena d27) \u2192 a series of *acknowledged* supersessions to fast-forward-only (Marcus d38, Dana d42, Sam d50 all referencing the prior writer), then Priya (d55) set merge-commit unaware, creating a Sam-vs-Priya conflict that Grace (d56) explicitly resolved by naming both sides and settling on fast-forward-only. Tom (d69) then referenced that fast-forward-only value and deliberately overrode it to squash-merge per the incident review \u2014 an acknowledged supersession of an already-resolved state, so no live conflict remains.\n\nACTION: set_squash-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_squash-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_squash-merge, expected set_rebase-merge"
+      }
+    }
+  ]
+}

@@ -38,7 +38,7 @@ Pilot study run during the Kyrja-1 research arc (shelved 2026-04-21). The experi
 
 ### F1 token overlap and LLM-judge
 
-`[MEASURED]` retrieval method barely moves downstream F1 (T1=0.229, T2=0.228, T3=0.232) and barely moves LLM-judge correctness (T1=0.9%, T2=0.9%, T3=1.1%). The big jump is T0 → T1 (no-memory vs any-memory: F1 +0.08, p≈1.000). Above that floor, retrieval-method differences are within noise. *Construct-validity:* Haiku is both encoder and answerer in this design — encoder-quality ceiling and answerer-capacity ceiling are confounded with retrieval-tier differences. Stronger answerer or stronger encoder would likely shift absolute numbers; the relative rank of tiers is the load-bearing finding.
+`[MEASURED]` retrieval method barely moves downstream F1 (T1=0.229, T2=0.228, T3=0.232) and barely moves LLM-judge correctness (T1=0.9%, T2=0.9%, T3=1.1%). The big jump is T0 → T1 (no-memory vs any-memory: F1 +0.08; the `p≈1.000` originally reported here is **not a p-value** — it is `p_a_better`, the bootstrap probability that A exceeds B, so 1.000 means "better in every resample". Read the non-overlapping CIs instead. Correction added 2026-09-17; see the note atop `experiments/thread5/findings.md`). Above that floor, retrieval-method differences are within noise. *Construct-validity:* Haiku is both encoder and answerer in this design — encoder-quality ceiling and answerer-capacity ceiling are confounded with retrieval-tier differences. Stronger answerer or stronger encoder would likely shift absolute numbers; the relative rank of tiers is the load-bearing finding.
 
 ## Findings
 

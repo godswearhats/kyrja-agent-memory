@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4002/400k",
+    "target_scope": "eu-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 4,
+    "elapsed_s": 164.7
+  },
+  "ground_truth": {
+    "current_value": "growth",
+    "current_setter": "Omar",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": "growth",
+        "setter": "Marcus",
+        "type": "initial"
+      },
+      {
+        "value": "sre",
+        "setter": "Dana",
+        "type": "supersession"
+      },
+      {
+        "value": "growth",
+        "setter": "Omar",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_growth",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: growth team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: sre team\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: growth team\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "growth team",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "growth team",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "History: Marcus (day 116) set the owner to **growth**; Dana (day 329) explicitly referenced Marcus's growth value and superseded it to **sre**; Omar (day 692) explicitly referenced Dana's sre value and superseded it back to **growth**. Each change acknowledged and overrode the prior one, so these are resolved supersessions, not an open conflict \u2014 the current value is growth.\n\nACTION: set_growth\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_growth",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: growth team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: sre team\nSTEP_1_SETTER: Dana\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: growth team\nSTEP_2_SETTER: Omar\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "growth team",
+        "current_setter": "Omar",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "initial"
+          },
+          {
+            "value": "growth team",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 5,
+        "step_total": 9,
+        "score": 0.6153846153846154
+      },
+      "a_score": 0.6153846153846154,
+      "b_raw": "Change history: Dana first set billing-reconciliation to the sre team; Omar then explicitly references Dana's note and overrides it to the growth team based on the new charter mapping, which is an acknowledged supersession rather than an unresolved conflict.\n\nACTION: set_growth\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_growth",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: growth team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: sre team\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: growth team\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "growth team",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "growth team",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "## Tracing the change history of `billing-reconciliation` ownership\n\nWalking the exact-name writes in order: it starts at **growth** (Omar d15, Marcus d31/d116), gets reassigned with explicit acknowledgement repeatedly \u2014 Marcus d300 (\"saw Bob assign\u2026 to data-eng\u2026 reassigning to sre; Bob in the loop\"), Dana d329 (growth\u2192sre, flagging Marcus), Sam d398 (\u2192sre, \"was growth, per Marcus\"), then two genuine **resolutions** of competing values (Grace d441: \"Sam had sre, Priya had fulfillment\u2026 assigning to data-eng, noting both\"; Carlos d636: \"Lena's payments and Bob's identity both live\u2026 unify\u2026 data-eng\"). Tom d494 (platform\u2192data-eng, flagging Omar) and Tom d550 (sre\u2192payments, per Marcus) are likewise acknowledged supersessions.\n\nThe **last write** is Omar, day 692: \"Per Dana's note, billing-reconciliation was assigned to the sre team; the new charter mapping says otherwise, so I'm updating it to the **growth team**.\" This explicitly references the prior writer/value (Dana's sre) and overrides it \u2014 an acknowledged supersession, not an open disagreement. Every contested fork earlier in the history was either acknowledged or resolved.\n\nACTION: set_growth\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_growth",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at the eu-cluster context specifically, I need to filter for billing-reconciliation changes where the surrounding operational context is eu-cluster (signalled by \"the eu-cluster migration plan got signed off at review\").\n\nTracing those:\n- **Marcus, day 116** (eu-cluster): sets owner of record to growth team \u2014 initial.\n- **Dana, day 329** (eu-cluster): acknowledges Marcus's growth assignment, moves to sre per charter, flags Marcus \u2014 supersession.\n- **Omar, day 692** (eu-cluster): acknowledges Dana's sre note, updates to growth per charter \u2014 supersession.\n\nOther entries (Omar d15 = apac, Priya/Grace = na, Bob d485/Carlos = legacy, Tom = staging) are different contexts, and Bob d271 concerns billing-reconciliation-adhoc (a different service).\n\nCURRENT_VALUE: growth team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: sre team\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: growth team\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "growth team",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "growth team",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "I'll trace the ownership history for `billing-reconciliation` (ignoring the distinct `billing-reconciliation-adhoc` setting on day 271).\n\nHistory: it started at **growth** (Omar d15, Marcus d116); Dana (d329) explicitly superseded Marcus \u2192 **sre**; Priya (d439) unilaterally set **fulfillment**; Grace (d441) resolved the sre/fulfillment clash by acknowledging both \u2192 **data-eng**; Bob (d485) unilaterally set **identity**, Tom (d550) \u2192 **payments**, and Carlos (d636) again resolved by acknowledging both the live payments and identity values \u2192 **data-eng**. Then Omar (d692) set **growth** by referencing only Dana's stale **sre** note \u2014 overriding a value that was no longer current and never acknowledging Carlos's standing **data-eng** resolution.\n\nSo the last genuine resolution was Carlos's **data-eng** (d636), and Omar's final **growth** assignment conflicts with it without acknowledging it \u2014 an unresolved disagreement between two writers.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got none, expected set_growth; false_alarm"
+      }
+    }
+  ]
+}

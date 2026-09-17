@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "domain": "rate-limit",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/rate-limit/s4004/400k",
+    "target_scope": "checkout-internal",
+    "n_scopes": 5,
+    "family": "family-rate-limit.json",
+    "n_results": 4,
+    "elapsed_s": 146.8
+  },
+  "ground_truth": {
+    "current_value": 100,
+    "current_setter": "Aisha",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": 500,
+        "setter": "Priya",
+        "type": "initial"
+      },
+      {
+        "value": 1000,
+        "setter": "Priya",
+        "type": "self_revision"
+      },
+      {
+        "value": 100,
+        "setter": "Aisha",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_100",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 100 req/s\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 500 req/s\nSTEP_1_SETTER: Priya\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 1000 req/s\nSTEP_2_SETTER: Priya\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: 100 req/s\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "100 req/s",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "500 req/s",
+            "setter": "Priya",
+            "type": "initial"
+          },
+          {
+            "value": "1000 req/s",
+            "setter": "Priya",
+            "type": "self_revision"
+          },
+          {
+            "value": "100 req/s",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "The change history: Priya set 500 (day 218), then explicitly referenced her own \"was 500 \u2014 moving it to 1000\" (day 416, acknowledged self-supersession); Aisha then explicitly referenced \"1000 req/s from Priya's change\" and overrode it to 100 (day 713). Each change references and supersedes the prior value, so the current setting of 100 rests on an acknowledged supersession chain rather than an unresolved conflict.\n\nACTION: set_100\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_100",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "I have what I need. The generator (answer key) is deliberately walled off from my session \u2014 appropriately, since this is a provenance-reconstruction item and the only legitimate context is the note itself. Reconstructing from that note:\n\nThe note is a single write by Aisha (day 713) about the checkout-internal `/checkout` rate limit:\n- It reports the limit \"is at 1000 req/s from **Priya's** change\" \u2192 Priya set 1000 req/s. No prior value is referenced, so this reads as the **initial** setting.\n- Aisha then moves it to 100 req/s, explicitly citing Priya's prior value/setter (\"from Priya's change \u2026 moving it to 100\") \u2192 she is **aware** of the prior setting and overrides it. That is a **supersession** (one prior party acknowledged and overridden), not a collision (she's not unaware), not a self-revision (not her own prior value), and not a resolution (no pre-existing conflict between two parties \u2014 Aisha herself is the one creating the disagreement and deciding it).\n- \"flagging Priya\" is a notification, not an open contest: Aisha decisively sets the new value. So the current value is unambiguous and there is no unresolved conflict.\n\nCURRENT_VALUE: 100 req/s\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: 1000 req/s\nSTEP_1_SETTER: Priya\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 100 req/s\nSTEP_2_SETTER: Aisha\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "100 req/s",
+        "current_setter": "Aisha",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "1000 req/s",
+            "setter": "Priya",
+            "type": "initial"
+          },
+          {
+            "value": "100 req/s",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 5,
+        "step_total": 9,
+        "score": 0.6153846153846154
+      },
+      "a_score": 0.6153846153846154,
+      "b_raw": "Change history: Priya set /checkout to 1000 req/s; Aisha (day 713) then explicitly cited that 1000 value as contradicted by the load test, lowered it to 100 req/s, and flagged Priya \u2014 an acknowledged supersession, not an unresolved disagreement.\n\nACTION: set_100\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_100",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "Reconstructing the change history for the **`/checkout`** rate limit scoped to the **checkout-internal** context (filtering out the many other `/checkout` chains belonging to checkout-mobile, checkout-api, checkout-web, checkout-sandbox, etc.):\n\n- **Priya, day 218** \u2014 \"checkout-internal had a quiet deploy window today\u2026 /checkout gets a rate limit of 500 req/s.\" \u2192 initial setting for this context.\n- **Priya, day 416** \u2014 \"checkout-internal tooling got a quality-of-life update\u2026 /checkout rate limit was 500 \u2014 moving it to 1000 req/s; the queueing alerts say the old number was wrong.\" \u2192 revises the value she herself set (no other setter named) = self-revision.\n- **Aisha, day 713** \u2014 \"checkout-internal tooling got a quality-of-life update. /checkout rate limit is at 1000 req/s from Priya's change\u2026 moving it to 100 req/s and flagging Priya.\" \u2192 acknowledges the prior value and setter = supersession.\n\nNo two parties ever held conflicting checkout-internal values simultaneously, so the chain is clean.\n\nCURRENT_VALUE: 100 req/s\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 500 req/s\nSTEP_1_SETTER: Priya\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 1000 req/s\nSTEP_2_SETTER: Priya\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: 100 req/s\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "100 req/s",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "500 req/s",
+            "setter": "Priya",
+            "type": "initial"
+          },
+          {
+            "value": "1000 req/s",
+            "setter": "Priya",
+            "type": "self_revision"
+          },
+          {
+            "value": "100 req/s",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "I traced every write to the exact `/checkout` path (excluding decoys like `/checkout-admin`, `/checkout-v2`, `/checkout-legacy`, `/checkout-canary`, `/checkout-internal`). The history is a long but largely chain-acknowledged sequence: Priya(100, d48)\u2192...\u2192Ines explicitly overriding Carlos's 150\u2192500 (d206), Bob's incident-review consolidation acknowledging *both* Ines's 500 and Priya's 100 \u2192 200 (d478), and a series of later acknowledged supersessions (Ravi d286, Marcus d569, Tom d575, Omar d583, etc.), each naming the prior writer/value it replaces. The final write is Aisha (day 713): \"/checkout rate limit is at 1000 req/s from Priya's change \u2026 moving it to 100 req/s and flagging Priya\" \u2014 an acknowledged supersession of the known prior value, not an unacknowledged clash.\n\nThe current value (100 req/s) was set by an acknowledged supersession that references and overrides the prior writer, so this is resolved, not an open conflict.\n\nACTION: set_100\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_100",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at the filler context in each entry, only three writers are operating in the **checkout-internal** context: Priya (day 218), Priya (day 416), and Aisha (day 713). The other /checkout entries belong to different contexts (checkout-mobile, checkout-api, checkout-sandbox, checkout-web, checkout-legacy) and are distractors.\n\nTracing the checkout-internal chain:\n- **Priya, day 218** \u2014 \"/checkout gets a rate limit of 500 req/s.\" No prior value referenced \u2192 initial.\n- **Priya, day 416** \u2014 \"rate limit was 500 \u2014 moving it to 1000.\" Acknowledges prior value 500, which she herself set \u2192 self-revision.\n- **Aisha, day 713** \u2014 \"is at 1000 from Priya's change... moving it to 100 and flagging Priya.\" Acknowledges prior value (1000) and setter (Priya) \u2192 supersession.\n\nChain is fully consistent (500 \u2192 1000 \u2192 100), no collisions, no open conflicts.\n\nCURRENT_VALUE: 100\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 500\nSTEP_1_SETTER: Priya\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 1000\nSTEP_2_SETTER: Priya\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: 100\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "100",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "500",
+            "setter": "Priya",
+            "type": "initial"
+          },
+          {
+            "value": "1000",
+            "setter": "Priya",
+            "type": "self_revision"
+          },
+          {
+            "value": "100",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "**Change history for the /checkout rate limit:** Each writer who changed it explicitly referenced and overrode a prior value \u2014 Ines\u2192500 (cited Carlos's 150), Priya\u21921000 (cited her own 500), Marcus\u2192300 (cited/flagged Grace), Omar\u2192100 (cited/looped Ravi), and finally Aisha at day 713\u2192100, explicitly citing Priya's 1000, overriding it on load-test evidence, and flagging Priya. The most recent write is an acknowledged supersession, not an unresolved clash.\n\nACTION: set_100\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_100",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    }
+  ]
+}

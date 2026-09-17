@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "domain": "merge-policy",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/merge-policy/s4003/25k",
+    "target_scope": "team-payments",
+    "n_scopes": 5,
+    "family": "family-merge-policy.json",
+    "n_results": 4,
+    "elapsed_s": 99.2
+  },
+  "ground_truth": {
+    "current_value": "contested",
+    "current_setter": "contested:{Priya,Omar}",
+    "chain_length": 4,
+    "steps": [
+      {
+        "value": "squash-merge",
+        "setter": "Sam",
+        "type": "initial"
+      },
+      {
+        "value": "rebase-merge",
+        "setter": "Tom",
+        "type": "collision"
+      },
+      {
+        "value": "merge-commit",
+        "setter": "Priya",
+        "type": "resolution"
+      },
+      {
+        "value": "fast-forward-only",
+        "setter": "Omar",
+        "type": "collision"
+      }
+    ],
+    "unresolved_conflict": true,
+    "action": "any_recorded",
+    "conflict_flag": true
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: fast-forward-only\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: squash-merge\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: rebase-merge\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: merge-commit\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nSTEP_4_VALUE: fast-forward-only\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "fast-forward-only",
+        "current_setter": "Omar",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "squash-merge",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": false,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 0.8125
+      },
+      "a_score": 0.8125,
+      "b_raw": "**History trace:** Sam set squash-merge (day 26); Tom overwrote it with rebase-merge without acknowledging Sam (day 27) \u2014 an unresolved collision; Priya then explicitly cited both Sam's and Tom's values and resolved them to merge-commit (day 88) \u2014 a genuine resolution. But Omar (day 90) overwrote that resolved value with fast-forward-only claiming he \"couldn't find any merge policy,\" never acknowledging Priya's resolution \u2014 so the current value sits on a fresh, unacknowledged override of a resolved setting.\n\nBecause the current value (fast-forward-only) was not set by a resolution or an acknowledged supersession but by a blind overwrite of Priya's resolved merge-commit, the disagreement between Omar and the prior resolution is unacknowledged and unresolved.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "The relevant log files are the harness's own run logs, not source records for this question. The actual data I have is the single memory entry provided in the prompt. Let me reason from it precisely.\n\nThe only write in evidence is Omar's, day 90: he states \"Couldn't find any merge policy on storefront-web, so I'm putting it on fast-forward-only.\" He found no prior value or setter (the platform handbook is cited as his *source/default*, not a prior setter in the chain). The team-payments mention (\"coordinating with a partner\") and the brown-bag/meeting-schedule musings are distractors unrelated to the merge-policy setting. There is no evidence of any earlier setting, so this is an initial setting, not a collision or supersession.\n\nCURRENT_VALUE: fast-forward-only\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 1\nSTEP_1_VALUE: fast-forward-only\nSTEP_1_SETTER: Omar\nSTEP_1_TYPE: initial\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "fast-forward-only",
+        "current_setter": "Omar",
+        "chain_length": "1",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "fast-forward-only",
+            "setter": "Omar",
+            "type": "initial"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": false,
+        "chain_length": false,
+        "step_correct": 2,
+        "step_total": 12,
+        "score": 0.125
+      },
+      "a_score": 0.125,
+      "b_raw": "Change history: The only record for storefront-web's merge policy is Omar's single write on day 90, where he found no existing policy and set it to fast-forward-only per the platform handbook. No earlier value or competing writer exists for this setting.\n\nSince there is exactly one writer and one value, there is nothing to disagree with \u2014 no conflict.\n\nACTION: set_fast-forward-only\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_fast-forward-only",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "flag_missed"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "## Reasoning\n\nI isolated changes to the exact repo `storefront-web` (excluding variants like `-legacy`, `-v2`, `-canary`, `-storybook`) and partitioned them by scope. Each merge-policy change is bundled in a message that also names a cross-team context \u2014 that tag identifies the scope. The `team-payments` tag appears alongside exactly four `storefront-web` changes:\n\n- **Sam, day 26** \u2014 \"product prioritization with team-payments\u2026 Setting the storefront-web merge policy to squash-merge\" \u2192 first setting in this scope.\n- **Tom, day 27** \u2014 \"the team-payments retro\u2026 Couldn't find any merge policy on storefront-web, so I'm putting it on rebase-merge\" \u2192 unaware of Sam's value (collision).\n- **Priya, day 88** \u2014 \"product prioritization with team-payments\u2026 conflict: Sam had squash-merge, Tom had rebase-merge\u2026 setting it to merge-commit\" \u2192 acknowledges both parties (resolution).\n- **Omar, day 90** \u2014 \"team-payments is coordinating with a partner\u2026 Couldn't find any merge policy on storefront-web, so I'm putting it on fast-forward-only\" \u2192 unaware of Priya's resolution (collision).\n\nThe other four scopes (team-design, team-platform, team-growth, team-mobile) each form their own internally-consistent chain, which cross-validates the partition. Omar's final collision leaves two unreconciled live values \u2014 Priya's `merge-commit` and Omar's `fast-forward-only` \u2014 so the state is contested.\n\n## Answer\n\nCURRENT_VALUE: contested\nCURRENT_SETTER: contested:{Priya,Omar}\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: squash-merge\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: rebase-merge\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: merge-commit\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nSTEP_4_VALUE: fast-forward-only\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nUNRESOLVED_CONFLICT: true",
+      "a_parsed": {
+        "current_value": "contested",
+        "current_setter": "contested:{Priya,Omar}",
+        "chain_length": "4",
+        "unresolved_conflict": "true",
+        "steps": [
+          {
+            "value": "squash-merge",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "I'll trace the change history for **storefront-web** specifically (excluding the distinct repos storefront-web-legacy, -v2, -canary, -storybook).\n\nThe setting churned repeatedly. Several genuine conflicts were properly resolved along the way: Ravi (day 36), Lena (day 49), Dana (day 71), Aisha (day 80), and Priya (day 88) each explicitly named the two competing values/writers and consolidated \u2014 Priya's day-88 resolution landed on **merge-commit**, acknowledging both Sam's squash-merge and Tom's rebase-merge. However, the final write is Omar (day 90): \"Couldn't find any merge policy on storefront-web, so I'm putting it on fast-forward-only\" \u2014 a blind set that ignores and contradicts Priya's just-resolved merge-commit without acknowledging it, re-opening a divergence (merge-commit vs fast-forward-only) that no one has since reconciled.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: fast-forward-only\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: squash-merge\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: merge-commit\nSTEP_2_SETTER: Priya\nSTEP_2_TYPE: resolution\nSTEP_3_VALUE: fast-forward-only\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: collision\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "fast-forward-only",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "squash-merge",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": false,
+        "chain_length": false,
+        "step_correct": 9,
+        "step_total": 12,
+        "score": 0.5625
+      },
+      "a_score": 0.5625,
+      "b_raw": "**History trace:** The storefront-web merge policy was contested repeatedly and resolved to `merge-commit` several times via acknowledged reviews that named both sides (Ravi day 36, Lena day 49, Dana day 71, Priya day 88). However, on day 90 Omar blind-set it to `fast-forward-only`, claiming he \"couldn't find any merge policy\" and citing the handbook \u2014 without acknowledging or referencing the day-88 `merge-commit` resolution.\n\nBecause Omar's latest write neither references nor supersedes the prior resolved `merge-commit` value (he asserted no policy existed), his `fast-forward-only` and the standing `merge-commit` are two different values set without mutual acknowledgement \u2014 an unresolved conflict rather than a clean supersession.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    }
+  ]
+}

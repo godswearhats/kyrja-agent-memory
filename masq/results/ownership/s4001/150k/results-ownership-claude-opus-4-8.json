@@ -1,0 +1,320 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4001/150k",
+    "target_scope": "na-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 4,
+    "elapsed_s": 138.9
+  },
+  "ground_truth": {
+    "current_value": "sre",
+    "current_setter": "Aisha",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": "trust-safety",
+        "setter": "Wei",
+        "type": "initial"
+      },
+      {
+        "value": "data-eng",
+        "setter": "Wei",
+        "type": "self_revision"
+      },
+      {
+        "value": "sre",
+        "setter": "Aisha",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_sre",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: sre\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: trust-safety\nSTEP_1_SETTER: Wei\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: data-eng\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: sre\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "sre",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "trust-safety",
+            "setter": "Wei",
+            "type": "initial"
+          },
+          {
+            "value": "data-eng",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "sre",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Tracing the history: Wei first set trust-safety (day 47), then explicitly revised his own call to data-eng (day 83), and Aisha later reassigned it to sre while explicitly noting \"was data-eng, per Wei\" (day 113). Each change acknowledged and overrode the prior value, so the final value is an acknowledged supersession chain, not an unresolved conflict.\n\nACTION: set_sre\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_sre",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at the provided memory, I need to check what is actually scoped to **na-cluster**.\n\nThe only memory write is Lena's (day 346). Parsing its content:\n- The clause mentioning a cluster \u2014 \"demoing the next feature off **staging-cluster** at review\" \u2014 is unrelated chatter about a feature demo, not about billing-reconciliation.\n- The substantive billing-reconciliation content \u2014 Bob assigning it to the sre team, Lena reassigning to the payments team \u2014 carries **no cluster qualifier at all**. It is not tied to na-cluster.\n\nThere is no record of any billing-reconciliation owner change in the **na-cluster** context. The Bob\u2192sre and Lena\u2192payments events are unscoped (and the only named cluster is staging-cluster, a different context tied to a different topic). Attributing them to na-cluster would be unfounded.\n\nCURRENT_VALUE: none\nCURRENT_SETTER: none\nCHAIN_LENGTH: 0\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "none",
+        "current_setter": "none",
+        "chain_length": "0",
+        "unresolved_conflict": "false",
+        "steps": []
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 9,
+        "score": 0.07692307692307693
+      },
+      "a_score": 0.07692307692307693,
+      "b_raw": "Change history: Bob assigned billing-reconciliation to the sre team; Lena then explicitly referenced Bob's assignment, cited the pager audit as contradicting it, and overrode it to the payments team with Bob in the loop. That is an acknowledged supersession (Lena names the prior writer and value and resolves it), not an unresolved conflict.\n\nACTION: set_payments\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_payments",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_payments, expected set_sre"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: payments\nCURRENT_SETTER: Lena\nCHAIN_LENGTH: 18\nSTEP_1_VALUE: fulfillment\nSTEP_1_SETTER: Lena\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: fulfillment\nSTEP_2_SETTER: Marcus\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: trust-safety\nSTEP_3_SETTER: Wei\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: trust-safety\nSTEP_4_SETTER: Wei\nSTEP_4_TYPE: collision\nSTEP_5_VALUE: platform\nSTEP_5_SETTER: Bob\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: data-eng\nSTEP_6_SETTER: Wei\nSTEP_6_TYPE: self_revision\nSTEP_7_VALUE: sre\nSTEP_7_SETTER: Aisha\nSTEP_7_TYPE: supersession\nSTEP_8_VALUE: payments\nSTEP_8_SETTER: Alice\nSTEP_8_TYPE: supersession\nSTEP_9_VALUE: trust-safety\nSTEP_9_SETTER: Tom\nSTEP_9_TYPE: collision\nSTEP_10_VALUE: sre\nSTEP_10_SETTER: Bob\nSTEP_10_TYPE: self_revision\nSTEP_11_VALUE: payments\nSTEP_11_SETTER: Aisha\nSTEP_11_TYPE: collision\nSTEP_12_VALUE: platform\nSTEP_12_SETTER: Priya\nSTEP_12_TYPE: resolution\nSTEP_13_VALUE: identity\nSTEP_13_SETTER: Carlos\nSTEP_13_TYPE: supersession\nSTEP_14_VALUE: platform\nSTEP_14_SETTER: Wei\nSTEP_14_TYPE: collision\nSTEP_15_VALUE: data-eng\nSTEP_15_SETTER: Omar\nSTEP_15_TYPE: resolution\nSTEP_16_VALUE: sre\nSTEP_16_SETTER: Dana\nSTEP_16_TYPE: supersession\nSTEP_17_VALUE: trust-safety\nSTEP_17_SETTER: Ravi\nSTEP_17_TYPE: collision\nSTEP_18_VALUE: payments\nSTEP_18_SETTER: Lena\nSTEP_18_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "payments",
+        "current_setter": "Lena",
+        "chain_length": "18",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "fulfillment",
+            "setter": "Lena",
+            "type": "initial"
+          },
+          {
+            "value": "fulfillment",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "trust-safety",
+            "setter": "Wei",
+            "type": "collision"
+          },
+          {
+            "value": "trust-safety",
+            "setter": "Wei",
+            "type": "collision"
+          },
+          {
+            "value": "platform",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "data-eng",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "sre",
+            "setter": "Aisha",
+            "type": "supersession"
+          },
+          {
+            "value": "payments",
+            "setter": "Alice",
+            "type": "supersession"
+          },
+          {
+            "value": "trust-safety",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "sre",
+            "setter": "Bob",
+            "type": "self_revision"
+          },
+          {
+            "value": "payments",
+            "setter": "Aisha",
+            "type": "collision"
+          },
+          {
+            "value": "platform",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "identity",
+            "setter": "Carlos",
+            "type": "supersession"
+          },
+          {
+            "value": "platform",
+            "setter": "Wei",
+            "type": "collision"
+          },
+          {
+            "value": "data-eng",
+            "setter": "Omar",
+            "type": "resolution"
+          },
+          {
+            "value": "sre",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "trust-safety",
+            "setter": "Ravi",
+            "type": "collision"
+          },
+          {
+            "value": "payments",
+            "setter": "Lena",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 8,
+        "step_total": 9,
+        "score": 0.6923076923076923
+      },
+      "a_score": 0.6923076923076923,
+      "b_raw": "I traced every write to the exact setting `billing-reconciliation` (excluding the distinct `-audit`, `-adhoc`, `-daily`, `-v2` variants).\n\nThe chain runs: fulfillment (Lena d2, Marcus d8) \u2192 trust-safety (Wei d47/d67, blind) \u2192 platform (Bob d70) \u2192 data-eng (Wei d83) \u2192 sre (Aisha d113, acked Wei) \u2192 payments (Alice d160, acked Lena) \u2192 sre (Bob d186) \u2192 payments (Aisha d205) \u2192 identity (Carlos d270, acked Aisha) / platform (Wei d271, blind) \u2192 **data-eng (Omar d300, explicitly resolving the Carlos-vs-Wei conflict)** \u2192 sre (Dana d322, acked Omar) \u2192 **trust-safety (Ravi d327, \"couldn't find an owner,\" ignoring Dana's sre)** \u2192 **payments (Lena d346, who acknowledges only *Bob's* sre value, not Ravi's trust-safety)**.\n\nSo the tail leaves an unresolved disagreement: Dana set sre (d322), Ravi blindly overwrote it with trust-safety (d327) acknowledging no one, and Lena then set payments (d346) referencing Bob's sre while never addressing Ravi's trust-safety write. The two most recent contrary writers (Ravi \u2192 trust-safety, Lena \u2192 payments) never acknowledged each other, and no later resolution reconciles them.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got none, expected set_sre; false_alarm"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: payments\nCURRENT_SETTER: Lena\nCHAIN_LENGTH: 9\nSTEP_1_VALUE: fulfillment team\nSTEP_1_SETTER: Lena\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: fulfillment team\nSTEP_2_SETTER: Marcus\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: trust-safety team\nSTEP_3_SETTER: Wei\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: platform team\nSTEP_4_SETTER: Bob\nSTEP_4_TYPE: collision\nSTEP_5_VALUE: data-eng team\nSTEP_5_SETTER: Wei\nSTEP_5_TYPE: self_revision\nSTEP_6_VALUE: payments team\nSTEP_6_SETTER: Alice\nSTEP_6_TYPE: supersession\nSTEP_7_VALUE: identity team\nSTEP_7_SETTER: Carlos\nSTEP_7_TYPE: supersession\nSTEP_8_VALUE: data-eng team\nSTEP_8_SETTER: Omar\nSTEP_8_TYPE: resolution\nSTEP_9_VALUE: payments team\nSTEP_9_SETTER: Lena\nSTEP_9_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "payments",
+        "current_setter": "Lena",
+        "chain_length": "9",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "fulfillment team",
+            "setter": "Lena",
+            "type": "initial"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "trust-safety team",
+            "setter": "Wei",
+            "type": "collision"
+          },
+          {
+            "value": "platform team",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "data-eng team",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "payments team",
+            "setter": "Alice",
+            "type": "supersession"
+          },
+          {
+            "value": "identity team",
+            "setter": "Carlos",
+            "type": "supersession"
+          },
+          {
+            "value": "data-eng team",
+            "setter": "Omar",
+            "type": "resolution"
+          },
+          {
+            "value": "payments team",
+            "setter": "Lena",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 5,
+        "step_total": 9,
+        "score": 0.46153846153846156
+      },
+      "a_score": 0.46153846153846156,
+      "b_raw": "## Change history trace\n\nFor **billing-reconciliation** (excluding the separate `billing-reconciliation-adhoc` setting): the value passed through a long chain of *acknowledged* supersessions and resolutions \u2014 Lena/Marcus (fulfillment) \u2192 Wei revised his own call to data-eng \u2192 Alice referenced Lena's fulfillment and overrode to payments \u2192 Carlos referenced payments and overrode to identity \u2192 Omar explicitly acknowledged *both* contested sides and resolved to data-eng \u2192 and finally Lena (day 346) referenced Bob's sre assignment, overrode it to payments, and noted \"Bob is in the loop.\" The most recent value was set by an acknowledged supersession, so it stands without an open conflict.\n\nACTION: set_payments\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_payments",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_payments, expected set_sre"
+      }
+    }
+  ]
+}

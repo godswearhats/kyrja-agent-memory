@@ -1,0 +1,291 @@
+{
+  "meta": {
+    "domain": "rate-limit",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/rate-limit/s4001/150k",
+    "target_scope": "checkout-web",
+    "n_scopes": 5,
+    "family": "family-rate-limit.json",
+    "n_results": 4,
+    "elapsed_s": 124.4
+  },
+  "ground_truth": {
+    "current_value": 800,
+    "current_setter": "Aisha",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": 1000,
+        "setter": "Wei",
+        "type": "initial"
+      },
+      {
+        "value": 300,
+        "setter": "Wei",
+        "type": "self_revision"
+      },
+      {
+        "value": 800,
+        "setter": "Aisha",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_800",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 800\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 1000\nSTEP_1_SETTER: Wei\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 300\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: 800\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "800",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "1000",
+            "setter": "Wei",
+            "type": "initial"
+          },
+          {
+            "value": "300",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "800",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "History: Wei set 1000 (day 47), then Wei himself revised it to 300 (day 83, explicitly referencing his own prior 1000\u2192300), and Aisha later set it to 800 (day 113, explicitly noting \"was 300, set by Wei\"). Each change acknowledges the prior value, so this is a chain of resolved supersessions, not an unresolved conflict.\n\nACTION: set_800\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_800",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 50 req/s\nCURRENT_SETTER: Lena\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: 800 req/s\nSTEP_1_SETTER: Bob\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 50 req/s\nSTEP_2_SETTER: Lena\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "50 req/s",
+        "current_setter": "Lena",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "800 req/s",
+            "setter": "Bob",
+            "type": "initial"
+          },
+          {
+            "value": "50 req/s",
+            "setter": "Lena",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 9,
+        "score": 0.07692307692307693
+      },
+      "a_score": 0.07692307692307693,
+      "b_raw": "Change history: Bob set /checkout rate limit to 800 req/s; Lena then explicitly referenced Bob's setting, overrode it to 50 req/s citing last week's load test, and noted Bob was in the loop \u2014 an acknowledged supersession, not an open conflict.\n\nACTION: set_50\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_50",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_50, expected set_800"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 50\nCURRENT_SETTER: Lena\nCHAIN_LENGTH: 17\nSTEP_1_VALUE: 500\nSTEP_1_SETTER: Lena\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 500\nSTEP_2_SETTER: Marcus\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 1000\nSTEP_3_SETTER: Wei\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: 1000\nSTEP_4_SETTER: Wei\nSTEP_4_TYPE: collision\nSTEP_5_VALUE: 300\nSTEP_5_SETTER: Wei\nSTEP_5_TYPE: self_revision\nSTEP_6_VALUE: 800\nSTEP_6_SETTER: Aisha\nSTEP_6_TYPE: supersession\nSTEP_7_VALUE: 50\nSTEP_7_SETTER: Alice\nSTEP_7_TYPE: supersession\nSTEP_8_VALUE: 1000\nSTEP_8_SETTER: Tom\nSTEP_8_TYPE: collision\nSTEP_9_VALUE: 800\nSTEP_9_SETTER: Bob\nSTEP_9_TYPE: self_revision\nSTEP_10_VALUE: 50\nSTEP_10_SETTER: Aisha\nSTEP_10_TYPE: collision\nSTEP_11_VALUE: 100\nSTEP_11_SETTER: Priya\nSTEP_11_TYPE: resolution\nSTEP_12_VALUE: 150\nSTEP_12_SETTER: Carlos\nSTEP_12_TYPE: supersession\nSTEP_13_VALUE: 100\nSTEP_13_SETTER: Wei\nSTEP_13_TYPE: collision\nSTEP_14_VALUE: 300\nSTEP_14_SETTER: Omar\nSTEP_14_TYPE: resolution\nSTEP_15_VALUE: 800\nSTEP_15_SETTER: Dana\nSTEP_15_TYPE: supersession\nSTEP_16_VALUE: 1000\nSTEP_16_SETTER: Ravi\nSTEP_16_TYPE: collision\nSTEP_17_VALUE: 50\nSTEP_17_SETTER: Lena\nSTEP_17_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "50",
+        "current_setter": "Lena",
+        "chain_length": "17",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "500",
+            "setter": "Lena",
+            "type": "initial"
+          },
+          {
+            "value": "500",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "1000",
+            "setter": "Wei",
+            "type": "collision"
+          },
+          {
+            "value": "1000",
+            "setter": "Wei",
+            "type": "collision"
+          },
+          {
+            "value": "300",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "800",
+            "setter": "Aisha",
+            "type": "supersession"
+          },
+          {
+            "value": "50",
+            "setter": "Alice",
+            "type": "supersession"
+          },
+          {
+            "value": "1000",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "800",
+            "setter": "Bob",
+            "type": "self_revision"
+          },
+          {
+            "value": "50",
+            "setter": "Aisha",
+            "type": "collision"
+          },
+          {
+            "value": "100",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "150",
+            "setter": "Carlos",
+            "type": "supersession"
+          },
+          {
+            "value": "100",
+            "setter": "Wei",
+            "type": "collision"
+          },
+          {
+            "value": "300",
+            "setter": "Omar",
+            "type": "resolution"
+          },
+          {
+            "value": "800",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "1000",
+            "setter": "Ravi",
+            "type": "collision"
+          },
+          {
+            "value": "50",
+            "setter": "Lena",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 8,
+        "step_total": 9,
+        "score": 0.6923076923076923
+      },
+      "a_score": 0.6923076923076923,
+      "b_raw": "**Tracing /checkout (exact key, excluding -admin/-canary/-legacy/-v2):** The value churned repeatedly \u2014 500 (Lena d2/Marcus d8) \u2192 1000 (Wei d47/67) \u2192 100 (Bob d70) \u2192 300 (Wei d83, revising his own) \u2192 800 (Aisha d113, \"was 300, set by Wei\") \u2192 50 (Alice d160, \"per Lena's note\") \u2192 ... \u2192 resolved twice with both-sides acknowledgment (Priya d230 unifying Marcus/Wei to 100; Omar d300 unifying Carlos/Wei to 300), then 800 (Dana d322, \"was 300, set by Omar\"), a blind 1000 (Ravi d327), and finally Lena d346 explicitly overriding Bob's 800 down to 50 with \"Bob is in the loop.\" The final write is an acknowledged supersession, so the current value stands without an open conflict.\n\nACTION: set_50\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_50",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_50, expected set_800"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at this, I need to isolate only the **checkout-web** context from the surrounding distractor contexts (checkout-sandbox, checkout-canary, checkout-mobile, checkout-api, checkout-internal).\n\nScanning for checkout-web entries:\n- **Wei, day 83** explicitly names the *checkout-web* retro. He writes: *\"Revisiting my /checkout change: taking the rate limit from 1000 to 300 req/s.\"* This is a **self-revision** \u2014 which means there must be a prior Wei setting of 1000 in this same chain.\n- **Wei, day 67** is the only Wei\u21921000 setting (*\"Nothing's configured... setting it to 1000 req/s\"* = **initial**). The \"checkout-sandbox\" mention in that entry is chatter noise; the binding signal is Wei's own back-reference (\"my change... from 1000\") on day 83, which pulls day 67 into the checkout-web chain.\n\nAll other /checkout changes (Alice/Tom \u2192 mobile; Carlos/Wei/Omar/Dana \u2192 api; Lena \u2192 internal; day 77 is a different *checkout-canary* endpoint entirely) belong to other contexts and are excluded.\n\nNo checkout-web entries exist after day 83.\n\nCURRENT_VALUE: 300 req/s\nCURRENT_SETTER: Wei\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: 1000 req/s\nSTEP_1_SETTER: Wei\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 300 req/s\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: self_revision\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "300 req/s",
+        "current_setter": "Wei",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "1000 req/s",
+            "setter": "Wei",
+            "type": "initial"
+          },
+          {
+            "value": "300 req/s",
+            "setter": "Wei",
+            "type": "self_revision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 6,
+        "step_total": 9,
+        "score": 0.5384615384615384
+      },
+      "a_score": 0.5384615384615384,
+      "b_raw": "Tracing /checkout: the recent chain runs Omar (day 300, sets 300 as a single-source-of-truth resolution) \u2192 Dana (day 322, overrides to 800, explicitly referencing Omar's 300) \u2192 Lena (day 346, overrides 800 down to 50, explicitly referencing the 800 value and noting the prior writer is \"in the loop\"). Each later write acknowledges and supersedes the prior value rather than silently diverging, so the current value of 50 req/s rests on an acknowledged supersession, not an open conflict.\n\nACTION: set_50\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_50",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_50, expected set_800"
+      }
+    }
+  ]
+}

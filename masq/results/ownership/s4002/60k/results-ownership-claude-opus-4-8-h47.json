@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4002/60k",
+    "target_scope": "eu-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 2,
+    "elapsed_s": 197.7
+  },
+  "ground_truth": {
+    "current_value": "growth",
+    "current_setter": "Omar",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": "growth",
+        "setter": "Marcus",
+        "type": "initial"
+      },
+      {
+        "value": "sre",
+        "setter": "Dana",
+        "type": "supersession"
+      },
+      {
+        "value": "growth",
+        "setter": "Omar",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_growth",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "bm25-scoped-k10",
+      "arm_key": "bm25_scoped_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: growth team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: sre team\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: growth team\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "growth team",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "growth team",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Marcus (day 29) set billing-reconciliation to the growth team per the charter; Dana (day 83) explicitly cited Marcus's change and superseded it to sre; Omar (day 173) explicitly cited Dana's note and superseded it back to growth. Each change acknowledged and overrode the prior one, so these are resolved supersessions, not an unresolved conflict, and the current value is growth.\n\nACTION: set_growth\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_growth",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at this carefully, I need to track **billing-reconciliation** (exact resource name) and distinguish it from the decoy resources (`billing-reconciliation-v2`, `billing-reconciliation-adhoc`). The `eu-cluster` mentions in these entries are all attached to *separate, unrelated* clauses (\"Separately\", \"Almost forgot\", etc.) \u2014 none of the billing-reconciliation ownership assignments are actually scoped to a cluster. Ownership here is a global service-charter/audit fact, so the global chain is what holds when queried from any context, including eu-cluster.\n\nCURRENT_VALUE: platform team\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 7\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Omar\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: growth team\nSTEP_2_SETTER: Marcus\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: payments team\nSTEP_3_SETTER: Lena\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: sre team\nSTEP_4_SETTER: Dana\nSTEP_4_TYPE: supersession\nSTEP_5_VALUE: fulfillment team\nSTEP_5_SETTER: Priya\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: data-eng team\nSTEP_6_SETTER: Grace\nSTEP_6_TYPE: resolution\nSTEP_7_VALUE: platform team\nSTEP_7_SETTER: Omar\nSTEP_7_TYPE: self_revision\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "platform team",
+        "current_setter": "Omar",
+        "chain_length": "7",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Omar",
+            "type": "initial"
+          },
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "payments team",
+            "setter": "Lena",
+            "type": "collision"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "data-eng team",
+            "setter": "Grace",
+            "type": "resolution"
+          },
+          {
+            "value": "platform team",
+            "setter": "Omar",
+            "type": "self_revision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 5,
+        "step_total": 9,
+        "score": 0.5384615384615384
+      },
+      "a_score": 0.5384615384615384,
+      "b_raw": "## Change history for `billing-reconciliation` (eu-cluster)\n\nTracing the exact setting (ignoring the `-v2` and `-adhoc` distractors):\n\n- **Day 4 Omar \u2192 growth**, restated **Day 29 Marcus \u2192 growth**.\n- **Day 83 Dana** explicitly acknowledged Marcus's growth value and superseded it \u2192 **sre** (charter mapping).\n- **Day 110 Priya**, seeing \"no owner on record,\" set **fulfillment** without acknowledging sre.\n- **Day 111 Grace** surfaced the Sam(sre)/Priya(fulfillment) discrepancy, **acknowledged both sides**, and resolved it \u2192 **data-eng**. That is a clean, resolved supersession.\n- **Day 119 Omar** then \"reassigned it from the growth team to the platform team.\" But growth had been dead since Day 83; Omar never acknowledged Grace's resolved `data-eng` value \u2014 he reverted to a stale premise (his own original Day-4 value) and overwrote to **platform**.\n\nSo the last well-founded value was Grace's resolution (`data-eng`), and Omar's later `platform` write disagrees with it without acknowledging it. Grace couldn't acknowledge Omar (earlier), and Omar didn't acknowledge Grace \u2014 neither acknowledged the other. That is a fresh **unresolved conflict** (data-eng vs platform) layered on top of an otherwise-resolved history, so I won't silently pick one.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got none, expected set_growth; false_alarm"
+      }
+    }
+  ]
+}

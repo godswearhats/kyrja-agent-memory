@@ -25,7 +25,7 @@ import urllib.request
 import numpy as np
 from rank_bm25 import BM25Okapi
 
-OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://192.168.109.1:11434")
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
 HAIKU_MODEL = "claude-haiku-4-5-20251001"
 EMBED_MODEL = "nomic-embed-text"
 TOP_K = 3

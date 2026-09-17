@@ -1,0 +1,387 @@
+{
+  "meta": {
+    "domain": "rate-limit",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/rate-limit/s4002/60k",
+    "target_scope": "checkout-mobile",
+    "n_scopes": 5,
+    "family": "family-rate-limit.json",
+    "n_results": 6,
+    "elapsed_s": 30.7
+  },
+  "ground_truth": {
+    "current_value": 200,
+    "current_setter": "Omar",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": 200,
+        "setter": "Marcus",
+        "type": "initial"
+      },
+      {
+        "value": 800,
+        "setter": "Dana",
+        "type": "supersession"
+      },
+      {
+        "value": 200,
+        "setter": "Omar",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_200",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 200 req/s\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 200 req/s\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 800 req/s\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: 200 req/s\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "200 req/s",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200 req/s",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "800 req/s",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "200 req/s",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Change history: Marcus set it to 200 (day 29); Dana explicitly referenced Marcus's 200 and superseded it to 800 (day 83); Omar explicitly referenced Dana's 800 and superseded it back to 200 (day 173). Each later writer named the prior value/writer, so these are acknowledged supersessions, not unresolved conflicts; the current value is 200.\n\nACTION: set_200\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_200",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 200 req/s\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: 800 req/s\nSTEP_1_SETTER: Dana\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 200 req/s\nSTEP_2_SETTER: Omar\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "200 req/s",
+        "current_setter": "Omar",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "800 req/s",
+            "setter": "Dana",
+            "type": "initial"
+          },
+          {
+            "value": "200 req/s",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 5,
+        "step_total": 9,
+        "score": 0.6153846153846154
+      },
+      "a_score": 0.6153846153846154,
+      "b_raw": "**Change history:** Dana set /checkout rate limit to 800 req/s; Omar (day 173) explicitly referenced Dana's 800 value and overrode it to 200 req/s based on the new capacity model. Because Omar named the earlier value and writer when changing it, this is an acknowledged supersession, not an unresolved conflict.\n\nACTION: set_200\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_200",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at the `/checkout` endpoint specifically (excluding distractor endpoints like `/checkout-v2`, `/checkout-admin`, `/checkout-legacy`, `/checkout-canary`, and subsystem chatter like checkout-web/api/internal/mobile/sandbox). The `/checkout` rate limit is a single shared value \u2014 \"checkout-mobile\" is context framing, not a separate limit.\n\nI traced every statement that *sets/changes* the `/checkout` limit (ignoring pure status reports like \"held at \u2026 through the spike\" or \"cap \u2026 hasn't tripped\"):\n\nCURRENT_VALUE: 200\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 16\nSTEP_1_VALUE: 200\nSTEP_1_SETTER: Omar\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 200\nSTEP_2_SETTER: Marcus\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 200\nSTEP_3_SETTER: Marcus\nSTEP_3_TYPE: self_revision\nSTEP_4_VALUE: 300\nSTEP_4_SETTER: Bob\nSTEP_4_TYPE: collision\nSTEP_5_VALUE: 50\nSTEP_5_SETTER: Lena\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: 800\nSTEP_6_SETTER: Marcus\nSTEP_6_TYPE: supersession\nSTEP_7_VALUE: 800\nSTEP_7_SETTER: Dana\nSTEP_7_TYPE: supersession\nSTEP_8_VALUE: 800\nSTEP_8_SETTER: Sam\nSTEP_8_TYPE: supersession\nSTEP_9_VALUE: 500\nSTEP_9_SETTER: Priya\nSTEP_9_TYPE: collision\nSTEP_10_VALUE: 300\nSTEP_10_SETTER: Grace\nSTEP_10_TYPE: resolution\nSTEP_11_VALUE: 100\nSTEP_11_SETTER: Omar\nSTEP_11_TYPE: self_revision\nSTEP_12_VALUE: 150\nSTEP_12_SETTER: Bob\nSTEP_12_TYPE: collision\nSTEP_13_VALUE: 300\nSTEP_13_SETTER: Tom\nSTEP_13_TYPE: supersession\nSTEP_14_VALUE: 50\nSTEP_14_SETTER: Tom\nSTEP_14_TYPE: supersession\nSTEP_15_VALUE: 300\nSTEP_15_SETTER: Carlos\nSTEP_15_TYPE: resolution\nSTEP_16_VALUE: 200\nSTEP_16_SETTER: Omar\nSTEP_16_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "200",
+        "current_setter": "Omar",
+        "chain_length": "16",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200",
+            "setter": "Omar",
+            "type": "initial"
+          },
+          {
+            "value": "200",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "200",
+            "setter": "Marcus",
+            "type": "self_revision"
+          },
+          {
+            "value": "300",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "50",
+            "setter": "Lena",
+            "type": "collision"
+          },
+          {
+            "value": "800",
+            "setter": "Marcus",
+            "type": "supersession"
+          },
+          {
+            "value": "800",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "800",
+            "setter": "Sam",
+            "type": "supersession"
+          },
+          {
+            "value": "500",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "300",
+            "setter": "Grace",
+            "type": "resolution"
+          },
+          {
+            "value": "100",
+            "setter": "Omar",
+            "type": "self_revision"
+          },
+          {
+            "value": "150",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "300",
+            "setter": "Tom",
+            "type": "supersession"
+          },
+          {
+            "value": "50",
+            "setter": "Tom",
+            "type": "supersession"
+          },
+          {
+            "value": "300",
+            "setter": "Carlos",
+            "type": "resolution"
+          },
+          {
+            "value": "200",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 8,
+        "step_total": 9,
+        "score": 0.8461538461538461
+      },
+      "a_score": 0.8461538461538461,
+      "b_raw": "Tracing /checkout (excluding variants like -v2, -canary, -legacy, -admin, -internal): early writers set 200 (Omar d4, Marcus d8/d29), then a string of *acknowledged* supersessions and explicit resolutions followed \u2014 Marcus d75 overrode Bob's 300\u2192800 (Bob in loop), Grace d111 explicitly resolved Sam's 800 vs Priya's 500 by setting 300, Carlos d159 explicitly resolved Lena's 50 vs Bob's 150 by unifying on 300, and the most recent write, Omar d173, references the prior 800 value and overrides it to 200. Every disagreement was either explicitly referenced-and-overridden or resolved by an audit that named both sides, so the current value rests on an acknowledged supersession.\n\nACTION: set_200\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_200",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at this, the key is that `/checkout` rate-limit changes are tracked **per service context**, signaled by the surrounding chatter in each entry. Filtering to entries whose context is **checkout-mobile** yields a chain whose internal references line up exactly (200 from Marcus, 800 from Dana), confirming the correct partition. Entries about checkout-api, checkout-web, checkout-internal, and the separate `/checkout-admin` endpoint are excluded.\n\ncheckout-mobile entries:\n- **Marcus, day 29** (checkout-mobile build pipeline): sets `/checkout` to 200, no prior reference \u2192 initial.\n- **Dana, day 83** (checkout-mobile on-call): \"at 200 from Marcus's change \u2026 moving to 800, flagging Marcus\" \u2014 acknowledges Marcus's 200 \u2192 supersession.\n- **Omar, day 173** (checkout-mobile crash reports): \"Per Dana's note, was 800 \u2026 updating to 200\" \u2014 acknowledges Dana's 800 \u2192 supersession.\n\nEach reference matches the prior in-context value, so the chain is consistent with no collisions or dangling conflicts.\n\nCURRENT_VALUE: 200\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 200\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 800\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: 200\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "200",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "800",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "200",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "## Change history for /checkout rate limit\n\nTracing the chain: it starts at 200 (Omar d4, Marcus d8/d29), then becomes a series of explicitly-referenced overrides \u2014 Bob's 300 \u2192 Marcus's 800 with Bob looped in (d75), Dana \u2192 800 referencing Marcus (d83), Omar \u2192 100 revisiting his own change (d119), Tom \u2192 300 flagging Omar (d124), Tom \u2192 50 referencing Marcus's 800 (d138), and finally **Omar d173 \u2192 200, explicitly citing Dana's note** as the value he's superseding. Every step names a prior writer/value and overrides it, so the latest value (200) sits on an acknowledged supersession, not an unresolved disagreement. (The /checkout-admin change at d72 is a different setting and excluded.)\n\nACTION: set_200\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_200",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Reconstructing only the changes scoped to the **checkout-mobile** context (filtering out checkout-api, checkout-web, checkout-sandbox, and checkout-internal entries):\n\n- **Marcus, day 29** \u2014 context \"checkout-mobile build pipeline\": sets 200 req/s, no prior acknowledged \u2192 initial.\n- **Dana, day 83** \u2014 context \"on-call for checkout-mobile\": acknowledges \"200 req/s from Marcus's change,\" moves to 800 and flags Marcus \u2192 supersession.\n- **Omar, day 173** \u2014 context \"checkout-mobile crash reports\": acknowledges \"Per Dana's note... was 800 req/s,\" updates to 200 \u2192 supersession.\n\nThe Grace/Sam/Priya conflict-resolution (day 111) and Tom's 800\u219250 (day 138) belong to checkout-web and checkout-internal respectively, so they are excluded.\n\nCURRENT_VALUE: 200 req/s\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 200 req/s\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 800 req/s\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: 200 req/s\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "200 req/s",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200 req/s",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "800 req/s",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "200 req/s",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Tracing the /checkout rate-limit history: it bounced through many values (Omar/Marcus 200 \u2192 Lena 50 \u2192 Dana 800, flagging Marcus \u2192 Grace 300, reconciling Sam's 800 and Priya's 500 \u2192 Omar 100 \u2192 Tom 50, citing Marcus \u2192 Omar 200), and each pivotal change referenced the prior writer/value. The most recent write (Omar, day 173) explicitly cites Dana's 800 req/s note and the capacity model, overriding it down to 200 req/s \u2014 an acknowledged supersession, not an open conflict.\n\nACTION: set_200\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_200",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "where-scope-target",
+      "arm_key": "scopefilter",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 200 req/s\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 200 req/s\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 800 req/s\nSTEP_2_SETTER: Dana\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: 200 req/s\nSTEP_3_SETTER: Omar\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "200 req/s",
+        "current_setter": "Omar",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "200 req/s",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "800 req/s",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "200 req/s",
+            "setter": "Omar",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "## Change History\n\nMarcus (day 29) set /checkout to **200** req/s. Dana (day 83) explicitly referenced Marcus's 200 and overrode it to **800** per a new capacity model (acknowledged supersession). Omar (day 173) explicitly referenced Dana's 800 and overrode it back to **200** per the capacity model (acknowledged supersession).\n\nEach writer cited the prior value/writer before changing it, so this is a chain of resolved supersessions, not an unacknowledged conflict. The current value is 200, set by Omar's acknowledged override.\n\nACTION: set_200\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_200",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    }
+  ]
+}

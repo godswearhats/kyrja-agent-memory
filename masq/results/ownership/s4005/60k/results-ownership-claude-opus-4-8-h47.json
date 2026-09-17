@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4005/60k",
+    "target_scope": "apac-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 2,
+    "elapsed_s": 57.2
+  },
+  "ground_truth": {
+    "current_value": "sre",
+    "current_setter": "Dana",
+    "chain_length": 4,
+    "steps": [
+      {
+        "value": "growth",
+        "setter": "Sam",
+        "type": "initial"
+      },
+      {
+        "value": "trust-safety",
+        "setter": "Grace",
+        "type": "supersession"
+      },
+      {
+        "value": "fulfillment",
+        "setter": "Ines",
+        "type": "collision"
+      },
+      {
+        "value": "sre",
+        "setter": "Dana",
+        "type": "resolution"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_sre",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "bm25-scoped-k10",
+      "arm_key": "bm25_scoped_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: sre team\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: trust-safety team\nSTEP_2_SETTER: Grace\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: fulfillment team\nSTEP_3_SETTER: Ines\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: sre team\nSTEP_4_SETTER: Dana\nSTEP_4_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "sre team",
+        "current_setter": "Dana",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "trust-safety team",
+            "setter": "Grace",
+            "type": "supersession"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "I'll trace the change history for billing-reconciliation ownership.\n\n**Change history:**\n1. **Sam (day 5):** set to **growth**.\n2. **Grace (day 39):** explicitly cites \"Sam's note... growth team\" and overrides to **trust-safety** \u2014 an acknowledged supersession, not a conflict.\n3. **Ines (day 114):** \"Couldn't find an owner of record,\" sets **fulfillment** \u2014 does *not* acknowledge Grace's trust-safety value, so this introduces an unacknowledged conflict (trust-safety vs. fulfillment).\n4. **Dana (day 136):** explicitly names *both* sides (Grace/trust-safety and Ines/fulfillment), notes the conflict was flagged in weekly review, and resolves it by assigning to **sre**, recording both in the change record.\n\nDana acknowledged both conflicting values and resolved the disagreement, assigning to the sre team. Since the current value was set by a resolution, I act on it and report no open conflict.\n\nACTION: set_sre\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_sre",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: sre team\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: fulfillment team\nSTEP_2_SETTER: Ines\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: sre team\nSTEP_3_SETTER: Dana\nSTEP_3_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "sre team",
+        "current_setter": "Dana",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 9,
+        "step_total": 12,
+        "score": 0.75
+      },
+      "a_score": 0.75,
+      "b_raw": "The billing-reconciliation owner was set to many different values over time without cross-acknowledgment (Sam\u2192growth d5, Omar\u2192payments d13, Priya\u2192sre d21, Aisha\u2192platform d51, etc.), but the most recent relevant write is Dana on day 136, who explicitly flagged the Grace (trust-safety) vs. Ines (fulfillment) conflict, resolved it in weekly review by assigning the sre team, and noted both in the change record \u2014 an acknowledged resolution. (Note: Alice's \"billing-reconciliation-daily\"\u2192identity and Tom's \"volume-resize\"\u2192platform are different settings, not this one.)\n\nACTION: set_sre\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_sre",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    }
+  ]
+}

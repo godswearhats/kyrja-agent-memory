@@ -1,0 +1,244 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4005/150k",
+    "target_scope": "apac-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 4,
+    "elapsed_s": 83.6
+  },
+  "ground_truth": {
+    "current_value": "sre",
+    "current_setter": "Dana",
+    "chain_length": 4,
+    "steps": [
+      {
+        "value": "growth",
+        "setter": "Sam",
+        "type": "initial"
+      },
+      {
+        "value": "trust-safety",
+        "setter": "Grace",
+        "type": "supersession"
+      },
+      {
+        "value": "fulfillment",
+        "setter": "Ines",
+        "type": "collision"
+      },
+      {
+        "value": "sre",
+        "setter": "Dana",
+        "type": "resolution"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_sre",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: sre team\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: trust-safety team\nSTEP_2_SETTER: Grace\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: fulfillment team\nSTEP_3_SETTER: Ines\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: sre team\nSTEP_4_SETTER: Dana\nSTEP_4_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "sre team",
+        "current_setter": "Dana",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "trust-safety team",
+            "setter": "Grace",
+            "type": "supersession"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Change history: Sam (day 9) set growth; Grace (day 77) explicitly referenced Sam's growth assignment and superseded it with trust-safety; Ines (day 227) set fulfillment without acknowledging Grace, creating a conflict; Dana (day 272) acknowledged both Grace's and Ines's values and resolved the conflict by assigning to the sre team and noting both in the change record. Since the current value was set by an explicit resolution that acknowledged both sides, this is resolved.\n\nACTION: set_sre\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_sre",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: unknown\nCURRENT_SETTER: none\nCHAIN_LENGTH: 0\nUNRESOLVED_CONFLICT: false\n\nNote: No change to the billing-reconciliation owner is scoped to **apac-cluster** anywhere in the memory. The owner assignments present (Omar\u2192payments, Marcus\u2192growth, then a resolution to data-eng) carry no cluster context, and the only cluster explicitly named is **eu-cluster** \u2014 which concerns \"compliance posture,\" not billing-reconciliation ownership. Attributing those assignments to apac-cluster would be an unsupported inference, so for this specific context the chain is empty.",
+      "a_parsed": {
+        "current_value": "unknown",
+        "current_setter": "none",
+        "chain_length": "0",
+        "unresolved_conflict": "false",
+        "steps": []
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 12,
+        "score": 0.0625
+      },
+      "a_score": 0.0625,
+      "b_raw": "Omar set it to payments and Marcus independently set it to growth without acknowledging each other, but the team then explicitly acknowledged both and resolved the disagreement by unifying on data-eng \u2014 a resolution, not an open conflict.\n\nACTION: set_data-eng\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_data-eng",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_data-eng, expected set_sre"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: none\nCURRENT_SETTER: none\nCHAIN_LENGTH: 0\nUNRESOLVED_CONFLICT: false\n\nNote: Every `billing-reconciliation` ownership statement in this log is a global/service-level assignment (e.g. \"billing-reconciliation goes to the growth team,\" etc.). None of them is scoped to `apac-cluster`. The only `apac-cluster` references in the log concern regional stability, latency, stress-testing, and monitoring \u2014 never billing-reconciliation ownership. Therefore, in the specific context of `apac-cluster`, no owner was ever set and there is no change history to reconstruct.",
+      "a_parsed": {
+        "current_value": "none",
+        "current_setter": "none",
+        "chain_length": "0",
+        "unresolved_conflict": "false",
+        "steps": []
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 12,
+        "score": 0.0625
+      },
+      "a_score": 0.0625,
+      "b_raw": "Tracing the ownership history for `billing-reconciliation` (excluding suffixed variants like `-v2`, `-adhoc`, `-audit`, `-daily`): early bare assignments (Sam\u2192growth d9, Omar\u2192payments d26, Priya\u2192sre d41) were repeatedly cleaned up by writers who explicitly acknowledged the competing assignments and resolved them (Ines d130 \"Priya sre + Lena payments \u2192 identity\", Priya d143 \"Omar growth + Aisha sre \u2192 platform\", Dana d272 \"Grace trust-safety + Ines fulfillment \u2192 sre\", Ines d313 \"Aisha platform + Priya sre \u2192 identity\"), with later acknowledged supersessions (Aisha d318 identity\u2192fulfillment, Marcus d340 platform\u2192fulfillment). The final write, Tom d358, explicitly names both Omar's payments and Marcus's growth assignments and resolves to data-eng (\"the team agreed to unify... Resolving to the data-eng team\"), so the current value was set by an acknowledged resolution.\n\nACTION: set_data-eng\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_data-eng",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_data-eng, expected set_sre"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: fulfillment team\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 10\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: payments team\nSTEP_2_SETTER: Omar\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: sre team\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: trust-safety team\nSTEP_4_SETTER: Grace\nSTEP_4_TYPE: supersession\nSTEP_5_VALUE: platform team\nSTEP_5_SETTER: Aisha\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: payments team\nSTEP_6_SETTER: Lena\nSTEP_6_TYPE: collision\nSTEP_7_VALUE: growth team\nSTEP_7_SETTER: Marcus\nSTEP_7_TYPE: collision\nSTEP_8_VALUE: sre team\nSTEP_8_SETTER: Dana\nSTEP_8_TYPE: resolution\nSTEP_9_VALUE: identity team\nSTEP_9_SETTER: Ines\nSTEP_9_TYPE: resolution\nSTEP_10_VALUE: fulfillment team\nSTEP_10_SETTER: Aisha\nSTEP_10_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "fulfillment team",
+        "current_setter": "Aisha",
+        "chain_length": "10",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "payments team",
+            "setter": "Omar",
+            "type": "collision"
+          },
+          {
+            "value": "sre team",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "trust-safety team",
+            "setter": "Grace",
+            "type": "supersession"
+          },
+          {
+            "value": "platform team",
+            "setter": "Aisha",
+            "type": "collision"
+          },
+          {
+            "value": "payments team",
+            "setter": "Lena",
+            "type": "collision"
+          },
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "resolution"
+          },
+          {
+            "value": "identity team",
+            "setter": "Ines",
+            "type": "resolution"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 9,
+        "step_total": 12,
+        "score": 0.625
+      },
+      "a_score": 0.625,
+      "b_raw": "The most recent writer (Aisha, day 318) explicitly referenced Ines's prior value (identity team) and overrode it to the fulfillment team on the incident review's recommendation \u2014 an acknowledged supersession, not a silent conflict. Earlier disagreements (e.g., Dana day 272, Ines day 313) were each flagged in weekly review and resolved, so the chain stays resolved through to the current value.\n\nACTION: set_fulfillment\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_fulfillment",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_fulfillment, expected set_sre"
+      }
+    }
+  ]
+}

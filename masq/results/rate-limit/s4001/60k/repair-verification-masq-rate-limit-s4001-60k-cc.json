@@ -1,0 +1,11 @@
+{
+ "tag": "masq-rate-limit-s4001-60k-cc",
+ "ts": 1784971976.2197366,
+ "n_sessions": 626,
+ "n_docs": 626,
+ "n_zero_yield": 0,
+ "zero_yield_docs": [],
+ "error_stall_events_during_repair": 0,
+ "events_after_boundary_cutoff": 0,
+ "pass": true
+}

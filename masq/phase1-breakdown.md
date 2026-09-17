@@ -1,5 +1,13 @@
 # MASQ Paper — Phase 1 Work Breakdown
 
+> **SUPERSEDED — describes a MASQ that was never built.** This plan predates the
+> v2 redesign. It specifies a real-corpus attribution benchmark with local readers
+> (gemma3/qwen3), a qdrant store and mem0/chromadb adapters. None of that exists in
+> this archive. The benchmark that was actually built is synthetic, uses a frozen
+> frontier reader and closed-form grading, and is specified in
+> `generator/DESIGN-v2.md` and `harness/DESIGN-v2-analysis.md`. Kept for provenance.
+
+
 *Written 2026-06-07 (Nils/indigo). Input: Phase 0 survey + team-data probe (both passed; kill criterion clean — see reads/ for verbatim positioning notes). Budget assumption: ~6–8 hrs/wk total, skill-track cut first on blown weeks. Pick up here next session.*
 
 ## The claim we are building toward

@@ -1,5 +1,13 @@
 # Worked Scenario Family #1 — "checkout-rate-limit"
 
+> **SUPERSEDED — the 2×2 design described here was abandoned.** The party×time
+> factorial and its C1–C4 cells failed a pre-registered "too easy" gate (paste
+> scored 85%+ even at 400k) and were replaced by multi-scope confusability chains
+> with a single decision per scenario. There is no C1–C4 cell in the shipped
+> benchmark. The marker-discipline rules below *did* carry forward into
+> `generator/verify.py`. Live spec: `harness/DESIGN-v2-analysis.md`.
+
+
 **Status:** DRAFT for adversarial pressure-test (2026-06-08, Nils/indigo).
 **Purpose:** One micro-world rendered into all four factorial cells, with exact
 A-layer and B-layer ground truth + scoring for each. If it survives the attack

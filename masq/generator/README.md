@@ -1,5 +1,12 @@
 # MASQ generator — v0.2 (confusable-sibling embedding, domain packs)
 
+> **STALE (v0.2, 2026-06-10).** The "What exists" section below lists demo and
+> sweep directories that are not in this archive — corpora are build outputs and
+> are regenerated from seed, not shipped. The `verify.py` invocation shown also
+> predates the current signature. For how to generate the published worlds see the
+> repository README and `headline_gen.py`.
+
+
 **Status:** v0.2 LANDED 2026-06-10 (Nils/indigo). Embedding layer per
 `../c4-worked-family.md` §0.5 (as amended by §7/§8) and the two LANDED gates
 (gate 1, bare-set probe). v0.1 added marker BANKS (4–7 phrasings per class so

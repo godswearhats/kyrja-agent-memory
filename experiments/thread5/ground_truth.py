@@ -12,7 +12,7 @@ import sys
 import time
 import urllib.request
 
-OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://192.168.109.1:11434")
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
 MODEL = "gemma3:12b"
 
 SCRIPT_DIR = os.path.dirname(__file__)

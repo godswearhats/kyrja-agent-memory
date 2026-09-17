@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "domain": "rate-limit",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/rate-limit/s4001/60k",
+    "target_scope": "checkout-web",
+    "n_scopes": 5,
+    "family": "family-rate-limit.json",
+    "n_results": 2,
+    "elapsed_s": 51.5
+  },
+  "ground_truth": {
+    "current_value": 800,
+    "current_setter": "Aisha",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": 1000,
+        "setter": "Wei",
+        "type": "initial"
+      },
+      {
+        "value": 300,
+        "setter": "Wei",
+        "type": "self_revision"
+      },
+      {
+        "value": 800,
+        "setter": "Aisha",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_800",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 800 req/s\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: 1000 req/s\nSTEP_1_SETTER: Wei\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 800 req/s\nSTEP_2_SETTER: Aisha\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "800 req/s",
+        "current_setter": "Aisha",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "1000 req/s",
+            "setter": "Wei",
+            "type": "initial"
+          },
+          {
+            "value": "800 req/s",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 6,
+        "step_total": 9,
+        "score": 0.6923076923076923
+      },
+      "a_score": 0.6923076923076923,
+      "b_raw": "History: /checkout bounced around many times (Wei 1000 \u2192 Aisha 800 \u2192 Alice/Aisha 50 \u2192 Priya resolves conflicting 500/1000 to 100 \u2192 Omar resolves conflicting 150/100 to 300 \u2192 Dana supersedes to 800 \u2192 Bob 800), and the latest writer, Lena (day 173), explicitly referenced Bob's 800 and overrode it to 50 with Bob \"in the loop.\" Since the current value was set by an acknowledged supersession, there is no unresolved conflict.\n\nACTION: set_50\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_50",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_50, expected set_800"
+      }
+    },
+    {
+      "arm": "bm25-scoped-k10",
+      "arm_key": "bm25_scoped_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 800 req/s\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: 500 req/s\nSTEP_1_SETTER: Lena\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 1000 req/s\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 300 req/s\nSTEP_3_SETTER: Wei\nSTEP_3_TYPE: self_revision\nSTEP_4_VALUE: 800 req/s\nSTEP_4_SETTER: Aisha\nSTEP_4_TYPE: supersession\nUNRESOLVED_CONFLICT: true",
+      "a_parsed": {
+        "current_value": "800 req/s",
+        "current_setter": "Aisha",
+        "chain_length": "4",
+        "unresolved_conflict": "true",
+        "steps": [
+          {
+            "value": "500 req/s",
+            "setter": "Lena",
+            "type": "initial"
+          },
+          {
+            "value": "1000 req/s",
+            "setter": "Wei",
+            "type": "collision"
+          },
+          {
+            "value": "300 req/s",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "800 req/s",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": false,
+        "chain_length": false,
+        "step_correct": 8,
+        "step_total": 9,
+        "score": 0.7692307692307693
+      },
+      "a_score": 0.7692307692307693,
+      "b_raw": "Change history: Lena set /checkout to 500 (day 1), Wei raised it to 1000 (day 24), then Wei explicitly revised his own change down to 300 (day 42, acknowledged supersession), and Aisha adjusted it to 800 citing \"was 300, set by Wei\" per the incident review (day 57, acknowledged supersession). The current value of 800 rests on an explicitly acknowledged supersession chain, so there is no unresolved conflict.\n\nACTION: set_800\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_800",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    }
+  ]
+}

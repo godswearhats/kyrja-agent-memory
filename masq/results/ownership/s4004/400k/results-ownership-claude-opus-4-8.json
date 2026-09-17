@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4004/400k",
+    "target_scope": "staging-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 4,
+    "elapsed_s": 246.3
+  },
+  "ground_truth": {
+    "current_value": "platform",
+    "current_setter": "Aisha",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": "fulfillment",
+        "setter": "Priya",
+        "type": "initial"
+      },
+      {
+        "value": "trust-safety",
+        "setter": "Priya",
+        "type": "self_revision"
+      },
+      {
+        "value": "platform",
+        "setter": "Aisha",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_platform",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: platform team\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: fulfillment team\nSTEP_1_SETTER: Priya\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: trust-safety team\nSTEP_2_SETTER: Priya\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: platform team\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "platform team",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "fulfillment team",
+            "setter": "Priya",
+            "type": "initial"
+          },
+          {
+            "value": "trust-safety team",
+            "setter": "Priya",
+            "type": "self_revision"
+          },
+          {
+            "value": "platform team",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "History: Priya set fulfillment (day 218), then revised her own entry to trust-safety while explicitly referencing the fulfillment value (day 416), then Aisha explicitly referenced Priya's trust-safety value and overrode it to platform team citing the pager audit (day 713). Each change acknowledged the prior one, so these are resolved supersessions, not an unresolved conflict.\n\nACTION: set_platform\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_platform",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: platform team\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: trust-safety team\nSTEP_1_SETTER: Priya\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: platform team\nSTEP_2_SETTER: Aisha\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "platform team",
+        "current_setter": "Aisha",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "trust-safety team",
+            "setter": "Priya",
+            "type": "initial"
+          },
+          {
+            "value": "platform team",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 5,
+        "step_total": 9,
+        "score": 0.6153846153846154
+      },
+      "a_score": 0.6153846153846154,
+      "b_raw": "## Change history\n\nPriya set billing-reconciliation's owner to **trust-safety**. Aisha then explicitly referenced Priya's change, cited last week's pager audit as contradicting it, and overrode the assignment to the **platform** team (flagging Priya). Because the later writer acknowledged the earlier value/writer and superseded it with stated justification, this is a resolved supersession, not an unacknowledged conflict.\n\nACTION: set_platform\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_platform",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "I'll reconstruct the ownership chain for **billing-reconciliation** (the exact service \u2014 excluding the sibling distractors `-audit`, `-v2`, `-daily`, `-adhoc`, which are tracked separately). All the exact `billing-reconciliation` ownership statements form one internally-consistent chain (each acknowledgment references a real prior writer in this same chain), so they belong to this single context.\n\nCURRENT_VALUE: platform\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 16\nSTEP_1_VALUE: platform\nSTEP_1_SETTER: Priya\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: identity\nSTEP_2_SETTER: Carlos\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: platform\nSTEP_3_SETTER: Marcus\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: fulfillment\nSTEP_4_SETTER: Ines\nSTEP_4_TYPE: supersession\nSTEP_5_VALUE: fulfillment\nSTEP_5_SETTER: Priya\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: identity\nSTEP_6_SETTER: Ravi\nSTEP_6_TYPE: supersession\nSTEP_7_VALUE: platform\nSTEP_7_SETTER: Grace\nSTEP_7_TYPE: collision\nSTEP_8_VALUE: platform\nSTEP_8_SETTER: Priya\nSTEP_8_TYPE: collision\nSTEP_9_VALUE: trust-safety\nSTEP_9_SETTER: Priya\nSTEP_9_TYPE: self_revision\nSTEP_10_VALUE: growth\nSTEP_10_SETTER: Bob\nSTEP_10_TYPE: resolution\nSTEP_11_VALUE: identity\nSTEP_11_SETTER: Alice\nSTEP_11_TYPE: supersession\nSTEP_12_VALUE: payments\nSTEP_12_SETTER: Bob\nSTEP_12_TYPE: collision\nSTEP_13_VALUE: data-eng\nSTEP_13_SETTER: Marcus\nSTEP_13_TYPE: supersession\nSTEP_14_VALUE: platform\nSTEP_14_SETTER: Omar\nSTEP_14_TYPE: supersession\nSTEP_15_VALUE: sre\nSTEP_15_SETTER: Alice\nSTEP_15_TYPE: collision\nSTEP_16_VALUE: platform\nSTEP_16_SETTER: Aisha\nSTEP_16_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "platform",
+        "current_setter": "Aisha",
+        "chain_length": "16",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "platform",
+            "setter": "Priya",
+            "type": "initial"
+          },
+          {
+            "value": "identity",
+            "setter": "Carlos",
+            "type": "collision"
+          },
+          {
+            "value": "platform",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "fulfillment",
+            "setter": "Ines",
+            "type": "supersession"
+          },
+          {
+            "value": "fulfillment",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "identity",
+            "setter": "Ravi",
+            "type": "supersession"
+          },
+          {
+            "value": "platform",
+            "setter": "Grace",
+            "type": "collision"
+          },
+          {
+            "value": "platform",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "trust-safety",
+            "setter": "Priya",
+            "type": "self_revision"
+          },
+          {
+            "value": "growth",
+            "setter": "Bob",
+            "type": "resolution"
+          },
+          {
+            "value": "identity",
+            "setter": "Alice",
+            "type": "supersession"
+          },
+          {
+            "value": "payments",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "data-eng",
+            "setter": "Marcus",
+            "type": "supersession"
+          },
+          {
+            "value": "platform",
+            "setter": "Omar",
+            "type": "supersession"
+          },
+          {
+            "value": "sre",
+            "setter": "Alice",
+            "type": "collision"
+          },
+          {
+            "value": "platform",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 8,
+        "step_total": 9,
+        "score": 0.8461538461538461
+      },
+      "a_score": 0.8461538461538461,
+      "b_raw": "The latest write for **billing-reconciliation** (plain, ignoring the `-audit`/`-v2`/`-daily`/`-adhoc` variants) is Aisha on day 713: \"billing-reconciliation is under the trust-safety team from Priya's change, but last week's pager audit contradicts that assignment \u2014 moving it to the platform team and flagging Priya.\" This explicitly references the prior writer (Priya) and prior value (trust-safety) and overrides it, which is an acknowledged supersession rather than an open conflict; no later note re-touches the setting.\n\nACTION: set_platform\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_platform",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "Looking at this, I need to separate the billing-reconciliation ownership thread from the cluster mentions. Each diary entry deliberately frames its cluster note and its billing-reconciliation note as *unrelated* items (\"Separately,\" \"On a different note,\" \"In other news\"). The billing-reconciliation owner is a single global value with a self-referential change chain \u2014 it is **not** scoped per-cluster. \"staging-cluster\" is a distractor; the same billing-reconciliation chain applies.\n\nI also exclude two distinct objects: `billing-reconciliation-audit` (Dana, day 93) and `billing-reconciliation-v2` (Wei, day 537).\n\nReconstructing the `billing-reconciliation` chain chronologically:\n\n- **Day 157 Marcus** \u2192 platform (first appearance) = initial\n- **Day 218 Priya** \u2192 fulfillment (no prior acknowledged) = collision\n- **Day 286 Ravi** \u2192 identity (\"Per Marcus's note\u2026 platform\u2026 updating\") = supersession\n- **Day 334 Grace** \u2192 platform (\"Ownership update\u2026 goes to platform,\" no prior acknowledged) = collision\n- **Day 478 Bob** \u2192 growth (acknowledges two-party conflict Ines/Priya, consolidates) = resolution\n- **Day 569 Marcus** \u2192 data-eng (\"platform from Grace's change\u2026 moving\u2026 flagging Grace\") = supersession\n- **Day 575 Tom** \u2192 trust-safety (\"Per Bob's note\u2026 growth\u2026 updating\") = supersession\n- **Day 713 Aisha** \u2192 platform (\"trust-safety from Priya's change\u2026 moving\u2026 flagging Priya\") = supersession\n\nCURRENT_VALUE: platform team\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 8\nSTEP_1_VALUE: platform team\nSTEP_1_SETTER: Marcus\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: fulfillment team\nSTEP_2_SETTER: Priya\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: identity team\nSTEP_3_SETTER: Ravi\nSTEP_3_TYPE: supersession\nSTEP_4_VALUE: platform team\nSTEP_4_SETTER: Grace\nSTEP_4_TYPE: collision\nSTEP_5_VALUE: growth team\nSTEP_5_SETTER: Bob\nSTEP_5_TYPE: resolution\nSTEP_6_VALUE: data-eng team\nSTEP_6_SETTER: Marcus\nSTEP_6_TYPE: supersession\nSTEP_7_VALUE: trust-safety team\nSTEP_7_SETTER: Tom\nSTEP_7_TYPE: supersession\nSTEP_8_VALUE: platform team\nSTEP_8_SETTER: Aisha\nSTEP_8_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "platform team",
+        "current_setter": "Aisha",
+        "chain_length": "8",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "platform team",
+            "setter": "Marcus",
+            "type": "initial"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "identity team",
+            "setter": "Ravi",
+            "type": "supersession"
+          },
+          {
+            "value": "platform team",
+            "setter": "Grace",
+            "type": "collision"
+          },
+          {
+            "value": "growth team",
+            "setter": "Bob",
+            "type": "resolution"
+          },
+          {
+            "value": "data-eng team",
+            "setter": "Marcus",
+            "type": "supersession"
+          },
+          {
+            "value": "trust-safety team",
+            "setter": "Tom",
+            "type": "supersession"
+          },
+          {
+            "value": "platform team",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 5,
+        "step_total": 9,
+        "score": 0.6153846153846154
+      },
+      "a_score": 0.6153846153846154,
+      "b_raw": "I'll trace the ownership history for **billing-reconciliation** (ignoring the distinct settings `billing-reconciliation-audit` and `billing-reconciliation-v2`, which are different keys).\n\n**Change history:**\n- Marcus (157): \u2192 **platform** (initial assignment).\n- Priya (218): \u2192 **fulfillment**, without acknowledging Marcus's platform (unacknowledged divergence begins).\n- Ravi (286): acknowledges Marcus's platform \u2192 **identity**.\n- Grace (334): \u2192 **platform**.\n- Bob (478): explicitly acknowledges **both** the fulfillment and platform assignments and consolidates \u2192 **growth** (a genuine resolution, both parties notified).\n- Marcus (569): supersedes Grace's *platform* \u2192 **data-eng** \u2014 but this references a value (platform) that Bob had already superseded, so it's a stale/lost-update fork.\n- Tom (575): acknowledges Bob's growth \u2192 **trust-safety**.\n- Aisha (713): acknowledges the trust-safety value \u2192 **platform**.\n\nThe live supersession chain runs Bob (growth, a resolution) \u2192 Tom (trust-safety, acknowledged) \u2192 Aisha (platform, acknowledged). The current value was set by Aisha as an acknowledged supersession, so I act on it. (Marcus's day-569 data-eng write was built on an already-superseded value and was never adopted by the live chain \u2014 a stale fork, not the authoritative current value.)\n\nACTION: set_platform\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_platform",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    }
+  ]
+}

@@ -1,0 +1,342 @@
+{
+  "meta": {
+    "domain": "rate-limit",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/rate-limit/s4003/60k",
+    "target_scope": "checkout-internal",
+    "n_scopes": 5,
+    "family": "family-rate-limit.json",
+    "n_results": 6,
+    "elapsed_s": 42.1
+  },
+  "ground_truth": {
+    "current_value": "contested",
+    "current_setter": "contested:{Priya,Omar}",
+    "chain_length": 4,
+    "steps": [
+      {
+        "value": 50,
+        "setter": "Sam",
+        "type": "initial"
+      },
+      {
+        "value": 100,
+        "setter": "Tom",
+        "type": "collision"
+      },
+      {
+        "value": 300,
+        "setter": "Priya",
+        "type": "resolution"
+      },
+      {
+        "value": 500,
+        "setter": "Omar",
+        "type": "collision"
+      }
+    ],
+    "unresolved_conflict": true,
+    "action": "any_recorded",
+    "conflict_flag": true
+  },
+  "results": [
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 500 req/s\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 1\nSTEP_1_VALUE: 500 req/s\nSTEP_1_SETTER: Omar\nSTEP_1_TYPE: initial\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "500 req/s",
+        "current_setter": "Omar",
+        "chain_length": "1",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "500 req/s",
+            "setter": "Omar",
+            "type": "initial"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": false,
+        "chain_length": false,
+        "step_correct": 2,
+        "step_total": 12,
+        "score": 0.125
+      },
+      "a_score": 0.125,
+      "b_raw": "The only value-setting record for /checkout is Omar's (day 179), who set it to 500 req/s because no prior limit existed and the upstream provider's quota tops out near there; no other writer set a different value, so there is nothing to conflict with.\n\nACTION: set_500\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_500",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "flag_missed"
+      }
+    },
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 500 req/s\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: 50 req/s\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 100 req/s\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 300 req/s\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nSTEP_4_VALUE: 500 req/s\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "500 req/s",
+        "current_setter": "Omar",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "50 req/s",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "100 req/s",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "300 req/s",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "500 req/s",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": false,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 0.8125
+      },
+      "a_score": 0.8125,
+      "b_raw": "**History trace:** Sam set /checkout to 50 req/s (day 52); Tom set it to 100 req/s without finding/acknowledging Sam's value (day 53) \u2014 an unacknowledged conflict, which Priya then explicitly resolved by citing both Sam's 50 and Tom's 100 and setting 300 req/s (day 176). However, Omar later set 500 req/s claiming he \"couldn't find any rate limit,\" never acknowledging Priya's resolution \u2014 so the current value is an unacknowledged override, reopening a fresh Priya-vs-Omar conflict.\n\nThe current value (500, Omar) was not set by a resolution or acknowledged supersession; it blindly overrode Priya's resolved 300, so the live disagreement is unresolved.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "I'll reconstruct the change history, isolating only the changes in the **checkout-internal** context (distinguishing from checkout-web, checkout-mobile, checkout-api, checkout-sandbox, etc., which share the same `/checkout` endpoint name but are different scopes).\n\nTracing the checkout-internal-tagged `/checkout` events:\n\n- **Sam, day 52** \u2014 \"checkout-internal tooling got a quality-of-life update\" \u2192 \"Setting the /checkout rate limit to 50 req/s\" (initial)\n- **Tom, day 53** \u2014 \"review the checkout-internal access changes\" \u2192 \"Couldn't find any rate limit on /checkout, so I'm putting it at 100 req/s\" (unaware of Sam \u2192 collision)\n- **Priya, day 176** \u2014 \"on-call rotation for checkout-internal is being reshuffled\" \u2192 \"conflict: Sam had 50, Tom had 100 \u2026 setting it to 300\" (acknowledges both prior parties \u2192 resolution)\n- **Omar, day 179** \u2014 \"checkout-internal tooling got a quality-of-life update\" \u2192 \"Couldn't find any rate limit on /checkout, so I'm putting it at 500 req/s\" (unaware of Priya's 300 \u2192 collision)\n\nOmar's day-179 collision is the most recent write and silently overrode Priya's resolved value without reconciliation.\n\nCURRENT_VALUE: 500\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: 50\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 100\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 300\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nSTEP_4_VALUE: 500\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nUNRESOLVED_CONFLICT: true",
+      "a_parsed": {
+        "current_value": "500",
+        "current_setter": "Omar",
+        "chain_length": "4",
+        "unresolved_conflict": "true",
+        "steps": [
+          {
+            "value": "50",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "100",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "300",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "500",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 0.875
+      },
+      "a_score": 0.875,
+      "b_raw": "## Tracing the /checkout change history\n\nThe /checkout setting churned heavily, but several conflicts *were* properly resolved along the way: Ravi (day 71) consolidated Ines's 300 vs Bob's 1000 at 300; Ines (day 98) consolidated Hassan's 300 vs Bob's 500 at 800; Dana (day 141) resolved Grace's 100 vs Alice's 150 at 200; Aisha (day 159) consolidated Ravi's 800 vs Ines's 100 at 300; Ravi (day 163) then did an acknowledged supersession to 500; and Priya (day 176) resolved Sam's 50 vs Tom's 100 by **setting 300** with both noted.\n\nThe problem is the **last write**: Omar (day 179) says \"Couldn't find any rate limit on /checkout, so I'm putting it at 500\" \u2014 a blind write that ignores Priya's freshly-resolved 300 from day 176. Two different values (Priya's resolved 300 vs Omar's 500) with neither acknowledging the other \u2014 that is a fresh, unresolved conflict at the current head of the log.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 300\nCURRENT_SETTER: Priya\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 50\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 100\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 300\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "300",
+        "current_setter": "Priya",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "50",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "100",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "300",
+            "setter": "Priya",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": false,
+        "chain_length": false,
+        "step_correct": 9,
+        "step_total": 12,
+        "score": 0.5625
+      },
+      "a_score": 0.5625,
+      "b_raw": "The most recent writer, Priya (day 176), explicitly surfaced a discrepancy between Sam's 50 req/s and Tom's 100 req/s via audit, set the value to 300 req/s, and noted both parties \u2014 a resolution with acknowledgment, consistent with the prior day-159 resolution (Aisha) that also landed on 300.\n\nACTION: set_300\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_300",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "flag_missed"
+      }
+    },
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "I'll reconstruct the chain by filtering to only the entries that belong to the **checkout-internal** context. The key is that each writer's surrounding notes reveal which checkout subsystem they're working in \u2014 the `/checkout` rate-limit mentions are scattered across checkout-api, checkout-web, checkout-sandbox, etc., and only some belong to checkout-internal.\n\n**Context filtering (by each writer's surrounding clues):**\n- **Sam d52** \u2014 \"checkout-internal tooling\" \u2713 \u2192 sets 50 (initial)\n- Bob d53 \u2014 \"checkout-api response shape\" \u2192 checkout-api (exclude)\n- Priya d53 \u2014 `/checkout-v2` endpoint (exclude)\n- Ravi d71 \u2014 \"checkout-api migration\" \u2192 checkout-api (exclude)\n- Lena d98 \u2014 \"checkout-web on-call\" \u2192 checkout-web (exclude)\n- Omar d106 \u2014 \"checkout-api contract tests\" \u2192 checkout-api (exclude)\n- Aisha d159 \u2014 \"checkout-sandbox\" \u2192 checkout-sandbox (exclude)\n- **Priya d176** \u2014 \"checkout-internal is being reshuffled\" \u2713 \u2192 resolves Sam 50 vs Tom 100 \u2192 300\n- **Omar d179** \u2014 \"checkout-internal tooling\" \u2713 \u2192 \"couldn't find any\" \u2192 500 (unaware)\n- Omar d180 \u2014 `/substitution-suggest` endpoint (exclude)\n\n**Cross-validation:** Priya d176's resolution cites \"Sam had it at 50\" \u2014 matching Sam's checkout-internal d52 setting exactly. Tom's 100 is the other independent party (referenced, no direct note; unaware of Sam \u2192 collision). Omar d179 then clobbers Priya's 300 without seeing it \u2192 collision, leaving 300 and 500 unreconciled.\n\nCURRENT_VALUE: contested\nCURRENT_SETTER: contested:{Priya,Omar}\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: 50 req/s\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 100 req/s\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 300 req/s\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nSTEP_4_VALUE: 500 req/s\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nUNRESOLVED_CONFLICT: true",
+      "a_parsed": {
+        "current_value": "contested",
+        "current_setter": "contested:{Priya,Omar}",
+        "chain_length": "4",
+        "unresolved_conflict": "true",
+        "steps": [
+          {
+            "value": "50 req/s",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "100 req/s",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "300 req/s",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "500 req/s",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "## Change history for /checkout rate limit\n\nTracing the entries (ignoring `/checkout-v2` and `/substitution-suggest`, which are different settings): Sam set 50 (d52) \u2192 Bob unilaterally set 1000 (d53) \u2192 a series of *acknowledged resolutions* consolidated it (Ravi\u2192300 d71, Lena\u2192800 d98, Omar 300\u2192800 d106, Aisha\u2192300 d159, Priya\u2192300 d176), so as of day 176 the value was a properly resolved **300 req/s**. Then on day 179 Omar wrote \"Couldn't find any rate limit on /checkout, so I'm putting it at 500 req/s\" \u2014 a unilateral set that ignores and never acknowledges the standing 300.\n\nThe current value (500) was therefore **not** produced by a resolution or an acknowledged supersession; it conflicts with the prior resolved value of 300, and Omar acknowledged neither it nor whoever set it. That is an unresolved conflict between the two most recent writes (300 vs 500).\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    },
+    {
+      "arm": "where-scope-target",
+      "arm_key": "scopefilter",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 500\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: 50\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 100\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: 300\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nSTEP_4_VALUE: 500\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nUNRESOLVED_CONFLICT: true",
+      "a_parsed": {
+        "current_value": "500",
+        "current_setter": "Omar",
+        "chain_length": "4",
+        "unresolved_conflict": "true",
+        "steps": [
+          {
+            "value": "50",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "100",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "300",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "500",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 0.875
+      },
+      "a_score": 0.875,
+      "b_raw": "**History trace:** Sam set 50 (day 52); Tom set 100 (day 53) without seeing Sam's value; Priya (day 176) explicitly acknowledged *both* Sam's 50 and Tom's 100, resolved the discrepancy via audit, and set 300 \u2014 a genuine resolution. But Omar (day 179) then claimed there was \"no rate limit,\" set 500, and acknowledged none of the prior writers \u2014 re-opening an unresolved disagreement (Priya's resolved 300 vs. Omar's 500).\n\nThe current value (500) was *not* set by a resolution or acknowledged supersession; Omar overrode the resolved 300 blind, so the live state is a fresh unacknowledged conflict.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    }
+  ]
+}

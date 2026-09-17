@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4004/60k",
+    "target_scope": "staging-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 2,
+    "elapsed_s": 154.6
+  },
+  "ground_truth": {
+    "current_value": "platform",
+    "current_setter": "Aisha",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": "fulfillment",
+        "setter": "Priya",
+        "type": "initial"
+      },
+      {
+        "value": "trust-safety",
+        "setter": "Priya",
+        "type": "self_revision"
+      },
+      {
+        "value": "platform",
+        "setter": "Aisha",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_platform",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "bm25-scoped-k10",
+      "arm_key": "bm25_scoped_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: platform team\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: fulfillment team\nSTEP_1_SETTER: Priya\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: trust-safety team\nSTEP_2_SETTER: Priya\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: platform team\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "platform team",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "fulfillment team",
+            "setter": "Priya",
+            "type": "initial"
+          },
+          {
+            "value": "trust-safety team",
+            "setter": "Priya",
+            "type": "self_revision"
+          },
+          {
+            "value": "platform team",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "Change history: Priya first set fulfillment (day 55), then explicitly moved it to trust-safety citing her own staffing-plan change (day 104); Aisha then explicitly referenced Priya's trust-safety assignment, overrode it to platform based on the pager audit, and flagged Priya (day 179). Each change acknowledged and superseded the prior value, so the current owner is platform via an acknowledged supersession, not an unresolved conflict.\n\nACTION: set_platform\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_platform",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: platform team\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 9\nSTEP_1_VALUE: identity team\nSTEP_1_SETTER: Carlos\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: platform team\nSTEP_2_SETTER: Marcus\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: platform team\nSTEP_3_SETTER: Grace\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: platform team\nSTEP_4_SETTER: Priya\nSTEP_4_TYPE: collision\nSTEP_5_VALUE: growth team\nSTEP_5_SETTER: Bob\nSTEP_5_TYPE: resolution\nSTEP_6_VALUE: identity team\nSTEP_6_SETTER: Alice\nSTEP_6_TYPE: supersession\nSTEP_7_VALUE: payments team\nSTEP_7_SETTER: Bob\nSTEP_7_TYPE: collision\nSTEP_8_VALUE: sre team\nSTEP_8_SETTER: Alice\nSTEP_8_TYPE: collision\nSTEP_9_VALUE: platform team\nSTEP_9_SETTER: Aisha\nSTEP_9_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "platform team",
+        "current_setter": "Aisha",
+        "chain_length": "9",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "identity team",
+            "setter": "Carlos",
+            "type": "initial"
+          },
+          {
+            "value": "platform team",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "platform team",
+            "setter": "Grace",
+            "type": "collision"
+          },
+          {
+            "value": "platform team",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "growth team",
+            "setter": "Bob",
+            "type": "resolution"
+          },
+          {
+            "value": "identity team",
+            "setter": "Alice",
+            "type": "supersession"
+          },
+          {
+            "value": "payments team",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "sre team",
+            "setter": "Alice",
+            "type": "collision"
+          },
+          {
+            "value": "platform team",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 3,
+        "step_total": 9,
+        "score": 0.46153846153846156
+      },
+      "a_score": 0.46153846153846156,
+      "b_raw": "Change history: billing-reconciliation bounced across many owners (identity\u2192platform\u2192growth\u2192identity\u2192payments\u2192sre), but the most recent write is Aisha on day 179, who explicitly references the prior trust-safety assignment \"from Priya's change,\" cites the pager audit that contradicts it, and moves it to the platform team while flagging Priya. That is an acknowledged supersession, not an unresolved conflict, so I act on the current value.\n\nACTION: set_platform\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_platform",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    }
+  ]
+}

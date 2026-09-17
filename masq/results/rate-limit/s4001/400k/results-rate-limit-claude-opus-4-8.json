@@ -1,0 +1,221 @@
+{
+  "meta": {
+    "domain": "rate-limit",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/rate-limit/s4001/400k",
+    "target_scope": "checkout-web",
+    "n_scopes": 5,
+    "family": "family-rate-limit.json",
+    "n_results": 4,
+    "elapsed_s": 134.0
+  },
+  "ground_truth": {
+    "current_value": 800,
+    "current_setter": "Aisha",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": 1000,
+        "setter": "Wei",
+        "type": "initial"
+      },
+      {
+        "value": 300,
+        "setter": "Wei",
+        "type": "self_revision"
+      },
+      {
+        "value": 800,
+        "setter": "Aisha",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_800",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 50 req/s\nCURRENT_SETTER: Lena\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: 800 req/s\nSTEP_1_SETTER: Bob\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 50 req/s\nSTEP_2_SETTER: Lena\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "50 req/s",
+        "current_setter": "Lena",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "800 req/s",
+            "setter": "Bob",
+            "type": "initial"
+          },
+          {
+            "value": "50 req/s",
+            "setter": "Lena",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 9,
+        "score": 0.07692307692307693
+      },
+      "a_score": 0.07692307692307693,
+      "b_raw": "## Change history\n\nBob set `/checkout` rate limit to 800 req/s; Lena then explicitly referenced Bob's 800 setting, overrode it to 50 req/s citing last week's load test, and noted Bob is in the loop. That is an acknowledged supersession (later writer names the earlier value/writer and resolves it), not an unresolved conflict.\n\nRationale: The current value of 50 req/s was set by a resolved supersession that explicitly overrode the prior 800 with Bob acknowledged, so I act on it.\n\nACTION: set_50\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_50",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_50, expected set_800"
+      }
+    },
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 800 req/s\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 1000 req/s\nSTEP_1_SETTER: Wei\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 300 req/s\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: 800 req/s\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "800 req/s",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "1000 req/s",
+            "setter": "Wei",
+            "type": "initial"
+          },
+          {
+            "value": "300 req/s",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "800 req/s",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "The change history: Wei set 1000 (day 94), then explicitly revised his own value down to 300 (day 165), and Aisha later raised it to 800 (day 226) while directly citing the prior value (\"was 300, set by Wei\") and her reason (incident review). Each change explicitly references and supersedes the prior one, so the current value of 800 stands as an acknowledged supersession, not an unresolved conflict.\n\nACTION: set_800\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_800",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 800\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: 1000\nSTEP_1_SETTER: Wei\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 300\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: 800\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "800",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "1000",
+            "setter": "Wei",
+            "type": "initial"
+          },
+          {
+            "value": "300",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "800",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "## Change history for /checkout (checkout-web)\n\nTracing only the exact `/checkout` endpoint (ignoring `/checkout-admin`, `-canary`, `-legacy`, `-v2`, `-internal`, etc.):\n\nThe setting churned heavily, but several writes were clean resolutions/acknowledged supersessions \u2014 e.g. Priya (day 459) explicitly resolved Marcus's 500 vs. Wei's 1000 to 100, and Omar (day 599) resolved Carlos's 150 vs. Wei's 100 to 300, after which Dana (day 644) superseded Omar's 300 \u2192 800 with reference. The problem is at the tail: **Ravi (day 653) set it to 1000 claiming he \"couldn't find any rate limit,\" ignoring Dana's 800, and then Lena (day 691) overrode to 50 while referencing only the \"800\" value (misattributed to Bob) \u2014 neither Ravi nor Lena acknowledged the other's change.**\n\nBecause two different values (Ravi's 1000 and Lena's 50-over-800 lineage) were set with neither writer acknowledging the other, this is a live, unresolved conflict rather than an acknowledged supersession, so I will not silently pick one value.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got none, expected set_800; false_alarm"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: 300\nCURRENT_SETTER: Wei\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: 1000\nSTEP_1_SETTER: Wei\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: 300\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: self_revision\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "300",
+        "current_setter": "Wei",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "1000",
+            "setter": "Wei",
+            "type": "initial"
+          },
+          {
+            "value": "300",
+            "setter": "Wei",
+            "type": "self_revision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 6,
+        "step_total": 9,
+        "score": 0.5384615384615384
+      },
+      "a_score": 0.5384615384615384,
+      "b_raw": "**Change history trace:** The /checkout rate limit was set and reset many times (Wei 1000\u2192300, Alice\u219250 citing Lena, Tom\u21921000, Bob\u2192800, Aisha\u219250, Priya\u2192100 resolving Marcus/Wei, Wei\u2192100), but the most recent write is Lena on day 691, who explicitly referenced Bob's 800 req/s setting and overrode it to 50 req/s with \"Bob is in the loop.\" Since the latest value was set by an acknowledged supersession (Lena citing and overriding Bob, who was informed), this is resolved, not an open conflict.\n\nACTION: set_50\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_50",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_50, expected set_800"
+      }
+    }
+  ]
+}

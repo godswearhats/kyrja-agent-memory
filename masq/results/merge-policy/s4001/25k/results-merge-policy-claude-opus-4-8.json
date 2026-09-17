@@ -1,0 +1,296 @@
+{
+  "meta": {
+    "domain": "merge-policy",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/merge-policy/s4001/25k",
+    "target_scope": "team-platform",
+    "n_scopes": 5,
+    "family": "family-merge-policy.json",
+    "n_results": 4,
+    "elapsed_s": 65.4
+  },
+  "ground_truth": {
+    "current_value": "fast-forward-only",
+    "current_setter": "Aisha",
+    "chain_length": 3,
+    "steps": [
+      {
+        "value": "fast-forward-only",
+        "setter": "Wei",
+        "type": "initial"
+      },
+      {
+        "value": "merge-commit",
+        "setter": "Wei",
+        "type": "self_revision"
+      },
+      {
+        "value": "fast-forward-only",
+        "setter": "Aisha",
+        "type": "supersession"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_fast-forward-only",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: squash-merge\nCURRENT_SETTER: Lena\nCHAIN_LENGTH: 2\nSTEP_1_VALUE: fast-forward-only\nSTEP_1_SETTER: Bob\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: squash-merge\nSTEP_2_SETTER: Lena\nSTEP_2_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "squash-merge",
+        "current_setter": "Lena",
+        "chain_length": "2",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "fast-forward-only",
+            "setter": "Bob",
+            "type": "initial"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Lena",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 9,
+        "score": 0.07692307692307693
+      },
+      "a_score": 0.07692307692307693,
+      "b_raw": "**History:** Bob set the storefront-web merge policy to fast-forward-only; Lena later explicitly referenced Bob's value, overrode it to squash-merge citing the release audit, and noted Bob was in the loop \u2014 an acknowledged supersession, not an unresolved disagreement.\n\nSince the current value (squash-merge) was set by an acknowledged supersession of Bob's earlier value, I act on it.\n\nACTION: set_squash-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_squash-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_squash-merge, expected set_fast-forward-only"
+      }
+    },
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: fast-forward-only\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: fast-forward-only\nSTEP_1_SETTER: Wei\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: merge-commit\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: fast-forward-only\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "fast-forward-only",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "fast-forward-only",
+            "setter": "Wei",
+            "type": "initial"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "History: Wei set fast-forward-only (day 12), then in a self-revision changed it to merge-commit (day 21); Aisha then set it to fast-forward-only on day 29, explicitly noting \"(was merge-commit, set by Wei)\" \u2014 an acknowledged supersession, not an unresolved conflict.\n\nACTION: set_fast-forward-only\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_fast-forward-only",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "I worked through the log, filtering to the exact repo `storefront-web` (excluding the distractor repos `storefront-web-storybook`, `-canary`, `-legacy`, `-v2`) and tracking the actual running state versus what each writer claimed.\n\nKey principle for collision vs. supersession: if the writer cited the *correct current value* (even with a wrong setter name), I treat it as a supersession; if they were unaware of the actual current value (cited a stale value or \"no policy exists\"), it's a collision.\n\nCURRENT_VALUE: squash-merge\nCURRENT_SETTER: Lena\nCHAIN_LENGTH: 17\nSTEP_1_VALUE: merge-commit\nSTEP_1_SETTER: Grace\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: merge-commit\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: fast-forward-only\nSTEP_3_SETTER: Wei\nSTEP_3_TYPE: self_revision\nSTEP_4_VALUE: squash-merge\nSTEP_4_SETTER: Priya\nSTEP_4_TYPE: collision\nSTEP_5_VALUE: squash-merge\nSTEP_5_SETTER: Bob\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: merge-commit\nSTEP_6_SETTER: Wei\nSTEP_6_TYPE: self_revision\nSTEP_7_VALUE: fast-forward-only\nSTEP_7_SETTER: Aisha\nSTEP_7_TYPE: supersession\nSTEP_8_VALUE: squash-merge\nSTEP_8_SETTER: Bob\nSTEP_8_TYPE: collision\nSTEP_9_VALUE: fast-forward-only\nSTEP_9_SETTER: Bob\nSTEP_9_TYPE: self_revision\nSTEP_10_VALUE: squash-merge\nSTEP_10_SETTER: Aisha\nSTEP_10_TYPE: collision\nSTEP_11_VALUE: rebase-merge\nSTEP_11_SETTER: Grace\nSTEP_11_TYPE: resolution\nSTEP_12_VALUE: rebase-merge\nSTEP_12_SETTER: Carlos\nSTEP_12_TYPE: collision\nSTEP_13_VALUE: squash-merge\nSTEP_13_SETTER: Wei\nSTEP_13_TYPE: collision\nSTEP_14_VALUE: merge-commit\nSTEP_14_SETTER: Omar\nSTEP_14_TYPE: resolution\nSTEP_15_VALUE: fast-forward-only\nSTEP_15_SETTER: Dana\nSTEP_15_TYPE: supersession\nSTEP_16_VALUE: fast-forward-only\nSTEP_16_SETTER: Lena\nSTEP_16_TYPE: collision\nSTEP_17_VALUE: squash-merge\nSTEP_17_SETTER: Lena\nSTEP_17_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "squash-merge",
+        "current_setter": "Lena",
+        "chain_length": "17",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "merge-commit",
+            "setter": "Grace",
+            "type": "initial"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Wei",
+            "type": "collision"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Priya",
+            "type": "collision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Aisha",
+            "type": "supersession"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Bob",
+            "type": "collision"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Bob",
+            "type": "self_revision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Aisha",
+            "type": "collision"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Grace",
+            "type": "resolution"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Carlos",
+            "type": "collision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Wei",
+            "type": "collision"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Omar",
+            "type": "resolution"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Dana",
+            "type": "supersession"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Lena",
+            "type": "collision"
+          },
+          {
+            "value": "squash-merge",
+            "setter": "Lena",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 8,
+        "step_total": 9,
+        "score": 0.6923076923076923
+      },
+      "a_score": 0.6923076923076923,
+      "b_raw": "I traced every write to **storefront-web** itself (excluding the sibling repos: -storybook, -canary, -legacy, -v2).\n\n**Change history:** The setting was written many times (Grace\u2192merge-commit, Wei\u2192merge-commit\u2192ff-only, Priya\u2192squash, Bob\u2192squash, Wei\u2192merge-commit, Aisha\u2192ff-only, Bob\u2192squash, Tom\u2192rebase, Bob\u2192ff-only, Aisha\u2192squash, Grace\u2192rebase, Carlos\u2192rebase, Wei\u2192squash, Omar\u2192merge-commit, Dana\u2192ff-only, Lena\u2192ff-only\u2026). Crucially, the churn was repeatedly *acknowledged and resolved* along the way \u2014 Grace (day 58) explicitly reconciled Wei's merge-commit vs. Priya's squash and resolved to rebase-merge, and Omar (day 75) explicitly reconciled Carlos's rebase vs. Wei's squash and resolved to merge-commit. The **final write** is Lena (day 87): \"Saw Bob set storefront-web merge policy to fast-forward-only \u2026 so I'm overriding it to squash-merge; Bob is in the loop\" \u2014 an acknowledged supersession of the prior writer, not a silent clash.\n\nBecause the current value rests on an acknowledged supersession (and the earlier disagreements were each explicitly resolved), there is no dangling unresolved conflict.\n\nACTION: set_squash-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_squash-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_squash-merge, expected set_fast-forward-only"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: fast-forward-only\nCURRENT_SETTER: Aisha\nCHAIN_LENGTH: 3\nSTEP_1_VALUE: fast-forward-only\nSTEP_1_SETTER: Wei\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: merge-commit\nSTEP_2_SETTER: Wei\nSTEP_2_TYPE: self_revision\nSTEP_3_VALUE: fast-forward-only\nSTEP_3_SETTER: Aisha\nSTEP_3_TYPE: supersession\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "fast-forward-only",
+        "current_setter": "Aisha",
+        "chain_length": "3",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "fast-forward-only",
+            "setter": "Wei",
+            "type": "initial"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Wei",
+            "type": "self_revision"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Aisha",
+            "type": "supersession"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 9,
+        "step_total": 9,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "I'll trace the storefront-web merge policy history (ignoring storefront-web-canary, a different repo).\n\n**Change history:** The setting churned repeatedly \u2014 Wei set merge-commit (day 2), then fast-forward-only (day 12); Priya/Bob set squash-merge (days 17\u201318); Wei explicitly revised his own change to merge-commit (day 21); Aisha superseded \"merge-commit, set by Wei\" \u2192 fast-forward-only (day 29); Bob \u2192 squash-merge (day 40); Dana \u2192 fast-forward-only (day 81); and finally **Lena (day 87)** explicitly referenced the prior fast-forward-only value and overrode it to squash-merge, noting \"Bob is in the loop.\"\n\nThe latest write is an acknowledged supersession: Lena names the earlier value, overrides it deliberately, and loops in the prior writer \u2014 not a silent conflicting set. The current value therefore rests on an acknowledged supersession, so I act on it.\n\nACTION: set_squash-merge\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_squash-merge",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_squash-merge, expected set_fast-forward-only"
+      }
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "meta": {
+    "domain": "ownership",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/ownership/s4005/25k",
+    "target_scope": "apac-cluster",
+    "n_scopes": 5,
+    "family": "family-ownership.json",
+    "n_results": 4,
+    "elapsed_s": 68.8
+  },
+  "ground_truth": {
+    "current_value": "sre",
+    "current_setter": "Dana",
+    "chain_length": 4,
+    "steps": [
+      {
+        "value": "growth",
+        "setter": "Sam",
+        "type": "initial"
+      },
+      {
+        "value": "trust-safety",
+        "setter": "Grace",
+        "type": "supersession"
+      },
+      {
+        "value": "fulfillment",
+        "setter": "Ines",
+        "type": "collision"
+      },
+      {
+        "value": "sre",
+        "setter": "Dana",
+        "type": "resolution"
+      }
+    ],
+    "unresolved_conflict": false,
+    "action": "set_sre",
+    "conflict_flag": false
+  },
+  "results": [
+    {
+      "arm": "perfect-retrieval",
+      "arm_key": "ceiling",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: sre team\nCURRENT_SETTER: Dana\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: trust-safety team\nSTEP_2_SETTER: Grace\nSTEP_2_TYPE: supersession\nSTEP_3_VALUE: fulfillment team\nSTEP_3_SETTER: Ines\nSTEP_3_TYPE: collision\nSTEP_4_VALUE: sre team\nSTEP_4_SETTER: Dana\nSTEP_4_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "sre team",
+        "current_setter": "Dana",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "trust-safety team",
+            "setter": "Grace",
+            "type": "supersession"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Ines",
+            "type": "collision"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": true,
+        "current_setter": true,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 1.0
+      },
+      "a_score": 1.0,
+      "b_raw": "The change history: Sam (day 3) set growth \u2192 Grace (day 20) explicitly referenced Sam's note and superseded it to trust-safety \u2192 Ines (day 57) set fulfillment without acknowledging Grace, creating a conflict \u2192 Dana (day 68) acknowledged both Grace's and Ines's values and resolved it by assigning to the sre team. Since the current value was set by a resolution that acknowledged both sides, the conflict is resolved.\n\nACTION: set_sre\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_sre",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "correct"
+      }
+    },
+    {
+      "arm": "last-write-wins",
+      "arm_key": "lww",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: unset\nCURRENT_SETTER: none\nCHAIN_LENGTH: 0\nUNRESOLVED_CONFLICT: false\n\nNote: The memory records a billing-reconciliation ownership chain (Omar\u2192payments, Marcus\u2192growth collision, resolution\u2192data-eng), but none of these writes are scoped to apac-cluster. The only cluster named in the memory is eu-cluster (an unrelated health note), which confirms cluster context is tracked explicitly. With no change attributed to the apac-cluster context, the chain for this specific context is empty.",
+      "a_parsed": {
+        "current_value": "unset",
+        "current_setter": "none",
+        "chain_length": "0",
+        "unresolved_conflict": "false",
+        "steps": []
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 12,
+        "score": 0.0625
+      },
+      "a_score": 0.0625,
+      "b_raw": "History: Omar set billing-reconciliation to payments and Marcus independently set it to growth (a genuine two-person disagreement), but the team then acknowledged both and unified on a single resolution to data-eng \u2014 so the conflict is resolved, not open.\n\nACTION: set_data-eng\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_data-eng",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_data-eng, expected set_sre"
+      }
+    },
+    {
+      "arm": "paste-everything",
+      "arm_key": "paste",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: none\nCURRENT_SETTER: none\nCHAIN_LENGTH: 0\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "none",
+        "current_setter": "none",
+        "chain_length": "0",
+        "unresolved_conflict": "false",
+        "steps": []
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 0,
+        "step_total": 12,
+        "score": 0.0625
+      },
+      "a_score": 0.0625,
+      "b_raw": "## History trace\n\nTracing `billing-reconciliation` (excluding suffixed variants like `-v2`, `-adhoc`, `-audit`, `-daily`):\n\nThe ownership ping-ponged repeatedly \u2014 growth (Sam d3) \u2192 payments (Omar d7) \u2192 sre (Priya d11) \u2192 trust-safety (Grace d20, acknowledging Sam) \u2192 platform (Aisha d26) \u2192 payments (Lena d30) \u2192 growth (Omar d32) \u2192 **resolutions** at d33 (Ines \u2192 identity, citing Priya+Lena), d36 (Priya \u2192 platform, citing Omar+Aisha), d68 (Dana \u2192 sre, citing Grace+Ines), d79 (Ines \u2192 identity, citing Aisha+Priya), then acknowledged supersessions (Aisha d80 \u2192 fulfillment; Marcus d85 \u2192 fulfillment). The **final write** is Tom, day 90: \"Omar assigned \u2026 payments and Marcus independently assigned it to growth \u2014 the team agreed to unify on one assignment. Resolving to the data-eng team.\"\n\nThe current value was set by a resolution that explicitly acknowledged both competing assignments (Omar's payments and Marcus's growth) and unified on data-eng \u2014 an acknowledged resolution, not an open conflict.\n\nACTION: set_data-eng\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_data-eng",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_data-eng, expected set_sre"
+      }
+    },
+    {
+      "arm": "vector-rag-k10",
+      "arm_key": "vector_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: data-eng team\nCURRENT_SETTER: Tom\nCHAIN_LENGTH: 10\nSTEP_1_VALUE: growth team\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: payments team\nSTEP_2_SETTER: Omar\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: trust-safety team\nSTEP_3_SETTER: Grace\nSTEP_3_TYPE: supersession\nSTEP_4_VALUE: platform team\nSTEP_4_SETTER: Aisha\nSTEP_4_TYPE: collision\nSTEP_5_VALUE: payments team\nSTEP_5_SETTER: Lena\nSTEP_5_TYPE: collision\nSTEP_6_VALUE: platform team\nSTEP_6_SETTER: Priya\nSTEP_6_TYPE: resolution\nSTEP_7_VALUE: growth team\nSTEP_7_SETTER: Marcus\nSTEP_7_TYPE: collision\nSTEP_8_VALUE: sre team\nSTEP_8_SETTER: Dana\nSTEP_8_TYPE: resolution\nSTEP_9_VALUE: fulfillment team\nSTEP_9_SETTER: Aisha\nSTEP_9_TYPE: supersession\nSTEP_10_VALUE: data-eng team\nSTEP_10_SETTER: Tom\nSTEP_10_TYPE: resolution\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "data-eng team",
+        "current_setter": "Tom",
+        "chain_length": "10",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "growth team",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "payments team",
+            "setter": "Omar",
+            "type": "collision"
+          },
+          {
+            "value": "trust-safety team",
+            "setter": "Grace",
+            "type": "supersession"
+          },
+          {
+            "value": "platform team",
+            "setter": "Aisha",
+            "type": "collision"
+          },
+          {
+            "value": "payments team",
+            "setter": "Lena",
+            "type": "collision"
+          },
+          {
+            "value": "platform team",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "growth team",
+            "setter": "Marcus",
+            "type": "collision"
+          },
+          {
+            "value": "sre team",
+            "setter": "Dana",
+            "type": "resolution"
+          },
+          {
+            "value": "fulfillment team",
+            "setter": "Aisha",
+            "type": "supersession"
+          },
+          {
+            "value": "data-eng team",
+            "setter": "Tom",
+            "type": "resolution"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": false,
+        "step_correct": 9,
+        "step_total": 12,
+        "score": 0.625
+      },
+      "a_score": 0.625,
+      "b_raw": "**Change history trace:** Ownership churned repeatedly \u2014 Sam (growth, d3) \u2192 Omar (payments, d7, no ack) \u2192 Grace (trust-safety, d20, acks Sam) \u2192 Aisha (platform, d26) \u2192 Lena (payments, d30) \u2192 Priya (platform, d36, acks two sides) \u2192 Marcus (growth, d41) \u2192 Aisha (fulfillment, d80, acks Ines) \u2192 Tom (d90). The final writer, Tom, explicitly references both Omar's payments and Marcus's growth assignments and notes the team agreed to unify, resolving to data-eng \u2014 an acknowledged resolution, not an open conflict.\n\nACTION: set_data-eng\nCONFLICT: false",
+      "b_parsed": {
+        "action": "set_data-eng",
+        "conflict": "false"
+      },
+      "b_grade": {
+        "pass": false,
+        "reason": "action: got set_data-eng, expected set_sre"
+      }
+    }
+  ]
+}

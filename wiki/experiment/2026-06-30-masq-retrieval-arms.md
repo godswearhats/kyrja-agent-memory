@@ -66,8 +66,8 @@ B-pass measures whether the reader emits the correct action **and** the correct 
 
 - **Synthetic, single-construct.** One benchmark, confusability by construction. **Not** evidence about real coding/enterprise-corpus retrieval, where confusability is natural and variable. Generalization is untested.
 - **n=15 cores, one size (60k), one reader model.** The headline ladder is one size; seeds (not sizes — sizes are near-verbatim copies, pseudoreplicated) are the axis that buys power. Within-plateau gaps (paste vs bm25 vs vector) are not separable at this n.
-- **Oracle filter.** scopefilter uses ground-truth scope tags; whether any real system recovers that filter is an [open question](../open-question/structured-memory-auto-scope-index.md), not shown here.
-- Single embedder (`nomic-embed-text`) and single BM25 config; a different encoder could shift recall but cannot manufacture an exclusion criterion the query lacks.
+- **Oracle filter.** scopefilter uses ground-truth scope tags; whether any real system recovers that filter is an [open question](../open-question/structured-memory-auto-scope-index.md), not shown here. **Correction 2026-09-17:** inside MASQ it is recovered trivially — parsing the scope from the query's `"In the context of X:"` preamble and substring-matching prose selects **the identical sessions on 15/15 cores**. The generator plants the scope string lexically. The oracle framing overstates the difficulty *within this benchmark*.
+- Single embedder (`nomic-embed-text`) and single BM25 config; a different encoder could shift recall but cannot manufacture an exclusion criterion the query lacks. **FALSIFIED 2026-09-17** — the criterion was in the query all along, and a BM25 config differing only in tokenization and query formulation scores 14/15 B-pass against this arm's 8/15. See [RESULTS-scoped-bm25](../../masq/harness/RESULTS-scoped-bm25.md). This bullet asserted a universal from one configuration; treat it as the cautionary example it now is.
 
 ## Raw artifacts
 

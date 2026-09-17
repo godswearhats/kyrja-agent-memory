@@ -1,0 +1,150 @@
+{
+  "meta": {
+    "domain": "merge-policy",
+    "model": "claude-opus-4-8",
+    "corpus_dir": "masq/generator/headline/merge-policy/s4003/60k",
+    "target_scope": "team-payments",
+    "n_scopes": 5,
+    "family": "family-merge-policy.json",
+    "n_results": 2,
+    "elapsed_s": 71.5
+  },
+  "ground_truth": {
+    "current_value": "contested",
+    "current_setter": "contested:{Priya,Omar}",
+    "chain_length": 4,
+    "steps": [
+      {
+        "value": "squash-merge",
+        "setter": "Sam",
+        "type": "initial"
+      },
+      {
+        "value": "rebase-merge",
+        "setter": "Tom",
+        "type": "collision"
+      },
+      {
+        "value": "merge-commit",
+        "setter": "Priya",
+        "type": "resolution"
+      },
+      {
+        "value": "fast-forward-only",
+        "setter": "Omar",
+        "type": "collision"
+      }
+    ],
+    "unresolved_conflict": true,
+    "action": "any_recorded",
+    "conflict_flag": true
+  },
+  "results": [
+    {
+      "arm": "bm25-scoped-k10",
+      "arm_key": "bm25_scoped_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "I'll reconstruct the storefront-web merge policy history, filtering out the unrelated sandbox-environment thread.\n\nTracing the storefront-web entries in chronological order:\n\n- **Day 52 \u2014 Sam**: sets squash-merge (initial declaration).\n- **Day 53 \u2014 Tom**: \"Couldn't find any merge policy... putting it on rebase-merge\" \u2014 unaware of Sam's setting (collision).\n- **Day 176 \u2014 Priya**: explicitly names the Sam-vs-Tom conflict and resolves it to merge-commit (resolution).\n- **Day 179 \u2014 Omar**: \"Couldn't find any merge policy... putting it on fast-forward-only\" \u2014 unaware of all prior settings including Priya's resolution (collision).\n\nCURRENT_VALUE: fast-forward-only\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: squash-merge\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: rebase-merge\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: merge-commit\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nSTEP_4_VALUE: fast-forward-only\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nUNRESOLVED_CONFLICT: true",
+      "a_parsed": {
+        "current_value": "fast-forward-only",
+        "current_setter": "Omar",
+        "chain_length": "4",
+        "unresolved_conflict": "true",
+        "steps": [
+          {
+            "value": "squash-merge",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": true,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 0.875
+      },
+      "a_score": 0.875,
+      "b_raw": "**Trace:** Sam set storefront-web to squash-merge (day 52) and Tom set it to rebase-merge (day 53) without acknowledging Sam \u2014 a genuine conflict that Priya explicitly resolved at day 176 by citing both sides and setting merge-commit. But then Omar (day 179) said he \"couldn't find any merge policy\" and set fast-forward-only, never acknowledging Priya's resolution \u2014 reopening an unresolved conflict between the resolved value (merge-commit) and Omar's new value (fast-forward-only).\n\nBecause the current value was not set by a resolution or an acknowledged supersession \u2014 Omar overwrote Priya's resolution blind \u2014 the disagreement stands unresolved, so I decline to silently pick one.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    },
+    {
+      "arm": "bm25-rag-k10",
+      "arm_key": "bm25_k10",
+      "model": "claude-opus-4-8",
+      "a_raw": "CURRENT_VALUE: fast-forward-only\nCURRENT_SETTER: Omar\nCHAIN_LENGTH: 4\nSTEP_1_VALUE: squash-merge\nSTEP_1_SETTER: Sam\nSTEP_1_TYPE: initial\nSTEP_2_VALUE: rebase-merge\nSTEP_2_SETTER: Tom\nSTEP_2_TYPE: collision\nSTEP_3_VALUE: merge-commit\nSTEP_3_SETTER: Priya\nSTEP_3_TYPE: resolution\nSTEP_4_VALUE: fast-forward-only\nSTEP_4_SETTER: Omar\nSTEP_4_TYPE: collision\nUNRESOLVED_CONFLICT: false",
+      "a_parsed": {
+        "current_value": "fast-forward-only",
+        "current_setter": "Omar",
+        "chain_length": "4",
+        "unresolved_conflict": "false",
+        "steps": [
+          {
+            "value": "squash-merge",
+            "setter": "Sam",
+            "type": "initial"
+          },
+          {
+            "value": "rebase-merge",
+            "setter": "Tom",
+            "type": "collision"
+          },
+          {
+            "value": "merge-commit",
+            "setter": "Priya",
+            "type": "resolution"
+          },
+          {
+            "value": "fast-forward-only",
+            "setter": "Omar",
+            "type": "collision"
+          }
+        ]
+      },
+      "a_grade": {
+        "current_value": false,
+        "current_setter": false,
+        "unresolved_conflict": false,
+        "chain_length": true,
+        "step_correct": 12,
+        "step_total": 12,
+        "score": 0.8125
+      },
+      "a_score": 0.8125,
+      "b_raw": "## Change history\n\nThe storefront-web merge policy has a long, noisy history, but the pattern is clear: every time two people set conflicting values (Carlos/Bob, Hassan/Bob, Grace/Alice, Sam/Tom), a later writer **explicitly acknowledged both sides and consolidated on merge-commit** \u2014 Ravi (d71), Lena (d98), Dana (d141), and most recently Priya (d176), each a proper resolution. The single exception is the final entry: on day 179 Omar wrote fast-forward-only claiming he \"couldn't find any merge policy,\" which silently overwrites Priya's acknowledged day-176 merge-commit resolution without referencing it.\n\nBecause Omar's day-179 write neither acknowledged nor superseded Priya's resolved merge-commit value \u2014 he asserted there was no policy at all \u2014 the current state is two different values set without either party acknowledging the other. That is an unresolved conflict, so I will not silently pick one.\n\nACTION: none\nCONFLICT: true",
+      "b_parsed": {
+        "action": "none",
+        "conflict": "true"
+      },
+      "b_grade": {
+        "pass": true,
+        "reason": "flag_correct"
+      }
+    }
+  ]
+}

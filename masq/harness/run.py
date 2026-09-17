@@ -106,6 +106,7 @@ def arm_ceiling(family, _corpus_dir):
 
 from arm_vector import make_vector_arm
 from arm_bm25 import make_bm25_arm
+from arm_bm25_scoped import make_bm25_scoped_arm
 from arm_scopefilter import arm_scopefilter
 
 
@@ -123,6 +124,7 @@ ARMS = {
     "vector_k10": ("vector-rag-k10",     make_vector_arm(10)),
     "vector_k20": ("vector-rag-k20",     make_vector_arm(20)),
     "bm25_k10":   ("bm25-rag-k10",       make_bm25_arm(10)),
+    "bm25_scoped_k10": ("bm25-scoped-k10", make_bm25_scoped_arm(10)),
     "scopefilter":("where-scope-target", arm_scopefilter),
     "supermemory":("supermemory-k20",    arm_supermemory),
 }
